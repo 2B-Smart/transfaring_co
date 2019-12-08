@@ -14,7 +14,11 @@ class CreateOffices extends Migration
     public function up()
     {
         Schema::create('offices', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->string('office_name')->primary();
+            $table->string('c_name');
+            $table->foreign('c_name')->references('city_name')->on('cities');
+            $table->string('user_create');
+            $table->string('user_last_update')->nullable();
             $table->timestamps();
         });
     }

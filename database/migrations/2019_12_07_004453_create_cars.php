@@ -14,7 +14,10 @@ class CreateCars extends Migration
     public function up()
     {
         Schema::create('cars', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->string('vehicle_number')->primary();
+            $table->string('vehicle_type');
+            $table->string('user_create');
+            $table->string('user_last_update')->nullable();
             $table->timestamps();
         });
     }
