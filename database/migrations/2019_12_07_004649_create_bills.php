@@ -24,6 +24,7 @@ class CreateBills extends Migration
             $table->foreign('driver_id')->references('id')->on('drivers');
             $table->string('v_number');
             $table->foreign('v_number')->references('vehicle_number')->on('cars');
+            $table->boolean('has_done');
             $table->string('user_create');
             $table->string('user_last_update')->nullable();
             $table->timestamps();
