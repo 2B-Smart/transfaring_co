@@ -13,8 +13,8 @@
 
 
                         <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
-                            <label for="full_name" class="col-md-4 control-label">الاسم</label>
 
+                            <div class="col-md-2"></div>
                             <div class="col-md-6">
                                 <input id="full_name" type="text" class="form-control" name="full_name" value="{{ $drivers->full_name }}" required>
 
@@ -24,11 +24,12 @@
                                     </span>
                                 @endif
                             </div>
+                            <label for="full_name" class="col-md-2 control-label">الاسم</label>
                         </div>
 
                         <div class="form-group{{ $errors->has('mobile_number') ? ' has-error' : '' }}">
-                            <label for="mobile_number" class="col-md-4 control-label">Last Name</label>
 
+                            <div class="col-md-2"></div>
                             <div class="col-md-6">
                                 <input id="mobile_number" type="text" class="form-control" name="mobile_number" value="{{ $drivers->mobile_number }}" required>
 
@@ -38,6 +39,7 @@
                                     </span>
                                 @endif
                             </div>
+                            <label for="mobile_number" class="col-md-2 control-label">رقم الجوال</label>
                         </div>
 
                         <div class="form-group">

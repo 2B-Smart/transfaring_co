@@ -11,8 +11,8 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
-                            <label for="full_name" class="col-md-4 control-label">الاسم الكامل</label>
 
+                            <div class="col-md-2"></div>
                             <div class="col-md-6">
                                 <input id="full_name" type="text" class="form-control" name="full_name" value="{{ old('full_name') }}" required autofocus>
 
@@ -22,11 +22,12 @@
                                     </span>
                                 @endif
                             </div>
+                            <label for="full_name" class="col-md-2 control-label">الاسم الكامل</label>
                         </div>
 
                         <div class="form-group{{ $errors->has('national_id_number') ? ' has-error' : '' }}">
-                            <label for="national_id_number" class="col-md-4 control-label">الرقم الوطني</label>
 
+                            <div class="col-md-2"></div>
                             <div class="col-md-6">
                                 <input id="national_id_number" type="text" class="form-control" name="national_id_number" value="{{ old('national_id_number') }}" required>
 
@@ -36,10 +37,11 @@
                                     </span>
                                 @endif
                             </div>
+                            <label for="national_id_number" class="col-md-2 control-label">الرقم الوطني</label>
                         </div>
                         <div class="form-group{{ $errors->has('mobile_number') ? ' has-error' : '' }}">
-                            <label for="mobile_number" class="col-md-4 control-label">رقم الجوال</label>
 
+                            <div class="col-md-2"></div>
                             <div class="col-md-6">
                                 <input id="mobile_number" type="text" class="form-control" name="mobile_number" value="{{ old('mobile_number') }}" required>
 
@@ -49,6 +51,7 @@
                                     </span>
                                 @endif
                             </div>
+                            <label for="mobile_number" class="col-md-2 control-label">رقم الجوال</label>
                         </div>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
