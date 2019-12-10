@@ -1,5 +1,6 @@
 @extends('users-mgmt.base')
 @section('action-content')
+        <div>
     <!-- Main content -->
     <section class="content">
       <div class="box">
@@ -22,8 +23,8 @@
       <form method="POST" action="{{ route('user-management.search') }}">
          {{ csrf_field() }}
          @component('layouts.search', ['title' => 'Search'])
-          @component('layouts.two-cols-search-row', ['items' => ['User Name', 'First Name'], 
-          'oldVals' => [isset($searchingVals) ? $searchingVals['username'] : '', isset($searchingVals) ? $searchingVals['firstname'] : '']])
+          @component('layouts.two-cols-search-row', ['items' => ['Name', 'First Name'],
+          'oldVals' => [isset($searchingVals) ? $searchingVals['name'] : '', isset($searchingVals) ? $searchingVals['firstname'] : '']])
           @endcomponent
           </br>
           @component('layouts.two-cols-search-row', ['items' => ['Last Name', 'Department'],
@@ -47,7 +48,7 @@
             <tbody>
             @foreach ($users as $user)
                 <tr role="row" class="odd">
-                  <td class="sorting_1">{{ $user->username }}</td>
+                  <td class="sorting_1">{{ $user->name }}</td>
                   <td>{{ $user->email }}</td>
                   <td class="hidden-xs">{{ $user->firstname }}</td>
                   <td class="hidden-xs">{{ $user->lastname }}</td>

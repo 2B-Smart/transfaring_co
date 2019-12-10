@@ -58,7 +58,7 @@ class UserManagementController extends Controller
         $this->validateInput($request);
          User::create([
             //'username' => $request['username'],
-            //'name' => $request['name'],
+            'name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
             'firstname' => $request['firstname'],
@@ -107,13 +107,13 @@ class UserManagementController extends Controller
     {
         $user = User::findOrFail($id);
         $constraints = [
-            //'username' => 'required|max:20',
+            'name' => 'required|max:20',
             'firstname'=> 'required|max:60',
             'lastname' => 'required|max:60'
             ];
         $input = [
             //'username' => $request['username'],
-            //'name' => $request['name'],
+            'name' => $request['name'],
             'firstname' => $request['firstname'],
             'lastname' => $request['lastname']
         ];
@@ -148,7 +148,7 @@ class UserManagementController extends Controller
      */
     public function search(Request $request) {
         $constraints = [
-            'username' => $request['username'],
+            'name' => $request['name'],
             'firstname' => $request['firstname'],
             'lastname' => $request['lastname'],
             'department' => $request['department']
@@ -173,7 +173,7 @@ class UserManagementController extends Controller
     }
     private function validateInput($request) {
         $this->validate($request, [
-        'username' => 'required|max:20',
+        'name' => 'required|max:20',
         'email' => 'required|email|max:255|unique:users',
         'password' => 'required|min:6|confirmed',
         'firstname' => 'required|max:60',

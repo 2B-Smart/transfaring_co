@@ -16,7 +16,7 @@ class CreateDrivers extends Migration
         Schema::create('drivers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('full_name');
-            $table->integer('national_id_number');
+            $table->bigInteger('national_id_number')->unique();
             $table->integer('mobile_number');
             $table->string('user_create');
             $table->string('user_last_update')->nullable();

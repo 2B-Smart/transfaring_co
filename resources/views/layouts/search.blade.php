@@ -14,7 +14,7 @@
   <div class="box-footer">
     <button type="submit" class="btn btn-primary">
       <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-      Search
+      بحث
     </button>
   </div>
 </div>
