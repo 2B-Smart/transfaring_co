@@ -27,6 +27,9 @@ Route::resource('user-management', 'UserManagementController');
 Route::post('drivers/search', 'DriversController@search')->name('drivers.search');
 Route::resource('drivers', 'DriversController');
 
+Route::post('cars/search', 'CarsController@search')->name('cars.search');
+Route::resource('cars', 'CarsController');
+
 //Route::resource('employee-management', 'EmployeeManagementController');
 //Route::post('employee-management/search', 'EmployeeManagementController@search')->name('employee-management.search');
 //

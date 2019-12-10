@@ -33,6 +33,8 @@
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
         <li><a href="{{ route('user-management.index') }}"><i class="fa fa-link"></i> <span>User management</span></a></li>
+        <li><a href="{{ route('drivers.index') }}"><i class="fa fa-link"></i> <span>السائقين</span></a></li>
+        <li><a href="{{ route('cars.index') }}"><i class="fa fa-link"></i> <span>المركبات</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

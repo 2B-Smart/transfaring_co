@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\drivers;
+use App\cars;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class DriversController extends Controller
+class CarsController extends Controller
 {
     //
     protected $redirectTo = '/drivers';
 
     public function index()
     {
-        $drivers = drivers::paginate(10);
+        $cars = cars::paginate(10);
 
-        return view('drivers/index', ['drivers' => $drivers]);
+        return view('cars/index', ['cars' => $cars]);
     }
 
     public function create()
     {
-        return view('drivers/create');
+        return view('cars/create');
     }
 
     /**
@@ -35,26 +35,27 @@ class DriversController extends Controller
 //        $request['user_create']=Auth::user()->username;
 //        $request['user_last_update']=Auth::user()->username;
         $this->validateInput($request);
-        drivers::create([
-            'full_name' => $request['full_name'],
-            'national_id_number' => $request['national_id_number'],
-            'mobile_number' => $request['mobile_number'],
+        cars::create([
+            'vehicle_number' => $request['vehicle_number'],
+            'vehicle_type' => $request['vehicle_type'],
             'user_create' => Auth::user()->name,
             'user_last_update' => Auth::user()->name
         ]);
 
-        return redirect()->intended('/drivers');
+        return redirect()->intended('/cars');
     }
 
     public function edit($id)
     {
-        $drivers = drivers::find($id);
+//        $cars = cars::query();
+//        $cars = $cars->where( 'vehicle_number', '=', $id);
+        $cars = cars::where('vehicle_number', $id)->first();
         // Redirect to user list if updating user wasn't existed
-        if ($drivers == null || $drivers->count() == 0) {
-            return redirect()->intended('/drivers');
+        if ($cars == null || $cars->count() == 0) {
+            return redirect()->intended('/cars');
         }
 
-        return view('drivers/edit', ['drivers' => $drivers]);
+        return view('cars/edit', ['cars' => $cars]);
     }
 
     /**
@@ -66,54 +67,53 @@ class DriversController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $drivers = drivers::findOrFail($id);
-        $constraints = [];
-        if($drivers->national_id_number!=$request['national_id_number']){
+        $cars = cars::where('vehicle_number', $id)->first();
+        $constraints=[];
+        if($cars->vehicle_number!=$request['vehicle_number']){
             $constraints = [
-                'full_name' => 'required',
-                'national_id_number' => 'required|max:20|unique:drivers',
-                'mobile_number' => 'required',
+                'vehicle_number' => 'required|unique:cars',
+                //'national_id_number' => 'required|max:20|unique:drivers',
+                'vehicle_type' => 'required',
             ];
         }else{
             $constraints = [
-                'full_name' => 'required',
-                'national_id_number' => 'required|max:20',
-                'mobile_number' => 'required',
+                'vehicle_number' => 'required',
+                //'national_id_number' => 'required|max:20|unique:drivers',
+                'vehicle_type' => 'required',
             ];
         }
         $input = [
             //'username' => $request['username'],
-            'full_name' => $request['full_name'],
-            'national_id_number' => $request['national_id_number'],
-            'mobile_number' => $request['mobile_number'],
+            'vehicle_number' => $request['vehicle_number'],
+            //'national_id_number' => $request['national_id_number'],
+            'vehicle_type' => $request['vehicle_type'],
             'user_last_update' => Auth::user()->name
         ];
         $this->validate($request, $constraints);
-        drivers::where('id', $id)
+        cars::where('vehicle_number', $id)
             ->update($input);
 
-        return redirect()->intended('/drivers');
+        return redirect()->intended('/cars');
     }
 
     public function destroy($id)
     {
-        drivers::where('id', $id)->delete();
-        return redirect()->intended('/drivers');
+        cars::where('vehicle_number', $id)->delete();
+        return redirect()->intended('/cars');
     }
 
     public function search(Request $request) {
         $constraints = [
-            'full_name' => $request['الاسم'],
-            'national_id_number' => $request['الرقمالوطني'],
-            'mobile_number' => $request['رقمالجوال']
+            'vehicle_number' => $request['الاسم'],
+            'vehicle_type' => $request['الرقمالوطني']
         ];
-        $drivers = $this->doSearchingQuery($constraints);
+        $cars = $this->doSearchingQuery($constraints);
 
-        return view('drivers/index', ['drivers' => $drivers, 'searchingVals' => $constraints]);
+        return view('cars/index', ['cars' => $cars, 'searchingVals' => $constraints]);
     }
 
     private function doSearchingQuery($constraints) {
-        $query = drivers::query();
+        $query = cars::query();
         $fields = array_keys($constraints);
         $index = 0;
         foreach ($constraints as $constraint) {
@@ -127,9 +127,8 @@ class DriversController extends Controller
     }
     private function validateInput($request) {
         $this->validate($request, [
-            'full_name' => 'required',
-            'national_id_number' => 'required|max:20|unique:drivers',
-            'mobile_number' => 'required',
+            'vehicle_number' => 'required|unique:cars',
+            'vehicle_type' => 'required',
         ]);
     }
 }
