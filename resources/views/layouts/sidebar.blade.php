@@ -35,6 +35,7 @@
         <li><a href="{{ route('user-management.index') }}"><i class="fa fa-link"></i> <span>User management</span></a></li>
         <li><a href="{{ route('drivers.index') }}"><i class="fa fa-link"></i> <span>السائقين</span></a></li>
         <li><a href="{{ route('cars.index') }}"><i class="fa fa-link"></i> <span>المركبات</span></a></li>
+        <li><a href="{{ route('cities.index') }}"><i class="fa fa-link"></i> <span>المدن</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

@@ -30,6 +30,10 @@ Route::resource('drivers', 'DriversController');
 Route::post('cars/search', 'CarsController@search')->name('cars.search');
 Route::resource('cars', 'CarsController');
 
+Route::post('cities/search', 'CitiesController@search')->name('cities.search');
+Route::resource('cities', 'CitiesController');
+
+
 //Route::resource('employee-management', 'EmployeeManagementController');
 //Route::post('employee-management/search', 'EmployeeManagementController@search')->name('employee-management.search');
 //
@@ -45,8 +49,7 @@ Route::resource('cars', 'CarsController');
 //Route::resource('system-management/state', 'StateController');
 //Route::post('system-management/state/search', 'StateController@search')->name('state.search');
 //
-//Route::resource('system-management/city', 'CityController');
-//Route::post('system-management/city/search', 'CityController@search')->name('city.search');
+
 
 //Route::get('system-management/report', 'ReportController@index');
 //Route::post('system-management/report/search', 'ReportController@search')->name('report.search');
