@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">تعديل بيانات الزبون</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('cars.update', $customers->id) }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('customers.update', $customers->id) }}">
                         <input type="hidden" name="_method" value="PATCH">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -46,7 +46,7 @@
 
                             <div class="col-md-2"></div>
                             <div class="col-md-6">
-                                <input id="customer_address" type="text" class="form-control" name="customer_mobile" value="{{ $customers->customer_mobile }}" required>
+                                <input id="customer_mobile" type="number" class="form-control" name="customer_mobile" value="{{ $customers->customer_mobile }}" required>
 
                                 @if ($errors->has('customer_mobile'))
                                     <span class="help-block">

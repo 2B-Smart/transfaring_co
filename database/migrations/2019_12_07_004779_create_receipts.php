@@ -19,10 +19,10 @@ class CreateReceipts extends Migration
             $table->foreign('sender')->references('id')->on('customers');
             $table->bigInteger('receiver')->unsigned();
             $table->foreign('receiver')->references('id')->on('customers');
-            $table->string('source_office');
-            $table->foreign('source_office')->references('office_name')->on('offices');
-            $table->string('destination_office');
-            $table->foreign('destination_office')->references('office_name')->on('offices');
+            $table->string('source_city');
+            $table->foreign('source_city')->references('city_name')->on('cities');
+            $table->string('destination_city');
+            $table->foreign('destination_city')->references('city_name')->on('cities');
             $table->date('receipts_date');
             $table->integer('number_of_packages');
             $table->string('package_type');

@@ -86,9 +86,9 @@ class CitiesController extends Controller
      * @param  int  $cities
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $cities)
+    public function update(Request $request, $id)
     {
-        $cities = cities::where('city_name', $cities)->first();
+        $cities = cities::where('city_name', $id)->first();
         $constraints=[];
         if($cities->city_name!=$request['city_name']){
             $constraints = [
@@ -108,7 +108,7 @@ class CitiesController extends Controller
             'user_last_update' => Auth::user()->name
         ];
         $this->validate($request, $constraints);
-        cities::where('city_name', $cities)
+        cities::where('city_name', $id)
             ->update($input);
 
         return redirect()->intended('/cities');
@@ -120,15 +120,15 @@ class CitiesController extends Controller
      * @param  \App\cities  $cities
      * @return \Illuminate\Http\Response
      */
-    public function destroy(cities $cities)
+    public function destroy($id)
     {
-        cities::where('city_name', $cities)->delete();
+        cities::where('city_name', $id)->delete();
         return redirect()->intended('/cities');
     }
 
     public function search(Request $request) {
         $constraints = [
-            'city_name' => $request['الاسم']
+            'city_name' => $request['اسمالمدينة']
         ];
         $cities = $this->doSearchingQuery($constraints);
 

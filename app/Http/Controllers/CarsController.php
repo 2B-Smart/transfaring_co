@@ -104,8 +104,8 @@ class CarsController extends Controller
 
     public function search(Request $request) {
         $constraints = [
-            'vehicle_number' => $request['الاسم'],
-            'vehicle_type' => $request['الرقمالوطني']
+            'vehicle_number' => $request['رقمالمركبة'],
+            'vehicle_type' => $request['نوعالمركبة']
         ];
         $cars = $this->doSearchingQuery($constraints);
 

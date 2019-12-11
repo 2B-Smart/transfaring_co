@@ -94,9 +94,9 @@ class CustomersController extends Controller
 
     public function search(Request $request) {
         $constraints = [
-            'customer_name' => $request['الاسم'],
-            'customer_address' => $request['الرقمالوطني'],
-            'customer_mobile' => $request['رقمالجوال']
+            'customer_name' => $request['اسمالزبون'],
+            'customer_address' => $request['عنوانالزبون'],
+            'customer_mobile' => $request['رقمالزبون']
         ];
         $customers = $this->doSearchingQuery($constraints);
 
@@ -120,7 +120,7 @@ class CustomersController extends Controller
         $this->validate($request, [
             'customer_name' => 'required',
             'customer_address' => 'required',
-            'customer_mobile' => 'required|number',
+            'customer_mobile' => 'required',
         ]);
     }
 }

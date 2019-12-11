@@ -24,23 +24,8 @@
                                     </span>
                                 @endif
                             </div>
-                            <label for="city_name" class="col-md-2 control-label">رقم السيارة</label>
+                            <label for="city_name" class="col-md-2 control-label">إسم المدينة</label>
                         </div>
-
-                        <div class="form-group{{ $errors->has('vehicle_type') ? ' has-error' : '' }}">
-
-                            <!-- <div class="col-md-2"></div>
-                            <div class="col-md-6">
-                                <input id="vehicle_type" type="text" class="form-control" name="vehicle_type" value="{{ $cities->vehicle_type }}" required>
-
-                                @if ($errors->has('vehicle_type'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('vehicle_type') }}</strong>
-                                    </span>
-                                @endif 
-                            </div>
-                            <label for="vehicle_type" class="col-md-2 control-label">نوع المركبة</label>
-                         </div>  -->
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

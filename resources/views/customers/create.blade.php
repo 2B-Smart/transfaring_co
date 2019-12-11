@@ -44,7 +44,7 @@
 
                             <div class="col-md-2"></div>
                             <div class="col-md-6">
-                                <input id="customer_mobile" type="text" class="form-control" name="customer_mobile" value="{{ old('customer_mobile') }}" required>
+                                <input id="customer_mobile" type="number" class="form-control" name="customer_mobile" value="{{ old('customer_mobile') }}" required>
 
                                 @if ($errors->has('customer_mobile'))
                                     <span class="help-block">

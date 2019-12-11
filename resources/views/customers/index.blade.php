@@ -61,10 +61,10 @@
                   <td class="hidden-xs">{{ $customer->updated_at }}</td>
 
                   <td>
-                    <form class="row" method="POST" action="{{ route('customers.destroy',  $customer->vehicle_number) }}" onsubmit = "return confirm('Are you sure?')">
+                    <form class="row" method="POST" action="{{ route('customers.destroy',  $customer->id) }}" onsubmit = "return confirm('Are you sure?')">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <a href="{{ route('customers.edit', $customer->vehicle_number) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
+                        <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
                         تعديل
                         </a>
 
@@ -79,8 +79,9 @@
             </tbody>
             <tfoot>
               <tr>
-                <th width="10%" rowspan="1" colspan="1">رقم المركبة</th>
-                <th width="10%" rowspan="1" colspan="1">نوع المركبة</th>
+                <th width="10%" rowspan="1" colspan="1">إسم الزبون</th>
+                <th width="10%" rowspan="1" colspan="1">عنوان الزبون</th>
+                <th width="10%" rowspan="1" colspan="1">رقم الزبون</th>
                 <th class="hidden-xs" width="10%" rowspan="1" colspan="1">أنشئ من قبل</th>
                 <th class="hidden-xs" width="10%" rowspan="1" colspan="1">تاريخ الانشاء</th>
                 <th class="hidden-xs" width="10%" rowspan="1" colspan="1">اخر تعديل من قبل</th>
