@@ -32,11 +32,9 @@ class DriversController extends Controller
      */
     public function store(Request $request)
     {
-//        $request['user_create']=Auth::user()->username;
-//        $request['user_last_update']=Auth::user()->username;
         $this->validateInput($request);
         drivers::create([
-            'full_name' => $request['full_name'],
+            'customer_name' => $request['customer_name'],
             'national_id_number' => $request['national_id_number'],
             'mobile_number' => $request['mobile_number'],
             'user_create' => Auth::user()->name,

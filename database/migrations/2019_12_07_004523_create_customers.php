@@ -18,6 +18,8 @@ class CreateCustomers extends Migration
             $table->string('customer_name');
             $table->string('customer_address');
             $table->integer('customer_mobile');
+            $table->string('user_create');
+            $table->string('user_last_update')->nullable();
             $table->timestamps();
         });
     }

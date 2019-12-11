@@ -1,4 +1,4 @@
-@extends('cars.base')
+@extends('customers.base')
 @section('action-content')
         <div>
     <!-- Main content -->
@@ -7,10 +7,10 @@
   <div class="box-header">
     <div class="row">
         <div class="col-sm-8">
-          <h3 class="box-title">قائمة المركبات</h3>
+          <h3 class="box-title">قائمة الزبائن</h3>
         </div>
         <div class="col-sm-4">
-          <a class="btn btn-primary" href="{{ route('cars.create') }}">إضافة مركبة</a>
+          <a class="btn btn-primary" href="{{ route('customers.create') }}">إضافة زبون</a>
         </div>
     </div>
   </div>
@@ -20,11 +20,15 @@
         <div class="col-sm-6"></div>
         <div class="col-sm-6"></div>
       </div>
-      <form method="POST" action="{{ route('cars.search') }}">
+      <form method="POST" action="{{ route('customers.search') }}">
          {{ csrf_field() }}
          @component('layouts.search', ['title' => 'Search'])
-          @component('layouts.two-cols-search-row', ['items' => ['رقم المركبة' , 'نوع المركبة'],
-          'oldVals' => [isset($searchingVals) ? $searchingVals['vehicle_number'] : '', isset($searchingVals) ? $searchingVals['vehicle_type'] : '']])
+          @component('layouts.two-cols-search-row', ['items' => ['اسم الزبون' , 'عنوان الزبون'],
+          'oldVals' => [isset($searchingVals) ? $searchingVals['customer_name'] : '', isset($searchingVals) ? $searchingVals['customer_address'] : '']])
+          @endcomponent
+         </br>
+          @component('layouts.two-cols-search-row', ['items' => ['رقم الزبون'],
+          'oldVals' => [isset($searchingVals) ? $searchingVals['customer_mobile'] : '']])
           @endcomponent
         @endcomponent
       </form>
@@ -34,8 +38,9 @@
           <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
             <thead>
               <tr role="row">
-                <th width="10%" class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending">رقم المركبة</th>
-                <th width="10%" class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="ntnlno: activate to sort column ascending">نوع المركبة</th>
+                <th width="10%" class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending">إسم الزبون</th>
+                <th width="10%" class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="ntnlno: activate to sort column ascending">عنوان الزبون</th>
+                <th width="10%" class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="ntnlno2: activate to sort column ascending">رقم الزبون</th>
                 <th width="10%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Createdu: activate to sort column ascending">أنشئ من قبل</th>
                 <th width="10%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Createdd: activate to sort column ascending">تاريخ الانشاء</th>
                 <th width="10%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Updatedu: activate to sort column ascending">اخر تعديل من قبل</th>
@@ -45,20 +50,21 @@
               </tr>
             </thead>
             <tbody>
-            @foreach ($cars as $car)
+            @foreach ($customers as $customer)
                 <tr role="row" class="odd">
-                  <td class="sorting_1">{{ $car->vehicle_number }}</td>
-                  <td class="hidden-xs">{{ $car->vehicle_type }}</td>
-                  <td class="hidden-xs">{{ $car->user_create }}</td>
-                  <td class="hidden-xs">{{ $car->created_at }}</td>
-                  <td class="hidden-xs">{{ $car->user_last_update }}</td>
-                  <td class="hidden-xs">{{ $car->updated_at }}</td>
+                  <td class="sorting_1">{{ $customer->customer_name }}</td>
+                  <td class="hidden-xs">{{ $customer->customer_address }}</td>
+                  <td class="hidden-xs">{{ $customer->customer_mobile }}</td>
+                  <td class="hidden-xs">{{ $customer->user_create }}</td>
+                  <td class="hidden-xs">{{ $customer->created_at }}</td>
+                  <td class="hidden-xs">{{ $customer->user_last_update }}</td>
+                  <td class="hidden-xs">{{ $customer->updated_at }}</td>
 
                   <td>
-                    <form class="row" method="POST" action="{{ route('cars.destroy',  $car->vehicle_number) }}" onsubmit = "return confirm('Are you sure?')">
+                    <form class="row" method="POST" action="{{ route('customers.destroy',  $customer->vehicle_number) }}" onsubmit = "return confirm('Are you sure?')">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <a href="{{ route('cars.edit', $car->vehicle_number) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
+                        <a href="{{ route('customers.edit', $customer->vehicle_number) }}" class="btn btn-warning col-sm-3 col-xs-5 btn-margin">
                         تعديل
                         </a>
 
@@ -87,11 +93,11 @@
       </div>
       <div class="row">
         <div class="col-sm-5">
-          <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">إظهار 1 to {{count($cars)}} of {{count($cars)}} سجلات</div>
+          <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">إظهار 1 to {{count($customers)}} of {{count($customers)}} سجلات</div>
         </div>
         <div class="col-sm-7">
           <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-            {{ $cars->links() }}
+            {{ $customers->links() }}
           </div>
         </div>
       </div>
