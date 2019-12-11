@@ -36,6 +36,10 @@ Route::resource('cities', 'CitiesController');
 Route::post('customers/search', 'CustomersController@search')->name('customers.search');
 Route::resource('customers', 'CustomersController');
 
+Route::post('receipts/search', 'ReceiptsController@search')->name('receipts.search');
+Route::resource('receipts', 'ReceiptsController');
+
+
 
 //Route::resource('employee-management', 'EmployeeManagementController');
 //Route::post('employee-management/search', 'EmployeeManagementController@search')->name('employee-management.search');

@@ -37,6 +37,7 @@
         <li><a href="{{ route('cars.index') }}"><i class="fa fa-link"></i> <span>المركبات</span></a></li>
         <li><a href="{{ route('cities.index') }}"><i class="fa fa-link"></i> <span>المدن</span></a></li>
         <li><a href="{{ route('customers.index') }}"><i class="fa fa-link"></i> <span>الزبائن</span></a></li>
+        <li><a href="{{ route('receipts.index') }}"><i class="fa fa-link"></i> <span>إيصال جديد</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
