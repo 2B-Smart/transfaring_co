@@ -39,6 +39,9 @@ Route::resource('customers', 'CustomersController');
 Route::post('receipts/search', 'ReceiptsController@search')->name('receipts.search');
 Route::resource('receipts', 'ReceiptsController');
 
+Route::post('bills/search', 'BillsController@search')->name('bills.search');
+Route::resource('bills', 'BillsController');
+
 
 
 //Route::resource('employee-management', 'EmployeeManagementController');

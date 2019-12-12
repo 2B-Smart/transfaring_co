@@ -2,9 +2,9 @@
 @section('action-content')
 
 <div class="row">
-        {{-- <div class="col-sm-8 text-center">
+        <div class="col-sm-8 text-center">
             <h3></h3>
-        </div> --}}
+        </div>
         <div class="row">
                 <div class="col-md-6">
                   <div class="form-group text-right">
