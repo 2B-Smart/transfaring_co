@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\receipts;
+use App\customers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,13 +17,13 @@ class ReceiptsController extends Controller
     public function index()
     {
         $receipts = receipts::paginate(10);
-
-        return view('receipts/index', ['receipts' => $receipts]);
-
         $coustomer_list = DB::table('customers')
-            ->groupBy('customer_name')
+            ->orderBy('customer_name')
             ->get();
-        return view('receipts')->with('customer_address', $coustomer_list);
+        return view('receipts.index', [
+            'receipts' => $receipts,
+            'coustomer_list' => $coustomer_list
+        ]);
     }
 
     /**

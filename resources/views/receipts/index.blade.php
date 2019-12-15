@@ -13,11 +13,13 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-2"><input class="form-control text-right" type="text" placeholder="أدخل اسم المرسل إليه"></div>
         <div class="col-sm-2">المرسل إليه</div>
-        <div class="col-sm-2"><select name="customer_name" id="customer_name" class="form-control input-lg dynamic" data-dependent ="customer_address">
-                @foreach($customer_list as $customer)
-                    <option value="{{ $customer->$customer }}">{{ $customer->$customer }}</option>
+        <div class="col-sm-2">
+          <select name="customer_name" id="customer_name" class="form-control input-lg dynamic">
+                @foreach ($coustomer_list as $customer)
+                    <option value="{{ $customer->customer_name }}">{{ $customer->customer_name }}</option>
                 @endforeach
-            </select></div>
+            </select>
+        </div>
         <div class="col-sm-2">المرسل</div>
       </div>
       <div class="row">
