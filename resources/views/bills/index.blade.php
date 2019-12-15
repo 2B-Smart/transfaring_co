@@ -22,7 +22,7 @@
       </div>
       <form method="POST" action="{{ route('bills.search') }}">
          {{ csrf_field() }}
-         @component('layouts.search', ['title' => 'بحث'])
+         @component('layouts.search', ['title' => 'Search'])
           @component('layouts.two-cols-search-row', ['items' => ['تاريخ الرحلة', 'اسم السائق'],
           'oldVals' => [isset($searchingVals) ? $searchingVals['bill_date'] : '', isset($searchingVals) ? $searchingVals['driver_id'] : '']])
           @endcomponent
@@ -52,6 +52,7 @@
                 <th width="10%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Createdd: activate to sort column ascending">تاريخ الانشاء</th>
                 <th width="10%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Updatedu: activate to sort column ascending">اخر تعديل من قبل</th>
                 <th width="10%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Updatedd: activate to sort column ascending">تاريخ اخر تعديل</th>
+                  ي
 
                 <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="Action: activate to sort column ascending">Action</th>
               </tr>

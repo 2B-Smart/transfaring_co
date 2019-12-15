@@ -1,97 +1,58 @@
-@extends('bills.base')
+@extends('drivers.base')
 
 @section('action-content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">إنشاء رحلة</div>
+                <div class="panel-heading">Add new user</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('bills.store') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('drivers.store') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('source_city') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
 
                             <div class="col-md-2"></div>
                             <div class="col-md-6">
+                                <input id="full_name" type="text" class="form-control" name="full_name" value="{{ old('full_name') }}" required autofocus>
 
-                                <select id="source_city" class="form-control" name="source_city" required autofocus>
-                                    <option value="" selected></option>
-                                    @foreach($cities_list as $city)
-                                        <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
-                                    @endforeach
-                                </select>
-
-                                @if ($errors->has('source_city'))
+                                @if ($errors->has('full_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('source_city') }}</strong>
+                                        <strong>{{ $errors->first('full_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                            <label for="source_city" class="col-md-2 control-label">المصدر</label>
+                            <label for="full_name" class="col-md-2 control-label">الاسم الكامل</label>
                         </div>
 
-                        <div class="form-group{{ $errors->has('destination_city') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('national_id_number') ? ' has-error' : '' }}">
 
                             <div class="col-md-2"></div>
                             <div class="col-md-6">
-                                <select id="destination_city" class="form-control" name="destination_city" required>
-                                    <option value="" selected></option>
-                                    @foreach($cities_list as $city)
-                                        <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('destination_city'))
+                                <input id="national_id_number" type="text" class="form-control" name="national_id_number" value="{{ old('national_id_number') }}" required>
+
+                                @if ($errors->has('national_id_number'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('destination_city') }}</strong>
+                                        <strong>{{ $errors->first('national_id_number') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                            <label for="destination_city" class="col-md-2 control-label">الوجهة</label>
+                            <label for="national_id_number" class="col-md-2 control-label">الرقم الوطني</label>
                         </div>
-
-                        <div class="form-group{{ $errors->has('driver_id') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('mobile_number') ? ' has-error' : '' }}">
 
                             <div class="col-md-2"></div>
                             <div class="col-md-6">
+                                <input id="mobile_number" type="text" class="form-control" name="mobile_number" value="{{ old('mobile_number') }}" required>
 
-                                <select id="driver_id" class="form-control" name="driver_id" required>
-                                    <option value="" selected></option>
-                                    @foreach($drivers_list as $driver)
-                                        <option value="{{ $driver->id }}">{{ $driver->full_name }}</option>
-                                    @endforeach
-                                </select>
-
-                                @if ($errors->has('driver_id'))
+                                @if ($errors->has('mobile_number'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('driver_id') }}</strong>
+                                        <strong>{{ $errors->first('mobile_number') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                            <label for="driver_id" class="col-md-2 control-label">السائق</label>
+                            <label for="mobile_number" class="col-md-2 control-label">رقم الجوال</label>
                         </div>
-
-                        <div class="form-group{{ $errors->has('v_number') ? ' has-error' : '' }}">
-
-                            <div class="col-md-2"></div>
-                            <div class="col-md-6">
-                                <select id="v_number" class="form-control" name="v_number" required>
-                                    <option value="" selected></option>
-                                    @foreach($cars_list as $car)
-                                        <option value="{{ $car->vehicle_number }}">{{ $car->vehicle_type.' : '.$car->vehicle_number }}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('v_number'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('v_number') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                            <label for="v_number" class="col-md-2 control-label">رقم المركبة</label>
-                        </div>
-
-
-
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

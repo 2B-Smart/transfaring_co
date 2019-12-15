@@ -22,15 +22,7 @@ class BillsController extends Controller
 
     public function create()
     {
-        $drivers_list = DB::table('drivers')->orderBy('full_name')->get();
-        $cities_list = DB::table('cities')->get();
-        $cars_list = DB::table('cars')->get();
-
-        return view('bills.create', [
-            'drivers_list' => $drivers_list,
-            'cities_list' => $cities_list,
-            'cars_list' => $cars_list,
-        ]);
+        return view('bills/create');
     }
 
     /**
@@ -42,13 +34,11 @@ class BillsController extends Controller
     public function store(Request $request)
     {
         $this->validateInput($request);
-        bills::create([
-            'bill_date' => date('Y-m-d'),
-            'source_city' => $request['source_city'],
-            'has_done' => "غير مقفلة",
-            'destination_city' => $request['destination_city'],
-            'driver_id' => $request['driver_id'],
-            'v_number' => $request['v_number'],
+        drivers::create([
+            'full_name' => $request['full_name'],
+            'customer_name' => $request['customer_name'],
+            'national_id_number' => $request['national_id_number'],
+            'mobile_number' => $request['mobile_number'],
             'user_create' => Auth::user()->name,
             'user_last_update' => Auth::user()->name
         ]);
@@ -58,22 +48,13 @@ class BillsController extends Controller
 
     public function edit($id)
     {
-        $bills = bills::find($id);
+        $drivers = drivers::find($id);
         // Redirect to user list if updating user wasn't existed
-        if ($bills == null || $bills->count() == 0) {
-            return redirect()->intended('/bills');
+        if ($drivers == null || $drivers->count() == 0) {
+            return redirect()->intended('/drivers');
         }
 
-        $drivers_list = DB::table('drivers')->orderBy('full_name')->get();
-        $cities_list = DB::table('cities')->get();
-        $cars_list = DB::table('cars')->get();
-
-        return view('bills.edit', [
-            'bills' => $bills,
-            'drivers_list' => $drivers_list,
-            'cities_list' => $cities_list,
-            'cars_list' => $cars_list,
-        ]);
+        return view('drivers/edit', ['drivers' => $drivers]);
     }
 
     /**
@@ -85,31 +66,39 @@ class BillsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $bills = bills::findOrFail($id);
-        $constraints = [
-            'source_city' => 'required',
-            'destination_city' => 'required',
-            'driver_id' => 'required',
-            'v_number' => 'required',
-        ];
+        $drivers = drivers::findOrFail($id);
+        $constraints = [];
+        if($drivers->national_id_number!=$request['national_id_number']){
+            $constraints = [
+                'full_name' => 'required',
+                'national_id_number' => 'required|max:20|unique:drivers',
+                'mobile_number' => 'required',
+            ];
+        }else{
+            $constraints = [
+                'full_name' => 'required',
+                'national_id_number' => 'required|max:20',
+                'mobile_number' => 'required',
+            ];
+        }
         $input = [
-            'source_city' => $request['source_city'],
-            'destination_city' => $request['destination_city'],
-            'driver_id' => $request['driver_id'],
-            'v_number' => $request['v_number'],
+            //'username' => $request['username'],
+            'full_name' => $request['full_name'],
+            'national_id_number' => $request['national_id_number'],
+            'mobile_number' => $request['mobile_number'],
             'user_last_update' => Auth::user()->name
         ];
         $this->validate($request, $constraints);
-        bills::where('id', $id)
+        drivers::where('id', $id)
             ->update($input);
 
-        return redirect()->intended('/bills');
+        return redirect()->intended('/drivers');
     }
 
     public function destroy($id)
     {
-        bills::where('id', $id)->delete();
-        return redirect()->intended('/bills');
+        drivers::where('id', $id)->delete();
+        return redirect()->intended('/drivers');
     }
 
     public function billlock($id)
@@ -161,13 +150,11 @@ class BillsController extends Controller
         }
         return $query->orderBy('has_done')->orderByDesc('id')->paginate(10);
     }
-
     private function validateInput($request) {
         $this->validate($request, [
-            'source_city' => 'required',
-            'destination_city' => 'required',
-            'driver_id' => 'required',
-            'v_number' => 'required',
+            'full_name' => 'required',
+            'national_id_number' => 'required|max:20|unique:drivers',
+            'mobile_number' => 'required',
         ]);
     }
 
