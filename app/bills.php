@@ -8,7 +8,7 @@ class bills extends Model
 {
     //
     protected $fillable = [
-        'vehicle_number', 'vehicle_type','user_create','user_last_update'
+        'bill_date','source_city','destination_city','driver_id','v_number', 'has_done','user_create','user_last_update'
     ];
 
 

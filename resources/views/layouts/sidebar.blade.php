@@ -2,7 +2,7 @@
   <aside class="main-sidebar">
 
     <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+    <section class="sidebar" dir="rtl">
 
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
@@ -37,8 +37,8 @@
         <li><a href="{{ route('cars.index') }}"><i class="fa fa-link"></i> <span>المركبات</span></a></li>
         <li><a href="{{ route('cities.index') }}"><i class="fa fa-link"></i> <span>المدن</span></a></li>
         <li><a href="{{ route('customers.index') }}"><i class="fa fa-link"></i> <span>الزبائن</span></a></li>
-        <li><a href="{{ route('bills.index') }}"><i class="fa fa-link"></i> <span>رحلة جديدة</span></a></li>
-        <li><a href="{{ route('receipts.index') }}"><i class="fa fa-link"></i> <span>إيصال جديد</span></a></li>
+        <li><a href="{{ route('bills.index') }}"><i class="fa fa-link"></i> <span>الرحلات</span></a></li>
+        <li><a href="{{ route('receipts.index') }}"><i class="fa fa-link"></i> <span>الايصالات</span></a></li>
 
       </ul>
       <!-- /.sidebar-menu -->
