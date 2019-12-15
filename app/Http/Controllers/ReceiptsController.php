@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\receipts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReceiptsController extends Controller
 {
@@ -17,6 +18,11 @@ class ReceiptsController extends Controller
         $receipts = receipts::paginate(10);
 
         return view('receipts/index', ['receipts' => $receipts]);
+
+        $coustomer_list = DB::table('customers')
+            ->groupBy('customer_name')
+            ->get();
+        return view('receipts')->with('customer_address', $coustomer_list);
     }
 
     /**
@@ -32,7 +38,7 @@ class ReceiptsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -43,7 +49,7 @@ class ReceiptsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\receipts  $receipts
+     * @param \App\receipts $receipts
      * @return \Illuminate\Http\Response
      */
     public function show(receipts $receipts)
@@ -54,7 +60,7 @@ class ReceiptsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\receipts  $receipts
+     * @param \App\receipts $receipts
      * @return \Illuminate\Http\Response
      */
     public function edit(receipts $receipts)
@@ -65,8 +71,8 @@ class ReceiptsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\receipts  $receipts
+     * @param \Illuminate\Http\Request $request
+     * @param \App\receipts $receipts
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, receipts $receipts)
@@ -77,7 +83,7 @@ class ReceiptsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\receipts  $receipts
+     * @param \App\receipts $receipts
      * @return \Illuminate\Http\Response
      */
     public function destroy(receipts $receipts)

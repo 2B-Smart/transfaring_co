@@ -13,7 +13,11 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-2"><input class="form-control text-right" type="text" placeholder="أدخل اسم المرسل إليه"></div>
         <div class="col-sm-2">المرسل إليه</div>
-        <div class="col-sm-2"><input class="form-control text-right" type="text" placeholder="أدخل اسم المرسل"></div>
+        <div class="col-sm-2"><select name="customer_name" id="customer_name" class="form-control input-lg dynamic" data-dependent ="customer_address">
+                @foreach($customer_list as $customer)
+                    <option value="{{ $customer->$customer }}">{{ $customer->$customer }}</option>
+                @endforeach
+            </select></div>
         <div class="col-sm-2">المرسل</div>
       </div>
       <div class="row">
@@ -21,7 +25,8 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-2"><input class="form-control text-right" type="text" placeholder="أدخل عنوان المرسل إليه"></div>
         <div class="col-sm-2">العنوان</div>
-        <div class="col-sm-2"><input class="form-control text-right" type="text" placeholder="أدخل عنوان المرسل"></div>
+          <select name="customer_address" id="customer_address" class="form-control input-lg dynamic" data-dependent ="customer_mobile">
+              <option value="">إختر العنوان</option>
         <div class="col-sm-2">العنوان</div>
       </div>
       <div class="row">
