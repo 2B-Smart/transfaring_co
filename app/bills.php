@@ -16,4 +16,8 @@ class bills extends Model
     {
         return $this->belongsTo('App\drivers');
     }
+    public function car()
+    {
+        return $this->belongsTo('App\cars','v_number','vehicle_number');
+    }
 }

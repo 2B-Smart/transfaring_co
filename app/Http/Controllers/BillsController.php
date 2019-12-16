@@ -55,6 +55,23 @@ class BillsController extends Controller
 
         return redirect()->intended('/bills');
     }
+    public function view($id){
+        $bills = bills::find($id);
+        // Redirect to user list if updating user wasn't existed
+        if ($bills == null || $bills->count() == 0) {
+            return redirect()->intended('/bills');
+        }
+
+        $drivers_list = DB::table('drivers')->orderBy('full_name')->get();
+        $cities_list = DB::table('cities')->get();
+        $cars_list = DB::table('cars')->get();
+        return view('bills.view', [
+            'bills' => $bills,
+            'drivers_list' => $drivers_list,
+            'cities_list' => $cities_list,
+            'cars_list' => $cars_list,
+        ]);
+    }
 
     public function edit($id)
     {

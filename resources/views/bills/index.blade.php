@@ -85,6 +85,9 @@
                         <a href="{{ route('bills.edit', $bill->id) }}" class="btn btn-warning col-sm-6 col-xs-5 btn-margin">
                         تعديل
                         </a>
+                        <a href="{{ route('bills.view', $bill->id) }}" class="btn btn-success col-sm-6 col-xs-5 btn-margin">
+                        المحتويات
+                        </a>
                          <button type="submit" class="btn btn-danger col-sm-6 col-xs-5 btn-margin">
                           حذف
                         </button>

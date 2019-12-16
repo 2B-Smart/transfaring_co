@@ -41,6 +41,7 @@ Route::resource('receipts', 'ReceiptsController');
 
 Route::post('bills/search', 'BillsController@search')->name('bills.search');
 Route::post('billlock/{id}', 'BillsController@billlock')->name('bills.billlock');
+Route::get('bills/view/{id}', 'BillsController@view')->name('bills.view');
 //Route::get('billlock/{id}', 'BillsController@billlock');
 Route::resource('bills', 'BillsController');
 
