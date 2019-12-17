@@ -62,14 +62,16 @@ class BillsController extends Controller
             return redirect()->intended('/bills');
         }
 
-        $drivers_list = DB::table('drivers')->orderBy('full_name')->get();
-        $cities_list = DB::table('cities')->get();
-        $cars_list = DB::table('cars')->get();
+        $customers_list = DB::table('customers')->orderBy('customer_name')->get();
+//        $cities_list = DB::table('cities')->get();
+//        $cars_list = DB::table('cars')->get();
+
+//        print_r($bills->receipts);
+//        die();
+
         return view('bills.view', [
             'bills' => $bills,
-            'drivers_list' => $drivers_list,
-            'cities_list' => $cities_list,
-            'cars_list' => $cars_list,
+            'customers_list' => $customers_list,
         ]);
     }
 

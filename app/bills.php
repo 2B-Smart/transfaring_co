@@ -20,4 +20,12 @@ class bills extends Model
     {
         return $this->belongsTo('App\cars','v_number','vehicle_number');
     }
+
+    /**
+     * Get the receipts for the blog post.
+     */
+    public function receipts()
+    {
+        return $this->hasMany('App\receipts','bill_id');
+    }
 }

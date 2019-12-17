@@ -31,12 +31,12 @@ class CreateReceipts extends Migration
             $table->string('size')->nullable();
             $table->string('marks')->nullable();
             $table->string('notes')->nullable();
-            $table->string('prepaid')->nullable();
-            $table->string('collect_from_receiver')->nullable();
-            $table->string('prepaid_miscellaneous')->nullable();
-            $table->string('trans_miscellaneous')->nullable();
-            $table->string('remittances')->nullable();
-            $table->boolean('remittances_paid')->nullable();
+            $table->float('prepaid')->nullable();
+            $table->float('collect_from_receiver')->nullable();
+            $table->float('prepaid_miscellaneous')->nullable();
+            $table->float('trans_miscellaneous')->nullable();
+            $table->float('remittances')->nullable();
+            $table->string('remittances_paid')->nullable();
             $table->bigInteger('bill_id')->unsigned();
             $table->foreign('bill_id')->references('id')->on('bills');
             $table->string('user_create');
