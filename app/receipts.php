@@ -40,4 +40,8 @@ class receipts extends Model
     {
         return $this->belongsTo('App\customers','receiver','id');
     }
+    public function bill()
+    {
+        return $this->belongsTo('App\bills','bill_id','id');
+    }
 }

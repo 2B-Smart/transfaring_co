@@ -174,6 +174,7 @@ class BillsController extends Controller
 
         $constraints = [
             'bill_date' => $request['تاريخالرحلة'],
+            'id' => $request['رقمالرحلة'],
             'driver_id' => $request['اسمالسائق'],
             'source_city' => $request['المصدر'],
             'destination_city' => $request['الوجهة'],

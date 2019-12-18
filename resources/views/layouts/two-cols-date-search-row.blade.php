@@ -11,10 +11,7 @@
         <label class="col-md-3 control-label">{{$item}}</label>
         <div class="col-md-7">
             <div class="input-group date">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                </div>
-                <input type="text" value="{{isset($oldVals) ? $oldVals[$index] : ''}}" name="<?=$stringFormat?>" class="form-control pull-right" id="<?=$stringFormat?>" placeholder="{{$item}}" required>
+                <input type="text"  value="{{isset($oldVals) ? $oldVals[$index] : ''}}" name="<?=$stringFormat?>" class="form-control pull-right" id="from" placeholder="{{$item}}">
             </div>
         </div>
       </div>

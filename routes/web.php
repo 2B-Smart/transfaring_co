@@ -37,6 +37,7 @@ Route::post('customers/search', 'CustomersController@search')->name('customers.s
 Route::resource('customers', 'CustomersController');
 
 Route::post('receipts/search', 'ReceiptsController@search')->name('receipts.search');
+Route::get('receipts/view/{id}', 'ReceiptsController@view')->name('receipts.view');
 Route::resource('receipts', 'ReceiptsController');
 
 Route::post('bills/search', 'BillsController@search')->name('bills.search');
@@ -44,7 +45,6 @@ Route::post('billlock/{id}', 'BillsController@billlock')->name('bills.billlock')
 Route::get('bills/view/{id}', 'BillsController@view')->name('bills.view');
 Route::Post('bills/addrec', 'BillsController@addrec')->name('bills.addrec');
 Route::Post('bills/delrec/{id}', 'BillsController@delrec')->name('bills.delrec');
-//Route::get('billlock/{id}', 'BillsController@billlock');
 Route::resource('bills', 'BillsController');
 
 

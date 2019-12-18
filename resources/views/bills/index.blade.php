@@ -23,8 +23,12 @@
       <form method="POST" action="{{ route('bills.search') }}">
          {{ csrf_field() }}
          @component('layouts.search', ['title' => 'بحث'])
-          @component('layouts.two-cols-search-row', ['items' => ['تاريخ الرحلة', 'اسم السائق'],
-          'oldVals' => [isset($searchingVals) ? $searchingVals['bill_date'] : '', isset($searchingVals) ? $searchingVals['driver_id'] : '']])
+          @component('layouts.two-cols-date-search-row', ['items' => ['تاريخ الرحلة'],
+          'oldVals' => [isset($searchingVals) ? $searchingVals['bill_date'] : '']])
+          @endcomponent
+          </br>
+          @component('layouts.two-cols-search-row', ['items' => ['رقم الرحلة', 'اسم السائق'],
+          'oldVals' => [isset($searchingVals) ? $searchingVals['id'] : '', isset($searchingVals) ? $searchingVals['driver_id'] : '']])
           @endcomponent
           </br>
           @component('layouts.two-cols-search-row', ['items' => ['المصدر', 'الوجهة'],

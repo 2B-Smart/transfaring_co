@@ -16,14 +16,9 @@ class ReceiptsController extends Controller
      */
     public function index()
     {
-        $receipts = receipts::paginate(10);
-        $coustomer_list = DB::table('customers')
-            ->orderBy('customer_name')
-            ->get();
-        return view('receipts.index', [
-            'receipts' => $receipts,
-            'coustomer_list' => $coustomer_list
-        ]);
+        $receipts = receipts::orderBy('id')->orderByDesc('bill_id')->paginate(10);
+
+        return view('receipts/index', ['receipts' => $receipts]);
     }
 
     /**
@@ -90,5 +85,71 @@ class ReceiptsController extends Controller
     public function destroy(receipts $receipts)
     {
         //
+    }
+    public function search(Request $request) {
+
+        $constraints = [
+            'receipts_date' => $request['تاريخالايصال'],
+            'id' => $request['رقمالايصال'],
+            'bill_id' => $request['رقمالمانيفست'],
+            'source_city' => $request['المصدر'],
+            'destination_city' => $request['الوجهة'],
+            'sender' => $request['المرسل'],
+            'receiver' => $request['المرسلإليه']
+        ];
+        $receipts = $this->doSearchingQuery($constraints);
+        return view('receipts/index', ['receipts' => $receipts, 'searchingVals' => $constraints]);
+    }
+
+    private function doSearchingQuery($constraints) {
+        $query = receipts::query();
+        $fields = array_keys($constraints);
+        $index = 0;
+        foreach ($constraints as $constraint) {
+            if ($constraint != null) {
+                if($fields[$index]=='sender'){
+                    $customers=customers::where('customer_name', 'like', '%' . $constraint . '%')->get();
+                    $customersIds=[];
+                    foreach($customers as $c){
+                        $customersIds[] = $c->id;
+                    }
+//                    print_r($driverIds);
+                    $ScIDs =implode(",",$customersIds);
+//                    echo $dIDs;
+//                    die();
+                    //$query = $query->where('driver_id', 'in', $driverIds);
+                    $query = $query->whereIn('sender', [$ScIDs]);
+
+                }
+                elseif($fields[$index]=='receiver'){
+                    $customers=customers::where('customer_name', 'like', '%' . $constraint . '%')->get();
+                    $customersIds=[];
+                    foreach($customers as $c){
+                        $customersIds[] = $c->id;
+                    }
+//                    print_r($driverIds);
+                    $ScIDs =implode(",",$customersIds);
+//                    echo $dIDs;
+//                    die();
+                    //$query = $query->where('driver_id', 'in', $driverIds);
+                    $query = $query->whereIn('receiver', [$ScIDs]);
+                }
+                else {
+                    $query = $query->where($fields[$index], 'like', '%' . $constraint . '%');
+                }
+            }
+
+            $index++;
+        }
+        return $query->orderBy('id')->orderByDesc('bill_id')->paginate(10);
+    }
+
+    private function validateInput($request) {
+        $this->validate($request, [
+            'source_city' => 'required',
+            'destination_city' => 'required',
+            'driver_id' => 'required',
+            'v_number' => 'required',
+        ]);
     }
 }
