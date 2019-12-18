@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\bills;
 use App\drivers;
+use App\receipts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -73,6 +74,37 @@ class BillsController extends Controller
             'bills' => $bills,
             'customers_list' => $customers_list,
         ]);
+    }
+    public function addrec(Request $request){
+
+        $bill = bills::find($request['bill_id']);
+        receipts::create([
+            'sender'=>$request['sender'],
+            'receiver'=>$request['receiver'],
+            'source_city'=>$bill->source_city,
+            'destination_city'=>$bill->destination_city,
+            'receipts_date'=>date('Y-m-d'),
+            'number_of_packages'=>$request['number_of_packages'],
+            'package_type'=>$request['package_type'],
+            'contents'=>$request['contents'],
+            'weight'=>$request['weight'],
+            'size'=>$request['size'],
+            'marks'=>$request['marks'],
+            'notes'=>$request['notes'],
+            'prepaid'=>$request['prepaid'],
+            'collect_from_receiver'=>$request['collect_from_receiver'],
+            'prepaid_miscellaneous'=>$request['prepaid_miscellaneous'],
+            'trans_miscellaneous'=>$request['trans_miscellaneous'],
+            'remittances'=>$request['remittances'],
+            'remittances_paid'=>"غير مدفوع",
+            'bill_id'=>$request['bill_id'],
+            'user_create' => Auth::user()->name,
+            'user_last_update' => Auth::user()->name
+        ]);
+    }
+
+    public function delrec($id){
+        receipts::where('id', $id)->delete();
     }
 
     public function edit($id)

@@ -7,6 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 class receipts extends Model
 {
     //
+    protected $fillable = [
+        'sender',
+        'receiver',
+        'source_city',
+        'destination_city',
+        'receipts_date',
+        'number_of_packages',
+        'package_type',
+        'contents',
+        'weight',
+        'size',
+        'marks',
+        'notes',
+        'prepaid',
+        'collect_from_receiver',
+        'prepaid_miscellaneous',
+        'trans_miscellaneous',
+        'remittances',
+        'remittances_paid',
+        'bill_id',
+        'user_create',
+        'user_last_update'
+    ];
     //get sender data
     public function customer_sender()
     {

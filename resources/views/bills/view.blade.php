@@ -1,5 +1,6 @@
 @extends('bills.base')
 @section('action-content')
+
     <style>
         table,
         thead,
@@ -85,6 +86,7 @@
                                         <td>{{ $bills->updated_at }}</td>
                                         <th>تاريخ اخر تعديل</th>
                                     </tr>
+
                                 </table>
                             </div>
                         </div>
@@ -149,7 +151,7 @@
                                                     <th colspan="2">الحجم</th>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2"><input class="form-control" type="text" id="weight" placeholder="الوزن"></td>
+                                                    <td colspan="2"><input class="form-control" type="number" step="any" id="weight" placeholder="الوزن"></td>
                                                     <td colspan="2"><input class="form-control" type="text" id="size" placeholder="الحجم"></td>
                                                 </tr>
                                                 <tr>
@@ -176,7 +178,16 @@
                                                     <td></td>
                                                     <th colspan="2">ضد الشحن</th>
                                                 </tr>
-                                                <tr></tr>
+                                                <tr>
+                                                    <td colspan="3"></td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <button type="button" class="btn btn-success addrec">إضافة</button>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                         </table>
                                     </div>
                                 </div>
@@ -185,6 +196,7 @@
                         <!-- /.box-body -->
                     </div>
                 </div>
+                {{--قائمة الايصالات--}}
                 <div class="col col-sm-6">
                     <div class="box box-default">
                         <div class="box-header with-border">
@@ -205,6 +217,12 @@
                                     <div class="col-sm-12">
                                         <table id="example2" class="table table-bordered table-hover">
                                             @foreach($bills->receipts as $receipt)
+                                                <tr>
+                                                    <td colspan="3"></td>
+                                                    <td>
+                                                        <button class='ion-android-delete delrec' id="{{ $receipt->id }}"></button>
+                                                    </td>
+                                                </tr>
                                                 <tr>
                                                     <td>{{ $receipt->receipts_date }}</td>
                                                     <th>تاريخ الايصال</th>
@@ -266,7 +284,7 @@
                                                     <td>{{ $receipt->prepaid+$receipt->prepaid_miscellaneous }}</td>
                                                     <th colspan="2">المجموع</th>
                                                 </tr>
-                                                <tr></tr>
+                                                <tr><td colspan="4" class="alert-success"></td></tr>
                                             @endforeach
                                         </table>
                                     </div>
@@ -280,4 +298,62 @@
         </section>
         <!-- /.content -->
     </div>
+    <script src="{{ asset ("/bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js") }}"></script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(function () {
+            $(document).on('click','.addrec',function() {
+                alert("d");
+                var remittances = $("#remittances").val();
+                var prepaid_miscellaneous = $("#prepaid_miscellaneous").val();
+                var trans_miscellaneous = $("#trans_miscellaneous").val();
+                var collect_from_receiver = $("#collect_from_receiver").val();
+                var prepaid = $("#prepaid").val();
+                var sender = $("#sender").val();
+                var receiver = $("#receiver").val();
+                var number_of_packages = $("#number_of_packages").val();
+                var package_type = $("#package_type").val();
+                var contents = $("#contents").val();
+                var marks = $("#marks").val();
+                var weight = $("#weight").val();
+                var size = $("#size").val();
+                var notes = $("#notes").val();
+
+                var Bid = <?php echo $bills->id; ?>;
+//                $.ajax({url:'bills/addrec&id='+ID+'&name='+coursName+'&center='+centerName,type : 'POST'}).done(function(result){ location.reload();});
+                $.ajax({
+
+                    type:'POST',
+
+                    url:"{{ route('bills.addrec') }}",
+
+                    data:{"_token": "{{ csrf_token() }}",sender:sender, receiver:receiver, number_of_packages:number_of_packages, package_type:package_type, contents:contents, marks:marks, weight:weight, size:size, notes:notes, remittances:remittances, prepaid_miscellaneous:prepaid_miscellaneous, trans_miscellaneous:trans_miscellaneous, collect_from_receiver:collect_from_receiver, prepaid:prepaid, bill_id:Bid}
+
+                }).done(function(result){ location.reload();});
+            });
+        });
+        $(function () {
+            $(document).on('click','.delrec',function() {
+                if(confirm("هل تريد الحذف!!")){
+                    var ID = $(this).attr("id");
+                    $.ajax({
+
+                        type:'POST',
+
+                        url:"/bills/delrec/"+ID+"",
+
+                        data:{"_token": "{{ csrf_token() }}"}
+
+                    }).done(function(result){ location.reload();});
+                }
+            });
+        });
+
+    </script>
 @endsection
+
+
