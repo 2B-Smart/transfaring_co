@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\customers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Barryvdh\DomPDF\PDF;
 
 class CustomersController extends Controller
 {
@@ -24,6 +25,7 @@ class CustomersController extends Controller
     {
         return view('customers/create');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -101,6 +103,30 @@ class CustomersController extends Controller
         $customers = $this->doSearchingQuery($constraints);
 
         return view('customers/index', ['customers' => $customers, 'searchingVals' => $constraints]);
+    }
+
+    function pdf()
+    {
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($this->
+        convert_customers_data_to_html());
+        $pdf->stream();
+    }
+
+    function convert_customers_data_to_html()
+    {
+        $customers_data = $this->get_customers_data();
+        $output = '
+            <h1>test</h1>
+        ';
+        foreach ($customers_data as $customers)
+        {
+            $output .= '
+               <h1>.$customers->customer_name.</h1>
+            ';
+        }
+        $output .= '</table>';
+        return $output;
     }
 
     private function doSearchingQuery($constraints) {

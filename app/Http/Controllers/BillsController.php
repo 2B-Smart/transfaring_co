@@ -14,6 +14,30 @@ class BillsController extends Controller
     //
     protected $redirectTo = '/bills';
 
+    function pdf()
+    {
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($this->
+        convert_bills_data_to_html());
+        $pdf->stream();
+    }
+
+    function convert_bills_data_to_html()
+    {
+        $bills_data = $this->get_bills_data();
+        $output = '
+            <h1>test</h1>
+        ';
+        foreach ($bills_data as $bills)
+        {
+            $output .= '
+               <h1>.$bills->bill_name.</h1>
+            ';
+        }
+        $output .= '</table>';
+        return $output;
+    }
+
     public function index()
     {
         $bills = bills::orderBy('has_done')->orderByDesc('id')->paginate(10);

@@ -29,12 +29,16 @@ Route::resource('drivers', 'DriversController');
 
 Route::post('cars/search', 'CarsController@search')->name('cars.search');
 Route::resource('cars', 'CarsController');
+Route::get('cars/pdf', 'CarsController@pdf');
+
 
 Route::post('cities/search', 'CitiesController@search')->name('cities.search');
 Route::resource('cities', 'CitiesController');
+Route::get('cities/pdf', 'CitiesController@pdf');
 
 Route::post('customers/search', 'CustomersController@search')->name('customers.search');
 Route::resource('customers', 'CustomersController');
+Route::get('customers/pdf', 'CustomersController@pdf');
 
 Route::post('receipts/search', 'ReceiptsController@search')->name('receipts.search');
 Route::get('receipts/view/{id}', 'ReceiptsController@view')->name('receipts.view');
@@ -46,6 +50,7 @@ Route::get('bills/view/{id}', 'BillsController@view')->name('bills.view');
 Route::Post('bills/addrec', 'BillsController@addrec')->name('bills.addrec');
 Route::Post('bills/delrec/{id}', 'BillsController@delrec')->name('bills.delrec');
 Route::resource('bills', 'BillsController');
+Route::get('cities/pdf', 'BillsController@pdf');
 
 
 

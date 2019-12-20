@@ -92,6 +92,10 @@
                          <button type="submit" class="btn btn-danger col-sm-6 col-xs-5 btn-margin">
                           حذف
                         </button>
+
+                        <button type="submit" class="btn btn-success col-sm-3 col-xs-5 btn-margin">
+                            طباعة
+                        </button>
                         <?php } ?>
 
                     </form>

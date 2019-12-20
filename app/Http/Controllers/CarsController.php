@@ -6,6 +6,7 @@ use App\cars;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\PDF;
 
 class CarsController extends Controller
 {
@@ -22,6 +23,30 @@ class CarsController extends Controller
     public function create()
     {
         return view('cars/create');
+    }
+
+    function pdf()
+    {
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($this->
+            convert_cars_data_to_html());
+        $pdf->stream();
+    }
+
+    function convert_cars_data_to_html()
+    {
+        $cars_data = $this->get_cars_data();
+        $output = '
+            <h1>test</h1>
+        ';
+        foreach ($cars_data as $car)
+        {
+            $output .= '
+               <h1>.$car->car_name.</h1>
+            ';
+        }
+        $output .= '</table>';
+        return $output;
     }
 
     /**
@@ -57,6 +82,7 @@ class CarsController extends Controller
 
         return view('cars/edit', ['cars' => $cars]);
     }
+
 
     /**
      * Update the specified resource in storage.
