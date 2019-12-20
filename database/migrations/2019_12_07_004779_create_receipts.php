@@ -37,6 +37,7 @@ class CreateReceipts extends Migration
             $table->float('trans_miscellaneous')->nullable();
             $table->float('remittances')->nullable();
             $table->string('remittances_paid')->nullable();
+            $table->float('discount')->nullable();
             $table->bigInteger('bill_id')->unsigned();
             $table->foreign('bill_id')->references('id')->on('bills');
             $table->string('user_create');
