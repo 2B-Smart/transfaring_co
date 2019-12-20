@@ -35,29 +35,6 @@ class CitiesController extends Controller
         return view('cities/create');
     }
 
-    function pdf()
-    {
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadHTML($this->
-            convert_cities_data_to_html());
-        $pdf->stream();
-    }
-
-    function convert_cities_data_to_html()
-    {
-        $cities_data = $this->get_cities_data();
-        $output = '
-            <h1>test</h1>
-        ';
-        foreach ($cities_data as $cities)
-        {
-            $output .= '
-               <h1>.$cities->city_name.</h1>
-            ';
-        }
-        $output .= '</table>';
-        return $output;
-    }
     /**
      * Store a newly created resource in storage.
      *

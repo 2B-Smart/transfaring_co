@@ -20,34 +20,34 @@ class CarsController extends Controller
         return view('cars/index', ['cars' => $cars]);
     }
 
-    public function create()
-    {
-        return view('cars/create');
-    }
-
-    function pdf()
-    {
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($this->
-            convert_cars_data_to_html());
-        $pdf->stream();
-    }
-
-    function convert_cars_data_to_html()
-    {
-        $cars_data = $this->get_cars_data();
-        $output = '
-            <h1>test</h1>
-        ';
-        foreach ($cars_data as $car)
-        {
-            $output .= '
-               <h1>.$car->car_name.</h1>
-            ';
-        }
-        $output .= '</table>';
-        return $output;
-    }
+//    public function create()
+//    {
+//        return view('cars/create');
+//    }
+//
+//    function pdf()
+//    {
+//        $pdf = \App::make('dompdf.wrapper');
+//        $pdf->loadHTML($this->
+//            convert_cars_data_to_html());
+//        $pdf->stream();
+//    }
+//
+//    function convert_cars_data_to_html()
+//    {
+//        $cars_data = $this->get_cars_data();
+//        $output = '
+//            <h1>test</h1>
+//        ';
+//        foreach ($cars_data as $car)
+//        {
+//            $output .= '
+//               <h1>.$car->car_name.</h1>
+//            ';
+//        }
+//        $output .= '</table>';
+//        return $output;
+//    }
 
     /**
      * Store a newly created resource in storage.

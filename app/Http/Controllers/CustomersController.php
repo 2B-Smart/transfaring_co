@@ -105,30 +105,6 @@ class CustomersController extends Controller
         return view('customers/index', ['customers' => $customers, 'searchingVals' => $constraints]);
     }
 
-    function pdf()
-    {
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadHTML($this->
-        convert_customers_data_to_html());
-        $pdf->stream();
-    }
-
-    function convert_customers_data_to_html()
-    {
-        $customers_data = $this->get_customers_data();
-        $output = '
-            <h1>test</h1>
-        ';
-        foreach ($customers_data as $customers)
-        {
-            $output .= '
-               <h1>.$customers->customer_name.</h1>
-            ';
-        }
-        $output .= '</table>';
-        return $output;
-    }
-
     private function doSearchingQuery($constraints) {
         $query = customers::query();
         $fields = array_keys($constraints);

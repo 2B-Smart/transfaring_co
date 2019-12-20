@@ -66,9 +66,6 @@
                           حذف
                         </button>
 
-                        <a href="{{ url('cars/pdf') }}" class="btn btn-success col-sm-3 col-xs-5 btn-margin">
-                            طباعة
-                        </a>
 
                     </form>
                   </td>
