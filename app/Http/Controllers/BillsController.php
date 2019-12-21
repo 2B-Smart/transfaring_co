@@ -78,7 +78,7 @@ class BillsController extends Controller
     public function addrec(Request $request){
 
         $bill = bills::find($request['bill_id']);
-        receipts::create([
+        $receipts=receipts::create([
             'sender'=>$request['sender'],
             'receiver'=>$request['receiver'],
             'source_city'=>$bill->source_city,
@@ -97,10 +97,12 @@ class BillsController extends Controller
             'trans_miscellaneous'=>$request['trans_miscellaneous'],
             'remittances'=>$request['remittances'],
             'remittances_paid'=>"غير مدفوع",
+            'discount'=>$request['discount'],
             'bill_id'=>$request['bill_id'],
             'user_create' => Auth::user()->name,
             'user_last_update' => Auth::user()->name
         ]);
+        //return response($receipts->id);
     }
 
     public function delrec($id){

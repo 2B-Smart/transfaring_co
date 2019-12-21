@@ -20,10 +20,10 @@ class CarsController extends Controller
         return view('cars/index', ['cars' => $cars]);
     }
 
-//    public function create()
-//    {
-//        return view('cars/create');
-//    }
+    public function create()
+    {
+        return view('cars/create');
+    }
 //
 //    function pdf()
 //    {

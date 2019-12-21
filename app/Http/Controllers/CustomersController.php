@@ -46,6 +46,17 @@ class CustomersController extends Controller
 
         return redirect()->intended('/customers');
     }
+    public function addrec(Request $request){
+
+        $customers=customers::create([
+            'customer_mobile'=>$request['customer_mobile'],
+            'customer_address'=>$request['customer_address'],
+            'customer_name'=>$request['customer_name'],
+            'user_create' => Auth::user()->name,
+            'user_last_update' => Auth::user()->name
+        ]);
+        return response($customers->id);
+    }
 
     public function edit($id)
     {

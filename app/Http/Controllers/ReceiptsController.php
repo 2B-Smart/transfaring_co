@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\bills;
 use App\receipts;
 use App\customers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ReceiptsController extends Controller
@@ -28,18 +30,50 @@ class ReceiptsController extends Controller
      */
     public function create()
     {
-        //
+        $bills_list = DB::table('bills')->get();
+        $customers_list = DB::table('customers')->orderBy('customer_name')->get();
+
+        return view('receipts.create', [
+            'bills_list' => $bills_list,
+            'customers_list' => $customers_list,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $this->validateInput($request);
+        $bill = bills::find($request['bill_id']);
+        receipts::create([
+            'sender'=>$request['sender'],
+            'receiver'=>$request['receiver'],
+            'source_city'=>$bill->source_city,
+            'destination_city'=>$bill->destination_city,
+            'receipts_date'=>$request['receipts_date'],
+            'number_of_packages'=>$request['number_of_packages'],
+            'package_type'=>$request['package_type'],
+            'contents'=>$request['contents'],
+            'weight'=>$request['weight'],
+            'size'=>$request['size'],
+            'marks'=>$request['marks'],
+            'notes'=>$request['notes'],
+            'prepaid'=>$request['prepaid'],
+            'collect_from_receiver'=>$request['collect_from_receiver'],
+            'prepaid_miscellaneous'=>$request['prepaid_miscellaneous'],
+            'trans_miscellaneous'=>$request['trans_miscellaneous'],
+            'remittances'=>$request['remittances'],
+            'remittances_paid'=>"غير مدفوع",
+            'discount'=>$request['discount'],
+            'bill_id'=>$request['bill_id'],
+            'user_create' => Auth::user()->name,
+            'user_last_update' => Auth::user()->name
+        ]);
+        return redirect()->intended('/receipts');
     }
 
     /**
@@ -82,9 +116,11 @@ class ReceiptsController extends Controller
      * @param \App\receipts $receipts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(receipts $receipts)
+    public function destroy($id)
     {
         //
+        receipts::where('id', $id)->delete();
+        return redirect()->intended('/receipts');
     }
     public function search(Request $request) {
 
@@ -146,10 +182,13 @@ class ReceiptsController extends Controller
 
     private function validateInput($request) {
         $this->validate($request, [
-            'source_city' => 'required',
-            'destination_city' => 'required',
-            'driver_id' => 'required',
-            'v_number' => 'required',
+            'sender'=>'required',
+            'receiver'=>'required',
+            'receipts_date'=>'required',
+            'number_of_packages'=>'required',
+            'package_type'=>'required',
+            'contents'=>'required',
+            'bill_id'=>'required',
         ]);
     }
 }

@@ -159,6 +159,10 @@
                                                     <th>ملاحظات</th>
                                                 </tr>
                                                 <tr>
+                                                    <td colspan="2"><input class="form-control" name="discount" type="text" step="any" id="discount" placeholder="خصم"></td>
+                                                    <th colspan="2">خصم</th>
+                                                </tr>
+                                                <tr>
                                                     <th>للتحصيل من المرسل اليه</th>
                                                     <th>المدفوع مسبقاً</th>
                                                     <th colspan="2">الاجور</th>
@@ -260,6 +264,10 @@
                                                     <th>ملاحظات</th>
                                                 </tr>
                                                 <tr>
+                                                    <td colspan="2">{{ $receipt->discount }}</td>
+                                                    <th colspan="2">خصم</th>
+                                                </tr>
+                                                <tr>
                                                     <th>للتحصيل من المرسل اليه</th>
                                                     <th>المدفوع مسبقاً</th>
                                                     <th colspan="2">الاجور</th>
@@ -307,7 +315,6 @@
         });
         $(function () {
             $(document).on('click','.addrec',function() {
-                alert("d");
                 var remittances = $("#remittances").val();
                 var prepaid_miscellaneous = $("#prepaid_miscellaneous").val();
                 var trans_miscellaneous = $("#trans_miscellaneous").val();
@@ -322,6 +329,7 @@
                 var weight = $("#weight").val();
                 var size = $("#size").val();
                 var notes = $("#notes").val();
+                var discount = $("#discount").val();
 
                 var Bid = <?php echo $bills->id; ?>;
 //                $.ajax({url:'bills/addrec&id='+ID+'&name='+coursName+'&center='+centerName,type : 'POST'}).done(function(result){ location.reload();});
@@ -331,7 +339,7 @@
 
                     url:"{{ route('bills.addrec') }}",
 
-                    data:{"_token": "{{ csrf_token() }}",sender:sender, receiver:receiver, number_of_packages:number_of_packages, package_type:package_type, contents:contents, marks:marks, weight:weight, size:size, notes:notes, remittances:remittances, prepaid_miscellaneous:prepaid_miscellaneous, trans_miscellaneous:trans_miscellaneous, collect_from_receiver:collect_from_receiver, prepaid:prepaid, bill_id:Bid}
+                    data:{"_token": "{{ csrf_token() }}",sender:sender, receiver:receiver, number_of_packages:number_of_packages, package_type:package_type, contents:contents, marks:marks, weight:weight, size:size, notes:notes, remittances:remittances, prepaid_miscellaneous:prepaid_miscellaneous, trans_miscellaneous:trans_miscellaneous, collect_from_receiver:collect_from_receiver, prepaid:prepaid,discount:discount ,bill_id:Bid}
 
                 }).done(function(result){ location.reload();});
             });

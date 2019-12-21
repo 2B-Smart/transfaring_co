@@ -1,6 +1,6 @@
 @extends('receipts.base')
 @section('action-content')
-        <div>
+<div>
     <!-- Main content -->
     <section class="content">
       <div class="box">
