@@ -40,6 +40,7 @@ Route::resource('customers', 'CustomersController');
 
 Route::post('receipts/search', 'ReceiptsController@search')->name('receipts.search');
 Route::get('receipts/view/{id}', 'ReceiptsController@view')->name('receipts.view');
+Route::get('receipts/view/{id}', 'ReceiptsController@view')->name('receipts.view');
 Route::resource('receipts', 'ReceiptsController');
 
 Route::post('bills/search', 'BillsController@search')->name('bills.search');

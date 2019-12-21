@@ -24,7 +24,7 @@
          {{ csrf_field() }}
          @component('layouts.search', ['title' => 'Search'])
           @component('layouts.two-cols-search-row', ['items' => ['اسم المدينة'],
-          'oldVals' => [isset($searchingVals) ? $searchingVals['city_name'] : '', isset($searchingVals) ? $searchingVals['vehicle_type'] : '']])
+          'oldVals' => [isset($searchingVals) ? $searchingVals['city_name'] : '']])
           @endcomponent
         @endcomponent
       </form>

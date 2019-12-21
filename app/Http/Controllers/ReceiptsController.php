@@ -82,9 +82,16 @@ class ReceiptsController extends Controller
      * @param \App\receipts $receipts
      * @return \Illuminate\Http\Response
      */
-    public function show(receipts $receipts)
+    public function view($id)
     {
         //
+        $receipts = receipts::find($id);
+        if ($receipts == null || $receipts->count() == 0) {
+            return redirect()->intended('/receipts');
+        }
+        return view('receipts.view', [
+            'receipts' => $receipts,
+        ]);
     }
 
     /**
@@ -93,9 +100,23 @@ class ReceiptsController extends Controller
      * @param \App\receipts $receipts
      * @return \Illuminate\Http\Response
      */
-    public function edit(receipts $receipts)
+    public function edit($id)
     {
         //
+        $receipts = receipts::find($id);
+        // Redirect to user list if updating user wasn't existed
+        if ($receipts == null || $receipts->count() == 0) {
+            return redirect()->intended('/receipts');
+        }
+
+        $bills_list = DB::table('bills')->get();
+        $customers_list = DB::table('customers')->orderBy('customer_name')->get();
+
+        return view('receipts.edit', [
+            'receipts' => $receipts,
+            'bills_list' => $bills_list,
+            'customers_list' => $customers_list
+        ]);
     }
 
     /**
@@ -105,9 +126,47 @@ class ReceiptsController extends Controller
      * @param \App\receipts $receipts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, receipts $receipts)
+    public function update(Request $request, $id)
     {
-        //
+        $receipts = receipts::findOrFail($id);
+        $bill = bills::find($request['bill_id']);
+        $constraints = [
+            'sender'=>'required',
+            'receiver'=>'required',
+            'receipts_date'=>'required',
+            'number_of_packages'=>'required',
+            'package_type'=>'required',
+            'contents'=>'required',
+            'bill_id'=>'required',
+        ];
+        $input = [
+            'sender'=>$request['sender'],
+            'receiver'=>$request['receiver'],
+            'source_city'=>$bill->source_city,
+            'destination_city'=>$bill->destination_city,
+            'receipts_date'=>$request['receipts_date'],
+            'number_of_packages'=>$request['number_of_packages'],
+            'package_type'=>$request['package_type'],
+            'contents'=>$request['contents'],
+            'weight'=>$request['weight'],
+            'size'=>$request['size'],
+            'marks'=>$request['marks'],
+            'notes'=>$request['notes'],
+            'prepaid'=>$request['prepaid'],
+            'collect_from_receiver'=>$request['collect_from_receiver'],
+            'prepaid_miscellaneous'=>$request['prepaid_miscellaneous'],
+            'trans_miscellaneous'=>$request['trans_miscellaneous'],
+            'remittances'=>$request['remittances'],
+            'remittances_paid'=>"غير مدفوع",
+            'discount'=>$request['discount'],
+            'bill_id'=>$request['bill_id'],
+            'user_last_update' => Auth::user()->name
+        ];
+        $this->validate($request, $constraints);
+        receipts::where('id', $id)
+            ->update($input);
+
+        return redirect()->intended('/receipts');
     }
 
     /**

@@ -284,6 +284,9 @@
                     `<option value="${data}">${customer_name} , ${customer_address} , ${customer_mobile}</option>`
                     );
                     $('#Bcourses2').modal('hide');
+                    $("#mobileNo2").val("");
+                    $("#address2").val("");
+                    $("#full_name2").val("");
                     //location.reload();
                 });
             });
@@ -309,6 +312,10 @@
                                 `<option value="${data}" selected="selected">${customer_name} , ${customer_address} , ${customer_mobile} </option>`
                         );
                         $('#Bcourses').modal('hide');
+                            $('#Bcourses').modal('hide');
+                            $("#mobileNo").val("");
+                            $("#address").val("");
+                            $("#full_name").val("");
         //location.reload();
                 });
             });

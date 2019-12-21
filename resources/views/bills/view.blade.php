@@ -116,15 +116,6 @@
                                         <table id="example2" class="table table-bordered table-hover">
                                             <tr>
                                                 <td>
-                                                    <select id="sender" class="form-control" name="sender" required autofocus>
-                                                        <option value="" selected></option>
-                                                        @foreach($customers_list as $customer)
-                                                            <option value="{{ $customer->id }}">{{ $customer->customer_name.' , '.$customer->customer_address.' , '.$customer->customer_mobile }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                                <th>المرسل</th>
-                                                <td>
                                                     <select id="receiver" class="form-control" name="receiver" required>
                                                         <option value="" selected></option>
                                                         @foreach($customers_list as $customer)
@@ -132,7 +123,24 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <th>المستقبل</th>
+                                                <th>
+                                                    المستقبل<br>
+                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#Bcourses2">+</button>
+                                                </th>
+                                                <td>
+                                                    <select id="sender" class="form-control" name="sender" required autofocus>
+                                                        <option value="" selected></option>
+                                                        @foreach($customers_list as $customer)
+                                                            <option value="{{ $customer->id }}">{{ $customer->customer_name.' , '.$customer->customer_address.' , '.$customer->customer_mobile }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <th>
+                                                    المرسل<br>
+                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#Bcourses">+</button>
+
+                                                </th>
+
                                             </tr>
                                                 <tr>
                                                     <th>عدد الطرود</th>
@@ -198,6 +206,92 @@
                             </div>
                         </div>
                         <!-- /.box-body -->
+                    </div>
+                </div>
+                <div class="modal fade" id="Bcourses" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">إضافة زبون</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-2 control-label">اسم الزبون</label>
+                                        <div class="col-sm-10">
+                                            <input id="full_name" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="شadd" class="col-sm-2 control-label">العنوان</label>
+                                        <div class="col-sm-10">
+                                            <input id="address" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="moNo" class="col-sm-2 control-label">رقم الجوال</label>
+                                        <div class="col-sm-10">
+                                            <input id="mobileNo" type="number">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <button type="button" class="btn btn-success addcrs">إضافة</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal fade" id="Bcourses2" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">إضافة زبون</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-2 control-label">اسم الزبون</label>
+                                        <div class="col-sm-10">
+                                            <input id="full_name2" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="شadd" class="col-sm-2 control-label">العنوان</label>
+                                        <div class="col-sm-10">
+                                            <input id="address2" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="moNo" class="col-sm-2 control-label">رقم الجوال</label>
+                                        <div class="col-sm-10">
+                                            <input id="mobileNo2" type="number">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <button type="button" class="btn btn-success addcrs2">إضافة</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 {{--قائمة الايصالات--}}
@@ -358,6 +452,63 @@
 
                     }).done(function(result){ location.reload();});
                 }
+            });
+        });
+        $(function () {
+            $(document).on('click','.addcrs2',function() {
+                var customer_mobile = $("#mobileNo2").val();
+                var customer_address = $("#address2").val();
+                var customer_name = $("#full_name2").val();
+                $.ajax({
+
+                    type:'POST',
+
+                    url:"{{ route('customers.addrec') }}",
+
+                    data:{"_token": "{{ csrf_token() }}",customer_name:customer_name, customer_address:customer_address, customer_mobile:customer_mobile}
+
+                }).done(function(data){
+                    $('#receiver').append(
+                    `<option value="${data}" selected="selected">${customer_name} , ${customer_address} , ${customer_mobile}</option>`
+                    );
+                    $('#sender').append(
+                    `<option value="${data}">${customer_name} , ${customer_address} , ${customer_mobile}</option>`
+                    );
+                    $('#Bcourses2').modal('hide');
+                    $("#mobileNo2").val("");
+                    $("#address2").val("");
+                    $("#full_name2").val("");
+                    //location.reload();
+                });
+            });
+        });
+        $(function () {
+            $(document).on('click','.addcrs',function() {
+                var customer_mobile = $("#mobileNo").val();
+                var customer_address = $("#address").val();
+                var customer_name = $("#full_name").val();
+                $.ajax({
+
+                    type:'POST',
+
+                    url:"{{ route('customers.addrec') }}",
+
+                    data:{"_token": "{{ csrf_token() }}",customer_name:customer_name, customer_address:customer_address, customer_mobile:customer_mobile}
+
+                }).done(function(data){
+                    $('#receiver').append(
+                             `<option value="${data}">${customer_name} , ${customer_address} , ${customer_mobile}</option>`
+                    );
+                    $('#sender').append(
+                                `<option value="${data}" selected="selected">${customer_name} , ${customer_address} , ${customer_mobile} </option>`
+                    );
+                    $('#Bcourses').modal('hide');
+                    $('#Bcourses').modal('hide');
+                    $("#mobileNo").val("");
+                    $("#address").val("");
+                    $("#full_name").val("");
+                    //location.reload();
+                });
             });
         });
 
