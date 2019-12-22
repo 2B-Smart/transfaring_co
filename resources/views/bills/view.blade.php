@@ -19,6 +19,9 @@
                     <h3 class="box-title">معلومات الرحلة رقم: {{ $bills->id }}</h3>
 
                     <div class="box-tools pull-right">
+                        <a href="{{ route('reports.bill_no_report', $bills->id) }}" class="btn btn-success col-sm-6btn-margin">
+                            طباعة المانيفست
+                        </a>
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
                 </div>

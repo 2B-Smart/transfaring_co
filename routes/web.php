@@ -50,6 +50,7 @@ Route::Post('bills/addrec', 'BillsController@addrec')->name('bills.addrec');
 Route::Post('bills/delrec/{id}', 'BillsController@delrec')->name('bills.delrec');
 Route::resource('bills', 'BillsController');
 
+Route::get('reports/bill_no_report/{id}', 'ReportsController@bill_no_report')->name('reports.bill_no_report');
 
 
 //Route::resource('employee-management', 'EmployeeManagementController');
