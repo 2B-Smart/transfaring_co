@@ -38,18 +38,26 @@
         }
         .wrapper{
             margin: 10px;
-            width: 21.0cm;
-            /*height: 29.7cm;*/
+            width: 14.8cm;
+            height: 21.0cm;
             background-color: white;
         }
         .row {
             margin-right: 0px;
-             margin-left: 0px;
+            margin-left: 0px;
+        }
+        table,
+        thead,
+        tr,
+        tbody,
+        th,
+        td {
+            text-align: center;
         }
     </style>
 </head>
 <body class="hold-transition">
-<button type="button" onclick="printJS({ printable: 'printJS-div', type: 'html', css: ['/bower_components/AdminLTE/bootstrap/css/bootstrap.min.css','/css/app-template.css','/bower_components/AdminLTE/dist/css/skins/_all-skins.min.css']})">
+<button type="button" onclick="printJS({ printable: 'printJS-div', type: 'html', css: ['/bower_components/AdminLTE/bootstrap/css/bootstrap.min.css','/css/app-template.css','/bower_components/AdminLTE/dist/css/skins/_all-skins.min.css'],style:'table,thead,tr,tbody,th,td {text-align: center;}'})">
     Print Form
 </button>
 <div class="wrapper" id="printJS-div">
@@ -60,84 +68,96 @@
                 <tr>
                     <td></td>
                     <td>
-                        <img src="{{ asset("/logo.jpg") }}" width="100" height="100">
-                    </td>
-                    <td>
-                        <span>العودة</span><br>
-                        <span>للنقل</span>
-                    </td>
-                    <td>
-                        <span>
-                            مانيفست الامانات
-                        </span>
-                    </td>
-                    <td>
-                        <span id="billnumber">
-                            {{ $bills->id }}
-                        </span>
-                    </td>
-                    <td>
                         <span id="headernotes">
                             كل شطب او تعديل<br>
                             بدون توقيع غير معترف به
                         </span>
                     </td>
-                </tr>
-                <tr>
-
-                    <td></td>
-                    <td></td>
                     <td>
-                        الخط دمشق: {{ $bills->destination_city }} اسم السائق: {{ $bills->id }}
+                        <span id="billnumber">
+                            {{ $receipts->id }}
+                        </span>
                     </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <img src="{{ asset("/logo.jpg") }}" width="100" height="100">
+                    </td>
                 </tr>
             </table>
         </div>
     </div>
     <div class="row">
-        <div class="col cl-sm-12">
-            <table class="table table-border table-hover">
+            <div class="col col-sm-12">
+                <h3 class="box-title">معلومات الايصال رقم: {{ $receipts->id }}</h3>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="example2" class="table table-bordered table-hover">
                 <tr>
-                    <td></td>
-                    <th>المحول</th>
-                    <th>التحصيل من المرسل اليه</th>
-                    <th>الخصم</th>
-                    <th>المدفوع مسبقا</th>
-                    <th>متفرقات مدفوعة</th>
-                    <th>ضد الدفع</th>
-                    <th>المرسل اليه</th>
-                    <th>اسم المرسل</th>
+                    <td>{{ $receipts->receipts_date }}</td>
+                    <th>تاريخ الايصال</th>
+                    <td>{{ $receipts->id }}</td>
+                    <th>رقم الايصال</th>
+                </tr>
+                <tr>
+                    <td>{{ $receipts->customer_receiver->customer_name }}</td>
+                    <th>المستقبل</th>
+                    <td>{{ $receipts->customer_sender->customer_name }}</td>
+                    <th>المرسل</th>
+                </tr>
+                <tr>
                     <th>عدد الطرود</th>
                     <th>نوع الطرد</th>
-                    <th>المصدر</th>
-                    <th>رقم الايصال</th>
-                    <th> {{ "#" }} </th>
+                    <th>المحتويات</th>
+                    <th>العلامات</th>
                 </tr>
-                <?php
-                    $x=1;
-                ?>
-                @foreach($bills->receipts as $receipt)
-                    <tr>
-                        <td></td>
-                        <td>{{ $receipt->trans_miscellaneous }}</td>
-                        <td>{{ $receipt->collect_from_receiver }}</td>
-                        <td>{{ $receipt->discount }}</td>
-                        <td>{{ $receipt->prepaid }}</td>
-                        <td>{{ $receipt->prepaid_miscellaneous }}</td>
-                        <td>{{ $receipt->remittances }}</td>
-                        <td>{{ $receipt->customer_receiver->customer_name }}</td>
-                        <td>{{ $receipt->customer_sender->customer_name }}</td>
-                        <td>{{ $receipt->number_of_packages }}</td>
-                        <td>{{ $receipt->package_type }}</td>
-                        <td>{{ $receipt->source_city }}</td>
-                        <td>{{ $receipt->id }}</td>
-                        <td>{{ $x }}</td>
-                    </tr>
-                    <?php $x++; ?>
-                @endforeach
+                <tr>
+                    <td>{{ $receipts->number_of_packages }}</td>
+                    <td>{{ $receipts->package_type }}</td>
+                    <td>{{ $receipts->contents }}</td>
+                    <td>{{ $receipts->marks }}</td>
+                </tr>
+                <tr>
+                    <th colspan="2">الوزن</th>
+                    <th colspan="2">الحجم</th>
+                </tr>
+                <tr>
+                    <td colspan="2">{{ $receipts->weight }}</td>
+                    <td colspan="2">{{ $receipts->size }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3">{{ $receipts->notes }}</td>
+                    <th>ملاحظات</th>
+                </tr>
+                <tr>
+                    <td colspan="2">{{ $receipts->discount }}</td>
+                    <th colspan="2">خصم</th>
+                </tr>
+                <tr>
+                    <th>للتحصيل من المرسل اليه</th>
+                    <th>المدفوع مسبقاً</th>
+                    <th colspan="2">الاجور</th>
+                </tr>
+                <tr>
+                    <td>{{ $receipts->collect_from_receiver }}</td>
+                    <td>{{ $receipts->prepaid }}</td>
+                    <th colspan="2">اجور الشحن</th>
+                </tr>
+                <tr>
+                    <td>{{ $receipts->trans_miscellaneous }}</td>
+                    <td>{{ $receipts->prepaid_miscellaneous }}</td>
+                    <th colspan="2">متفرقات</th>
+                </tr>
+                <tr>
+                    <td>{{ $receipts->remittances }}</td>
+                    <td>{{ $receipts->remittances_paid }}</td>
+                    <th colspan="2">ضد الشحن</th>
+                </tr>
+                <tr>
+                    <td>{{ $receipts->collect_from_receiver+$receipts->trans_miscellaneous+$receipts->remittances }}</td>
+                    <td>{{ $receipts->prepaid+$receipts->prepaid_miscellaneous }}</td>
+                    <th colspan="2">المجموع</th>
+                </tr>
             </table>
         </div>
     </div>
