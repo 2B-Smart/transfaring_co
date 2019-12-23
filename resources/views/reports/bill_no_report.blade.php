@@ -26,6 +26,7 @@
       -->
     <link href="{{ asset("/bower_components/AdminLTE/dist/css/skins/_all-skins.min.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/app-template.css') }}" rel="stylesheet">
+    <link href="{{ asset('print/print.min.css') }}" rel="stylesheet">
     <style>
         body{
             font-size: 11px;
@@ -36,7 +37,7 @@
             background-color: grey;
         }
         .wrapper{
-            padding: 5px;
+            margin: 10px;
             width: 21.0cm;
             /*height: 29.7cm;*/
             background-color: white;
@@ -48,44 +49,58 @@
     </style>
 </head>
 <body class="hold-transition">
-<div class="wrapper">
+<button type="button" onclick="printJS({ printable: 'printJS-div', type: 'html', css: ['/bower_components/AdminLTE/bootstrap/css/bootstrap.min.css','/css/app-template.css','/bower_components/AdminLTE/dist/css/skins/_all-skins.min.css']})">
+    Print Form
+</button>
+<div class="wrapper" id="printJS-div">
     <!-- Main Header -->
     <div class="row">
-        <div class="col col-sm-2">
-            <span id="headernotes">
-                كل شطب او تعديل<br>
-                بدون توقيع غير معترف به
-            </span>
+        <div class="col cl-sm-12">
+            <table class="table">
+                <tr>
+                    <td></td>
+                    <td>
+                        <span id="headernotes">
+                            كل شطب او تعديل<br>
+                            بدون توقيع غير معترف به
+                        </span>
+                    </td>
+                    <td>
+                        <span id="billnumber">
+                            {{ $bills->id }}
+                        </span>
+                    </td>
+                    <td>
+                        <span>
+                            مانيفست الامانات
+                        </span>
+                    </td>
+                    <td>
+                        <span>العودة</span><br>
+                        <span>للنقل</span>
+                    </td>
+                    <td>
+                        <img src="{{ asset("/logo.jpg") }}" width="100" height="100">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        الخط دمشق: {{ $bills->destination_city }} اسم السائق: {{ $bills->id }}
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
         </div>
-        <div class="col col-sm-2">
-            <span id="billnumber">
-                {{ $bills->id }}
-            </span>
-        </div>
-        <div class="col col-sm-2">
-            <span>
-                مانيفست الامانات
-            </span>
-        </div>
-        <div class="col col-sm-3">
-            <span>العودة</span><br>
-            <span>للنقل</span>
-        </div>
-        <div class="col col-sm-3">
-            <img src="{{ asset("/logo.jpg") }}" width="100" height="100">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col col-sm-6"></div>
-        <div class="col col-sm-3">
-        الخط دمشق: {{ $bills->destination_city }} اسم السائق: {{ $bills->id }}
-        </div>
-        <div class="col col-sm-3"></div>
     </div>
     <div class="row">
         <div class="col cl-sm-12">
             <table class="table table-border table-hover">
                 <tr>
+                    <td></td>
                     <th>المحول</th>
                     <th>التحصيل من المرسل اليه</th>
                     <th>المدفوع مسبقا</th>
@@ -104,6 +119,7 @@
                 ?>
                 @foreach($bills->receipts as $receipt)
                     <tr>
+                        <td></td>
                         <td>{{ $receipt->trans_miscellaneous }}</td>
                         <td>{{ $receipt->collect_from_receiver }}</td>
                         <td>{{ $receipt->prepaid }}</td>
@@ -138,5 +154,6 @@
       fixed layout. -->
 
     <script src="{{ asset('js/site.js') }}"></script>
+    <script src="{{ asset('print/print.min.js') }}"></script>
 </body>
 </html>
