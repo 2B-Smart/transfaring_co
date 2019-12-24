@@ -39,6 +39,20 @@
         <li><a href="{{ route('customers.index') }}"><i class="fa fa-link"></i> <span>الزبائن</span></a></li>
         <li><a href="{{ route('bills.index') }}"><i class="fa fa-link"></i> <span>الرحلات</span></a></li>
         <li><a href="{{ route('receipts.index') }}"><i class="fa fa-link"></i> <span>الايصالات</span></a></li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>التقارير</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('reports/destination') }}">الوجهة</a></li>
+            <li><a href="{{ url('reports/driver') }}">السائق</a></li>
+            <li><a href="{{ url('reports/country') }}">المرسل</a></li>
+            <li><a href="{{ url('reports/state') }}">المرسل اليه</a></li>
+            <li><a href="{{ url('reports/city') }}">رقم لوحة المركبة</a></li>
+          </ul>
+        </li>
 
       </ul>
       <!-- /.sidebar-menu -->

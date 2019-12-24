@@ -53,6 +53,12 @@ Route::resource('bills', 'BillsController');
 Route::get('reports/bill_no_report/{id}', 'ReportsController@bill_no_report')->name('reports.bill_no_report');
 Route::get('reports/receipt/{id}', 'ReportsController@receipt')->name('reports.receipt');
 
+Route::get('reports/destination', 'ReportsController@destination')->name('reports.destination');
+Route::post('reports/destinationRp', 'ReportsController@destinationRp')->name('reports.destinationRp');
+
+Route::get('reports/driver', 'ReportsController@driver')->name('reports.driver');
+Route::post('reports/driverRp', 'ReportsController@driverRp')->name('reports.driverRp');
+
 
 //Route::resource('employee-management', 'EmployeeManagementController');
 //Route::post('employee-management/search', 'EmployeeManagementController@search')->name('employee-management.search');

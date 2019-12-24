@@ -75,6 +75,9 @@
                   <td>{{ $bill->updated_at }}</td>
 
                   <td>
+                      <a href="{{ route('reports.bill_no_report', $bill->id) }}" class="btn btn-success col-sm-6btn-margin">
+                          طباعة المانيفست
+                      </a>
                       <?php if($bill->has_done=="غير مقفلة") { ?>
                       <form class="row" method="POST" action="{{ route('bills.billlock', ['id' => $bill->id] ) }}" onsubmit = "return confirm('Are you sure?')">
                           <input type="hidden" name="_method" value="POST">
