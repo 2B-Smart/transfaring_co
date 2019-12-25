@@ -5,5 +5,5 @@
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2017 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; <?= date('Y') ?> <a href="#">2B Smart</a>.</strong> All rights reserved.
   </footer>
