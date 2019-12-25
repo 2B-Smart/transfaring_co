@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\bills;
 use App\cars;
 use App\cities;
+use App\customers;
 use App\receipts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -72,6 +73,72 @@ class ReportsController extends Controller
         return view('reports.driverRp', [
             'bills' => $bills,
             'driver'=>$request['driver'],
+        ]);
+    }
+
+    public function sender()
+    {
+        $customers = DB::table('customers')->get();
+        if ($customers == null || $customers->count() == 0) {
+            return redirect()->intended('/customers');
+        }
+
+        return view('reports.sender', [
+            'customers' => $customers,
+        ]);
+    }
+    public function senderRp(Request $request)
+    {
+        $receipts = receipts::where('sender', '=', $request['sender'])->whereBetween('receipts_date', [$request['start_date'], $request['end_date']])->get();
+        $sender=customers::where('id',$request['sender'])->first();
+        //print_r($bills);
+        return view('reports.senderRp', [
+            'receipts' => $receipts,
+            'sender'=>$sender->customer_name,
+        ]);
+    }
+
+    public function receiver()
+    {
+        $customers = DB::table('customers')->get();
+        if ($customers == null || $customers->count() == 0) {
+            return redirect()->intended('/customers');
+        }
+
+        return view('reports.receiver', [
+            'customers' => $customers,
+        ]);
+    }
+    public function receiverRp(Request $request)
+    {
+        $receipts = receipts::where('receiver', '=', $request['receiver'])->whereBetween('receipts_date', [$request['start_date'], $request['end_date']])->get();
+        $receiver=customers::where('id',$request['receiver'])->first();
+        //print_r($bills);
+        return view('reports.receiverRp', [
+            'receipts' => $receipts,
+            'receiver'=>$receiver->customer_name,
+        ]);
+    }
+
+    public function car()
+    {
+        $cars = DB::table('cars')->get();
+        if ($cars == null || $cars->count() == 0) {
+            return redirect()->intended('/cars');
+        }
+
+        return view('reports.car', [
+            'cars' => $cars,
+        ]);
+    }
+    public function carRp(Request $request)
+    {
+        $bills = bills::where('v_number', '=', $request['v_number'])->whereBetween('bill_date', [$request['start_date'], $request['end_date']])->get();
+        $car=cars::where('vehicle_number',$request['v_number'])->first();
+        //print_r($bills);
+        return view('reports.carRp', [
+            'bills' => $bills,
+            'car'=>$car->vehicle_type.' - '.$car->vehicle_number,
         ]);
     }
 }

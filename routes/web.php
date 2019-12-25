@@ -59,6 +59,15 @@ Route::post('reports/destinationRp', 'ReportsController@destinationRp')->name('r
 Route::get('reports/driver', 'ReportsController@driver')->name('reports.driver');
 Route::post('reports/driverRp', 'ReportsController@driverRp')->name('reports.driverRp');
 
+Route::get('reports/sender', 'ReportsController@sender')->name('reports.sender');
+Route::post('reports/senderRp', 'ReportsController@senderRp')->name('reports.senderRp');
+
+Route::get('reports/receiver', 'ReportsController@receiver')->name('reports.receiver');
+Route::post('reports/receiverRp', 'ReportsController@receiverRp')->name('reports.receiverRp');
+
+Route::get('reports/car', 'ReportsController@car')->name('reports.car');
+Route::post('reports/carRp', 'ReportsController@carRp')->name('reports.carRp');
+
 
 //Route::resource('employee-management', 'EmployeeManagementController');
 //Route::post('employee-management/search', 'EmployeeManagementController@search')->name('employee-management.search');

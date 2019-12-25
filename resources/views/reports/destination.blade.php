@@ -27,7 +27,7 @@
 
                                 <div class="col-md-2"></div>
                                 <div class="col-md-6">
-                                    <input class="form-control" name="start_date" id="from">
+                                    <input class="form-control" name="start_date" id="from" required>
                                 </div>
                                 <label for="city_name" class="col-md-2 control-label">تاريخ البداية</label>
                             </div>
@@ -35,7 +35,7 @@
 
                                 <div class="col-md-2"></div>
                                 <div class="col-md-6">
-                                    <input class="form-control" name="end_date" id="to">
+                                    <input class="form-control" name="end_date" id="to" required>
                                 </div>
                                 <label for="city_name" class="col-md-2 control-label">تاريخ النهاية</label>
                             </div>

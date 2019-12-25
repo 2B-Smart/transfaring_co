@@ -32,7 +32,7 @@ class UserManagementController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(5);
+        $users = User::paginate(10);
 
         return view('users-mgmt/index', ['users' => $users]);
     }
@@ -62,7 +62,8 @@ class UserManagementController extends Controller
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
             'firstname' => $request['firstname'],
-            'lastname' => $request['lastname']
+            'lastname' => $request['lastname'],
+             'role'=>$request['role']
         ]);
 
         return redirect()->intended('/user-management');
@@ -109,13 +110,15 @@ class UserManagementController extends Controller
         $constraints = [
             'name' => 'required|max:20',
             'firstname'=> 'required|max:60',
-            'lastname' => 'required|max:60'
+            'lastname' => 'required|max:60',
+            'role' => 'required'
             ];
         $input = [
             //'username' => $request['username'],
             'name' => $request['name'],
             'firstname' => $request['firstname'],
-            'lastname' => $request['lastname']
+            'lastname' => $request['lastname'],
+            'role'=>$request['role']
         ];
         if ($request['password'] != null && strlen($request['password']) > 0) {
             $constraints['password'] = 'required|min:6|confirmed';
@@ -148,10 +151,10 @@ class UserManagementController extends Controller
      */
     public function search(Request $request) {
         $constraints = [
-            'name' => $request['name'],
-            'firstname' => $request['firstname'],
-            'lastname' => $request['lastname'],
-            'department' => $request['department']
+            'name' => $request['اسمالمستخدم'],
+            'firstname' => $request['الاسمالاول'],
+            'lastname' => $request['الكنية'],
+            'role' => $request['الصلاحية']
             ];
 
        $users = $this->doSearchingQuery($constraints);
@@ -169,7 +172,7 @@ class UserManagementController extends Controller
 
             $index++;
         }
-        return $query->paginate(5);
+        return $query->paginate(10);
     }
     private function validateInput($request) {
         $this->validate($request, [
@@ -177,7 +180,8 @@ class UserManagementController extends Controller
         'email' => 'required|email|max:255|unique:users',
         'password' => 'required|min:6|confirmed',
         'firstname' => 'required|max:60',
-        'lastname' => 'required|max:60'
+        'lastname' => 'required|max:60',
+        'role'=>'required'
     ]);
     }
 }

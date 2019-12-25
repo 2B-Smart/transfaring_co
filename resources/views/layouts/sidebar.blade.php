@@ -17,30 +17,23 @@
       </div>
 
       <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
       <!-- /.search form -->
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
-        <li><a href="{{ route('user-management.index') }}"><i class="fa fa-link"></i> <span>User management</span></a></li>
-        <li><a href="{{ route('drivers.index') }}"><i class="fa fa-link"></i> <span>السائقين</span></a></li>
-        <li><a href="{{ route('cars.index') }}"><i class="fa fa-link"></i> <span>المركبات</span></a></li>
-        <li><a href="{{ route('cities.index') }}"><i class="fa fa-link"></i> <span>المدن</span></a></li>
-        <li><a href="{{ route('customers.index') }}"><i class="fa fa-link"></i> <span>الزبائن</span></a></li>
-        <li><a href="{{ route('bills.index') }}"><i class="fa fa-link"></i> <span>الرحلات</span></a></li>
-        <li><a href="{{ route('receipts.index') }}"><i class="fa fa-link"></i> <span>الايصالات</span></a></li>
+        <!-- Optionally, you can add icons to the links
+        <li class="active"><a href="/"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>-->
+        <?php if(\Illuminate\Support\Facades\Auth::user()->role=='admin'){ ?>
+        <li><a href="{{ route('user-management.index') }}"><i class="fa fa-users"></i> <span>ادارة المستخدمين</span></a></li>
+        <?php }?>
+        <li><a href="{{ route('drivers.index') }}"><i class="fa fa-user"></i> <span>السائقين</span></a></li>
+        <li><a href="{{ route('cars.index') }}"><i class="fa fa-car"></i> <span>المركبات</span></a></li>
+        <li><a href="{{ route('cities.index') }}"><i class="fa fa-building-o"></i> <span>المدن</span></a></li>
+        <li><a href="{{ route('customers.index') }}"><i class="fa fa-users"></i> <span>الزبائن</span></a></li>
+        <li><a href="{{ route('bills.index') }}"><i class="fa fa-truck"></i> <span>الرحلات</span></a></li>
+        <li><a href="{{ route('receipts.index') }}"><i class="fa fa-book"></i> <span>الايصالات</span></a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>التقارير</span>
+          <a href="#"><i class="fa fa-files-o"></i> <span>التقارير</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -48,9 +41,9 @@
           <ul class="treeview-menu">
             <li><a href="{{ url('reports/destination') }}">الوجهة</a></li>
             <li><a href="{{ url('reports/driver') }}">السائق</a></li>
-            <li><a href="{{ url('reports/country') }}">المرسل</a></li>
-            <li><a href="{{ url('reports/state') }}">المرسل اليه</a></li>
-            <li><a href="{{ url('reports/city') }}">رقم لوحة المركبة</a></li>
+            <li><a href="{{ url('reports/sender') }}">المرسل</a></li>
+            <li><a href="{{ url('reports/receiver') }}">المرسل اليه</a></li>
+            <li><a href="{{ url('reports/car') }}">رقم لوحة المركبة</a></li>
           </ul>
         </li>
 

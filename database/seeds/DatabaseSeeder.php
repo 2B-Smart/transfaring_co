@@ -20,5 +20,9 @@ class DatabaseSeeder extends Seeder
              'firstname' => 'admin',
             'role' => 'admin'
          ]);
+        $cities=['دمشق','حمص','حماة','حلب','ادلب','اللاذقية','طرطوس','الرقة','الحسكة','دير الزور','السويداء','درعا','القنيطرة'];
+        foreach($cities as $city){
+            $city_name=\App\cities::create(['city_name'=>$city,'user_create'=>'admin','user_last_update'=>'admin']);
+        }
     }
 }

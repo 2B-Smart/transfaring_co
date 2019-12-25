@@ -65,7 +65,7 @@
                             <div class="col-md-2"></div>
                             <div class="col-md-6">
 
-                                <select id="driver_id" class="form-control" name="driver_id" required>
+                                <select id="driver_id" class="form-control selecter" name="driver_id" required>
                                     <option value="" selected></option>
                                     @foreach($drivers_list as $driver)
 
@@ -90,7 +90,7 @@
 
                             <div class="col-md-2"></div>
                             <div class="col-md-6">
-                                <select id="v_number" class="form-control" name="v_number" required>
+                                <select id="v_number" class="form-control selecter" name="v_number" required>
                                     <option value="" selected></option>
                                     @foreach($cars_list as $car)
                                         @if($bills->v_number==$car->vehicle_number)

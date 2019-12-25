@@ -38,27 +38,27 @@
           <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
             <thead>
               <tr role="row">
-                <th width="10%" class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" aria-sort="ascending">إسم الزبون</th>
-                <th width="10%" class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="ntnlno: activate to sort column ascending">عنوان الزبون</th>
-                <th width="10%" class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="ntnlno2: activate to sort column ascending">رقم الزبون</th>
-                <th width="10%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Createdu: activate to sort column ascending">أنشئ من قبل</th>
-                <th width="10%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Createdd: activate to sort column ascending">تاريخ الانشاء</th>
-                <th width="10%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Updatedu: activate to sort column ascending">اخر تعديل من قبل</th>
-                <th width="10%" class="sorting hidden-xs" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Updatedd: activate to sort column ascending">تاريخ اخر تعديل</th>
+                <th width="10%" rowspan="1" colspan="1">إسم الزبون</th>
+                <th width="10%" rowspan="1" colspan="1">عنوان الزبون</th>
+                <th width="10%" rowspan="1" colspan="1">رقم الزبون</th>
+                <th width="10%" rowspan="1" colspan="1">أنشئ من قبل</th>
+                <th width="10%" rowspan="1" colspan="1">تاريخ الانشاء</th>
+                <th width="10%" rowspan="1" colspan="1">اخر تعديل من قبل</th>
+                <th width="10%" rowspan="1" colspan="1">تاريخ اخر تعديل</th>
 
-                <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="Action: activate to sort column ascending">Action</th>
+                <th tabindex="0" rowspan="1" colspan="2">Action</th>
               </tr>
             </thead>
             <tbody>
             @foreach ($customers as $customer)
                 <tr role="row" class="odd">
-                  <td class="sorting_1">{{ $customer->customer_name }}</td>
-                  <td class="hidden-xs">{{ $customer->customer_address }}</td>
-                  <td class="hidden-xs">{{ $customer->customer_mobile }}</td>
-                  <td class="hidden-xs">{{ $customer->user_create }}</td>
-                  <td class="hidden-xs">{{ $customer->created_at }}</td>
-                  <td class="hidden-xs">{{ $customer->user_last_update }}</td>
-                  <td class="hidden-xs">{{ $customer->updated_at }}</td>
+                  <td>{{ $customer->customer_name }}</td>
+                  <td>{{ $customer->customer_address }}</td>
+                  <td>{{ $customer->customer_mobile }}</td>
+                  <td>{{ $customer->user_create }}</td>
+                  <td>{{ $customer->created_at }}</td>
+                  <td>{{ $customer->user_last_update }}</td>
+                  <td>{{ $customer->updated_at }}</td>
 
                   <td>
                     <form class="row" method="POST" action="{{ route('customers.destroy',  $customer->id) }}" onsubmit = "return confirm('Are you sure?')">
@@ -84,10 +84,10 @@
                 <th width="10%" rowspan="1" colspan="1">إسم الزبون</th>
                 <th width="10%" rowspan="1" colspan="1">عنوان الزبون</th>
                 <th width="10%" rowspan="1" colspan="1">رقم الزبون</th>
-                <th class="hidden-xs" width="10%" rowspan="1" colspan="1">أنشئ من قبل</th>
-                <th class="hidden-xs" width="10%" rowspan="1" colspan="1">تاريخ الانشاء</th>
-                <th class="hidden-xs" width="10%" rowspan="1" colspan="1">اخر تعديل من قبل</th>
-                <th class="hidden-xs" width="10%" rowspan="1" colspan="1">تاريخ اخر تعديل</th>
+                <th width="10%" rowspan="1" colspan="1">أنشئ من قبل</th>
+                <th width="10%" rowspan="1" colspan="1">تاريخ الانشاء</th>
+                <th width="10%" rowspan="1" colspan="1">اخر تعديل من قبل</th>
+                <th width="10%" rowspan="1" colspan="1">تاريخ اخر تعديل</th>
                 <th rowspan="1" colspan="2">Action</th>
               </tr>
             </tfoot>

@@ -2,15 +2,15 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="/" class="logo" style="background-color: #eeb938 !important;">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>T</span>
+      <span class="logo-mini"><img src="{{ asset("/logo.jpg") }}" width="40" height="40"></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">Audeh Transfaring</span>
+      <span class="logo-lg">العودة للشحن</span>
     </a>
 
     <!-- Header Navbar -->
-    <nav class="navbar navbar-static-top" role="navigation">
+    <nav class="navbar navbar-static-top" role="navigation" style="background-color: #ecc35f !important;">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
@@ -29,11 +29,11 @@
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
-              <li class="user-header">
+              <li class="user-header"  style="background-color: #ecc35f !important;">
                 <img src="{{ asset("/bower_components/AdminLTE/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image">
 
                 <p>
-                  Hello {{ Auth::user()->username }}
+                  Hello {{ \Illuminate\Support\Facades\Auth::user()->name }}
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -43,9 +43,6 @@
                     <a href="{{ route('login') }}" class="btn btn-default btn-flat">Login</a>
                   </div>
                @else
-                 <div class="pull-left">
-                    <a href="{{ url('profile') }}" class="btn btn-default btn-flat">Profile</a>
-                  </div>
                  <div class="pull-right">
                     <a class="btn btn-default btn-flat" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     Logout

@@ -5,23 +5,23 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">عدد الرحلات التي قام بها السائق بين تاريخين</div>
+                    <div class="panel-heading">تقرير عدد الرحلات التي قامت بها مركبة بين تاريخين</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ route('reports.driverRp') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ route('reports.carRp') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group">
 
                                 <div class="col-md-2"></div>
                                 <div class="col-md-6">
-                                    <select class="form-control" name="driver" required>
-                                        <option value="" selected="selected">اختر اسم السائق</option>
-                                        @foreach($drivers as $driver)
-                                            <option value="{{ $driver->id }}">{{ $driver->full_name }}</option>
+                                    <select id="v_number" class="form-control selecter" name="v_number" required>
+                                        <option value="" selected></option>
+                                        @foreach($cars as $car)
+                                            <option value="{{ $car->vehicle_number }}">{{ $car->vehicle_type.' : '.$car->vehicle_number }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <label for="city_name" class="col-md-2 control-label">اسم المدينة الوجهة</label>
+                                <label for="customer_name" class="col-md-2 control-label">المركبة</label>
                             </div>
                             <div class="form-group">
 

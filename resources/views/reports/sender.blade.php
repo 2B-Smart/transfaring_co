@@ -5,23 +5,23 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">عدد الرحلات التي قام بها السائق بين تاريخين</div>
+                    <div class="panel-heading">تقرير الخدمات التي استفاد منها المرسل بين تاريخين</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ route('reports.driverRp') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ route('reports.senderRp') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group">
 
                                 <div class="col-md-2"></div>
                                 <div class="col-md-6">
-                                    <select class="form-control" name="driver" required>
-                                        <option value="" selected="selected">اختر اسم السائق</option>
-                                        @foreach($drivers as $driver)
-                                            <option value="{{ $driver->id }}">{{ $driver->full_name }}</option>
+                                    <select class="form-control" id="sender" name="sender" required>
+                                        <option value="" selected="selected">اختر اسم المرسل</option>
+                                        @foreach($customers as $customer)
+                                            <option value="{{ $customer->id }}">{{ $customer->customer_name.' , '.$customer->customer_address.' , '.$customer->customer_mobile }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <label for="city_name" class="col-md-2 control-label">اسم المدينة الوجهة</label>
+                                <label for="customer_name" class="col-md-2 control-label">اسم المرسل</label>
                             </div>
                             <div class="form-group">
 

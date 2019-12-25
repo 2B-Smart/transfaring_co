@@ -79,7 +79,7 @@
                   <td>{{ $receipt->updated_at }}</td>
 
                   <td>
-                      <?php if($receipt->bill->has_done=="غير مقفلة") { ?>
+                      <?php if($receipt->bill->has_done=="غير مقفلة"|| \Illuminate\Support\Facades\Auth::user()->role=="admin") { ?>
                     <form class="row" method="POST" action="{{ route('receipts.destroy',  $receipt->id) }}" onsubmit = "return confirm('Are you sure?')">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">

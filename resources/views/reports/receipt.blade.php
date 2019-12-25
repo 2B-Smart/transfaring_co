@@ -79,7 +79,7 @@
                         </span>
                     </td>
                     <td>
-                        <img src="{{ asset("/logo.jpg") }}" width="100" height="100">
+                        <img src="{{ asset("/logo.png") }}" width="100" height="100">
                     </td>
                 </tr>
             </table>

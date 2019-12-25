@@ -44,7 +44,7 @@
         }
         .row {
             margin-right: 0px;
-             margin-left: 0px;
+            margin-left: 0px;
         }
         table,
         thead,
@@ -65,25 +65,24 @@
     <div class="row">
         <div class="col cl-sm-12">
             <table class="table">
+                <tr><td colspan="6"></td></tr>
                 <tr>
                     <td></td>
                     <td>
-                        <img src="{{ asset("/logo.png") }}" width="100" height="100">
+                        <img src="{{ asset("/logo.png") }}" width="50" height="50">
                     </td>
                     <th>
                         <span>العودة</span><br>
                         <span>للنقل</span>
                     </th>
+                    <th style="text-align: right;">
+                        {{$receipts->count()}}
+                    </th>
                     <th>
-                        <span>
-                            مانيفست الامانات
+                        <span id="billnumber">
+                            :عدد المرات التي استفاد المرسل اليه  {{ $receiver }} من خدماتنا
                         </span>
                     </th>
-                    <td>
-                        <span id="billnumber">
-                            {{ $bills->id }}
-                        </span>
-                    </td>
                     <th>
                         <span id="headernotes">
                             كل شطب او تعديل<br>
@@ -91,17 +90,7 @@
                         </span>
                     </th>
                 </tr>
-                <tr>
 
-                    <td></td>
-                    <td></td>
-                    <td>
-                       {{ $bills->driver->full_name }}
-                    </td>
-                    <th>:اسم السائق</th>
-                    <td>{{ $bills->destination_city }}</td>
-                    <th>: الخط دمشق</th>
-                </tr>
             </table>
         </div>
     </div>
@@ -110,92 +99,32 @@
             <table class="table table-border table-hover">
                 <tr>
                     <td></td>
-                    <th>المحول</th>
-                    <th>التحصيل من المرسل اليه</th>
-                    <th>الخصم</th>
-                    <th>المدفوع مسبقا</th>
-                    <th>متفرقات مدفوعة</th>
-                    <th>ضد الدفع</th>
-                    <th>المرسل اليه</th>
-                    <th>اسم المرسل</th>
+                    <th>تاريخ الايصال</th>
+                    <th>المحتويات</th>
                     <th>عدد الطرود</th>
-                    <th>نوع الطرد</th>
+                    <th>المرسل</th>
                     <th>المصدر</th>
                     <th>رقم الايصال</th>
+                    <th>رقم الرحلة</th>
                     <th> {{ "#" }} </th>
                 </tr>
                 <?php
-                    $x=1;
-                    $trans_miscellaneous=0;
-                    $collect_from_receiver=0;
-                    $prepaid=0;
-                    $prepaid_miscellaneous=0;
-                    $remittances=0;
+                $x=1;
                 ?>
-                @foreach($bills->receipts as $receipt)
+                @foreach($receipts as $receipt)
                     <tr>
                         <td></td>
-                        <td>{{ $receipt->trans_miscellaneous }}</td>
-                        <td>{{ $receipt->collect_from_receiver }}</td>
-                        <td>{{ $receipt->discount }}</td>
-                        <td>{{ $receipt->prepaid }}</td>
-                        <td>{{ $receipt->prepaid_miscellaneous }}</td>
-                        <td>{{ $receipt->remittances }}</td>
-                        <td>{{ $receipt->customer_receiver->customer_name }}</td>
-                        <td>{{ $receipt->customer_sender->customer_name }}</td>
+                        <td>{{ $receipt->receipts_date }}</td>
+                        <td>{{ $receipt->contents }}</td>
                         <td>{{ $receipt->number_of_packages }}</td>
-                        <td>{{ $receipt->package_type }}</td>
+                        <td>{{ $receipt->customer_sender->customer_name }}</td>
                         <td>{{ $receipt->source_city }}</td>
                         <td>{{ $receipt->id }}</td>
+                        <td>{{ $receipt->bill->id }}</td>
                         <td>{{ $x }}</td>
                     </tr>
-                    <?php
-                        $trans_miscellaneous+= $receipt->trans_miscellaneous;
-                        $collect_from_receiver+= $receipt->collect_from_receiver;
-                        $prepaid+= $receipt->prepaid;
-                        $prepaid_miscellaneous+= $receipt->prepaid_miscellaneous;
-                        $remittances+= $receipt->remittances;
-                    ?>
                     <?php $x++; ?>
                 @endforeach
-            </table>
-            <table class="table">
-                <tr>
-                    <td></td>
-                    <td>{{$prepaid+$collect_from_receiver}}</td>
-                    <th>المجموع العام</th>
-                    <td>{{ $bills->driver->mobile_number }}</td>
-                    <th>جوال السائق</th>
-                    <td>{{ $bills->driver->full_name }}</td>
-                    <th>اسم السائق</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>{{$prepaid}}</td>
-                    <th>المسبق</th>
-                    <td>{{ $bills->bill_date }}</td>
-                    <th>التاريخ</th>
-                    <td>{{ $bills->driver->national_id_number }}</td>
-                    <th>الرقم الوطني</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>{{$trans_miscellaneous}}</td>
-                    <th>المحول</th>
-                    <td>{{ $bills->driver->mobile_number }}</td>
-                    <th>نوع السيارة</th>
-                    <td>{{ $bills->driver->full_name }}</td>
-                    <th>رقم السيارة</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>{{$prepaid_miscellaneous}}</td>
-                    <th>متفرقات مدفوعة</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
             </table>
         </div>
     </div>

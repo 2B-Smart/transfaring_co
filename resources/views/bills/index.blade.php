@@ -78,7 +78,7 @@
                       <a href="{{ route('reports.bill_no_report', $bill->id) }}" class="btn btn-success col-sm-6btn-margin">
                           طباعة المانيفست
                       </a>
-                      <?php if($bill->has_done=="غير مقفلة") { ?>
+                      <?php if($bill->has_done=="غير مقفلة" || \Illuminate\Support\Facades\Auth::user()->role=="admin") { ?>
                       <form class="row" method="POST" action="{{ route('bills.billlock', ['id' => $bill->id] ) }}" onsubmit = "return confirm('Are you sure?')">
                           <input type="hidden" name="_method" value="POST">
                           <input type="hidden" name="_token" value="{{ csrf_token() }}">

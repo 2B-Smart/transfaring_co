@@ -113,6 +113,7 @@
         });
         $("#sender").select2();
         $("#receiver").select2();
+        $(".selecter").select2();
     });
 </script>
 <script src="{{ asset('js/site.js') }}"></script>

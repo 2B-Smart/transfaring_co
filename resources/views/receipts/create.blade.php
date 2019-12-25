@@ -46,7 +46,7 @@
                                                     </td>
                                                     <th>تاريخ الايصال</th>
                                                     <td>
-                                                        <select id="bill_id" class="form-control" name="bill_id" required>
+                                                        <select id="bill_id" class="form-control selecter" name="bill_id" required>
                                                             <option value="" selected></option>
                                                             @foreach($bills_list as $bill)
                                                                 <option value="{{ $bill->id }}">{{ 'الرحلة رقم '.$bill->id.' من '.$bill->source_city.' الى ' .$bill->destination_city}}</option>

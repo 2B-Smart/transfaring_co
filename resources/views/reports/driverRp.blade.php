@@ -69,7 +69,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <img src="{{ asset("/logo.jpg") }}" width="50" height="50">
+                        <img src="{{ asset("/logo.png") }}" width="50" height="50">
                     </td>
                     <th>
                         <span>العودة</span><br>
