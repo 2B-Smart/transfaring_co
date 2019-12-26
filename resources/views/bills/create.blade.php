@@ -10,32 +10,6 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('bills.store') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('source_city') ? ' has-error' : '' }}">
-
-                            <div class="col-md-2"></div>
-                            <div class="col-md-6">
-
-                                <select id="source_city" class="form-control" name="source_city" required disabled = "disabled">
-                                    <option value=""></option>
-                                    @foreach($cities_list as $city)
-                                        @if($city->city_name=='دمشق')
-                                            <option value="{{ $city->city_name }}" selected="selected">{{ $city->city_name }}</option>
-                                        @else
-                                            <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
-                                        @endif
-
-                                    @endforeach
-                                </select>
-
-                                @if ($errors->has('source_city'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('source_city') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                            <label for="source_city" class="col-md-2 control-label">المصدر</label>
-                        </div>
-
                         <div class="form-group{{ $errors->has('destination_city') ? ' has-error' : '' }}">
 
                             <div class="col-md-2"></div>

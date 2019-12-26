@@ -12,31 +12,6 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 
-                        <div class="form-group{{ $errors->has('source_city') ? ' has-error' : '' }}">
-
-                            <div class="col-md-2"></div>
-                            <div class="col-md-6">
-
-                                <select id="source_city" class="form-control" name="source_city" required autofocus disabled = "disabled">
-                                    <option value="" selected></option>
-                                    @foreach($cities_list as $city)
-                                        @if($bills->source_city == $city->city_name)
-                                        <option value="{{ $city->city_name }}" selected="selected">{{ $city->city_name }}</option>
-                                        @else
-                                        <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-
-                                @if ($errors->has('source_city'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('source_city') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                            <label for="source_city" class="col-md-2 control-label">المصدر</label>
-                        </div>
-
                         <div class="form-group{{ $errors->has('destination_city') ? ' has-error' : '' }}">
 
                             <div class="col-md-2"></div>

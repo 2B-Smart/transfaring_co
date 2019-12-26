@@ -232,6 +232,18 @@ class ReceiptsController extends Controller
         return redirect()->intended('/receipts');
     }
 
+    public function haspaid($id)
+    {
+        $receipts = receipts::findOrFail($id);
+        $input = [
+            'remittances_paid'=>"مدفوع",
+            'user_last_update' => Auth::user()->name
+        ];
+        receipts::where('id', $id)
+            ->update($input);
+        return redirect()->intended('/receipts/unpaid');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -41,7 +41,7 @@ Route::resource('customers', 'CustomersController');
 Route::post('receipts/search', 'ReceiptsController@search')->name('receipts.search');
 Route::get('receipts/view/{id}', 'ReceiptsController@view')->name('receipts.view');
 Route::get('receipts/view/{id}', 'ReceiptsController@view')->name('receipts.view');
-Route::post('haspaid/{id}', 'BillsController@haspaid')->name('receipts.haspaid');
+Route::post('haspaid/{id}', 'ReceiptsController@haspaid')->name('receipts.haspaid');
 Route::get('receipts/unpaid', 'ReceiptsController@unpaid')->name('receipts.unpaid');
 Route::post('receipts/searchunpaid', 'ReceiptsController@searchunpaid')->name('receipts.searchunpaid');
 Route::resource('receipts', 'ReceiptsController');

@@ -45,7 +45,7 @@ class BillsController extends Controller
         $this->validateInput($request);
         bills::create([
             'bill_date' => date('Y-m-d'),
-            'source_city' => $request['source_city'],
+            'source_city' => 'دمشق',
             'has_done' => "غير مقفلة",
             'destination_city' => $request['destination_city'],
             'driver_id' => $request['driver_id'],
@@ -140,13 +140,13 @@ class BillsController extends Controller
     {
         $bills = bills::findOrFail($id);
         $constraints = [
-            'source_city' => 'required',
+            //'source_city' => 'required',
             'destination_city' => 'required',
             'driver_id' => 'required',
             'v_number' => 'required',
         ];
         $input = [
-            'source_city' => $request['source_city'],
+            //'source_city' => $request['source_city'],
             'destination_city' => $request['destination_city'],
             'driver_id' => $request['driver_id'],
             'v_number' => $request['v_number'],
@@ -222,7 +222,7 @@ class BillsController extends Controller
 
     private function validateInput($request) {
         $this->validate($request, [
-            'source_city' => 'required',
+            //'source_city' => 'required',
             'destination_city' => 'required',
             'driver_id' => 'required',
             'v_number' => 'required',
