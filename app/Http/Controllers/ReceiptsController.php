@@ -22,6 +22,70 @@ class ReceiptsController extends Controller
 
         return view('receipts/index', ['receipts' => $receipts]);
     }
+    public function unpaid()
+    {
+        $receipts = receipts::where('remittances_paid','غير مدفوع')->where('remittances','<>',null)
+            ->where('remittances','>',0)->orderBy('id')->orderByDesc('receipts_date')->paginate(10);
+
+        return view('receipts/unpaid', ['receipts' => $receipts]);
+    }
+    public function searchunpaid(Request $request) {
+
+        $constraints = [
+            'receipts_date' => $request['تاريخالايصال'],
+            'id' => $request['رقمالايصال'],
+            'bill_id' => $request['رقمالمانيفست'],
+            'source_city' => $request['المصدر'],
+            'destination_city' => $request['الوجهة'],
+            'sender' => $request['المرسل'],
+            'receiver' => $request['المرسلإليه']
+        ];
+        $receipts = $this->doSearchingQueryUnpaid($constraints);
+        return view('receipts/unpaid', ['receipts' => $receipts, 'searchingVals' => $constraints]);
+    }
+    private function doSearchingQueryUnpaid($constraints) {
+        $query = receipts::query();
+        $fields = array_keys($constraints);
+        $index = 0;
+        foreach ($constraints as $constraint) {
+            if ($constraint != null) {
+                if($fields[$index]=='sender'){
+                    $customers=customers::where('customer_name', 'like', '%' . $constraint . '%')->get();
+                    $customersIds=[];
+                    foreach($customers as $c){
+                        $customersIds[] = $c->id;
+                    }
+//                    print_r($driverIds);
+                    $ScIDs =implode(",",$customersIds);
+//                    echo $dIDs;
+//                    die();
+                    //$query = $query->where('driver_id', 'in', $driverIds);
+                    $query = $query->whereIn('sender', [$ScIDs]);
+
+                }
+                elseif($fields[$index]=='receiver'){
+                    $customers=customers::where('customer_name', 'like', '%' . $constraint . '%')->get();
+                    $customersIds=[];
+                    foreach($customers as $c){
+                        $customersIds[] = $c->id;
+                    }
+//                    print_r($driverIds);
+                    $ScIDs =implode(",",$customersIds);
+//                    echo $dIDs;
+//                    die();
+                    //$query = $query->where('driver_id', 'in', $driverIds);
+                    $query = $query->whereIn('receiver', [$ScIDs]);
+                }
+                else {
+                    $query = $query->where($fields[$index], 'like', '%' . $constraint . '%');
+                }
+            }
+
+            $index++;
+        }
+        return $query->where('remittances_paid','غير مدفوع')->where('remittances','<>',null)
+            ->where('remittances','>',0)->orderBy('id')->orderByDesc('bill_id')->paginate(10);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -157,7 +221,6 @@ class ReceiptsController extends Controller
             'prepaid_miscellaneous'=>$request['prepaid_miscellaneous'],
             'trans_miscellaneous'=>$request['trans_miscellaneous'],
             'remittances'=>$request['remittances'],
-            'remittances_paid'=>"غير مدفوع",
             'discount'=>$request['discount'],
             'bill_id'=>$request['bill_id'],
             'user_last_update' => Auth::user()->name

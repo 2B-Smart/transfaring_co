@@ -22,7 +22,7 @@
       </div>
       <form method="POST" action="{{ route('customers.search') }}">
          {{ csrf_field() }}
-         @component('layouts.search', ['title' => 'Search'])
+         @component('layouts.search', ['title' => 'بحث'])
           @component('layouts.two-cols-search-row', ['items' => ['اسم الزبون' , 'عنوان الزبون'],
           'oldVals' => [isset($searchingVals) ? $searchingVals['customer_name'] : '', isset($searchingVals) ? $searchingVals['customer_address'] : '']])
           @endcomponent

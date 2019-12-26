@@ -161,7 +161,11 @@ class BillsController extends Controller
 
     public function destroy($id)
     {
-        bills::where('id', $id)->delete();
+        try{
+            bills::where('id', $id)->delete();
+        }catch (\Exception $e){
+            return redirect()->intended('errorshandler/connot_do_this');
+        }
         return redirect()->intended('/bills');
     }
 

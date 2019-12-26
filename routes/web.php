@@ -41,6 +41,9 @@ Route::resource('customers', 'CustomersController');
 Route::post('receipts/search', 'ReceiptsController@search')->name('receipts.search');
 Route::get('receipts/view/{id}', 'ReceiptsController@view')->name('receipts.view');
 Route::get('receipts/view/{id}', 'ReceiptsController@view')->name('receipts.view');
+Route::post('haspaid/{id}', 'BillsController@haspaid')->name('receipts.haspaid');
+Route::get('receipts/unpaid', 'ReceiptsController@unpaid')->name('receipts.unpaid');
+Route::post('receipts/searchunpaid', 'ReceiptsController@searchunpaid')->name('receipts.searchunpaid');
 Route::resource('receipts', 'ReceiptsController');
 
 Route::post('bills/search', 'BillsController@search')->name('bills.search');
@@ -49,6 +52,8 @@ Route::get('bills/view/{id}', 'BillsController@view')->name('bills.view');
 Route::Post('bills/addrec', 'BillsController@addrec')->name('bills.addrec');
 Route::Post('bills/delrec/{id}', 'BillsController@delrec')->name('bills.delrec');
 Route::resource('bills', 'BillsController');
+
+Route::get('errorshandler/connot_do_this', 'ReportsController@connot_do_this')->name('errorshandler.connot_do_this');
 
 Route::get('reports/bill_no_report/{id}', 'ReportsController@bill_no_report')->name('reports.bill_no_report');
 Route::get('reports/receipt/{id}', 'ReportsController@receipt')->name('reports.receipt');

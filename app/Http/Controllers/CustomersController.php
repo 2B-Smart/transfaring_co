@@ -101,7 +101,11 @@ class CustomersController extends Controller
 
     public function destroy($id)
     {
-        customers::where('id', $id)->delete();
+        try{
+            customers::where('id', $id)->delete();
+        }catch (\Exception $e){
+            return redirect()->intended('errorshandler/connot_do_this');
+        }
         return redirect()->intended('/customers');
     }
 

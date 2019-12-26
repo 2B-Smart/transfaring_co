@@ -109,8 +109,13 @@ class CitiesController extends Controller
             'user_last_update' => Auth::user()->name
         ];
         $this->validate($request, $constraints);
-        cities::where('city_name', $id)
-            ->update($input);
+        try{
+            cities::where('city_name', $id)
+                ->update($input);
+        }catch (\Exception $e){
+            return redirect()->intended('errorshandler/connot_do_this');
+        }
+
 
         return redirect()->intended('/cities');
     }
@@ -123,7 +128,11 @@ class CitiesController extends Controller
      */
     public function destroy($id)
     {
-        cities::where('city_name', $id)->delete();
+        try{
+            cities::where('city_name', $id)->delete();
+        }catch (\Exception $e){
+            return redirect()->intended('errorshandler/connot_do_this');
+        }
         return redirect()->intended('/cities');
     }
 

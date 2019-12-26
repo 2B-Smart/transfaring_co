@@ -96,7 +96,11 @@ class DriversController extends Controller
 
     public function destroy($id)
     {
-        drivers::where('id', $id)->delete();
+        try{
+            drivers::where('id', $id)->delete();
+        }catch (\Exception $e){
+            return redirect()->intended('errorshandler/connot_do_this');
+        }
         return redirect()->intended('/drivers');
     }
 

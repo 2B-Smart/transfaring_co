@@ -116,15 +116,23 @@ class CarsController extends Controller
             'user_last_update' => Auth::user()->name
         ];
         $this->validate($request, $constraints);
-        cars::where('vehicle_number', $id)
-            ->update($input);
+        try{
+            cars::where('vehicle_number', $id)
+                ->update($input);
+        }catch (\Exception $e){
+            return redirect()->intended('errorshandler/connot_do_this');
+        }
 
         return redirect()->intended('/cars');
     }
 
     public function destroy($id)
     {
-        cars::where('vehicle_number', $id)->delete();
+        try{
+            cars::where('vehicle_number', $id)->delete();
+        }catch (\Exception $e){
+            return redirect()->intended('errorshandler/connot_do_this');
+        }
         return redirect()->intended('/cars');
     }
 

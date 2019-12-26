@@ -24,6 +24,9 @@ class ReportsController extends Controller
             'bills' => $bills,
         ]);
     }
+    public function connot_do_this(){
+        return view('errorshandler.connot_do_this');
+    }
     public function receipt($id)
     {
         $receipts = receipts::find($id);
