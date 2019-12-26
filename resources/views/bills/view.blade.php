@@ -321,7 +321,10 @@
                                                 <tr>
                                                     <td colspan="3"></td>
                                                     <td>
-                                                        <button class='ion-android-delete delrec' id="{{ $receipt->id }}"></button>
+                                                        <a href="{{ route('receipts.edit', $receipt->id) }}" class="btn btn-warning">
+                                                            تعديل
+                                                        </a>
+                                                        <button class='btn ion-android-delete delrec' id="{{ $receipt->id }}"></button>
                                                     </td>
                                                 </tr>
                                                 <tr>

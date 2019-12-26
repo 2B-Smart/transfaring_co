@@ -15,10 +15,15 @@
                             <div class="col-md-2"></div>
                             <div class="col-md-6">
 
-                                <select id="source_city" class="form-control" name="source_city" required autofocus>
-                                    <option value="" selected></option>
+                                <select id="source_city" class="form-control" name="source_city" required disabled = "disabled">
+                                    <option value=""></option>
                                     @foreach($cities_list as $city)
-                                        <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
+                                        @if($city->city_name=='دمشق')
+                                            <option value="{{ $city->city_name }}" selected="selected">{{ $city->city_name }}</option>
+                                        @else
+                                            <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
+                                        @endif
+
                                     @endforeach
                                 </select>
 
