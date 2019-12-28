@@ -45,7 +45,7 @@ class BillsController extends Controller
         $this->validateInput($request);
         bills::create([
             'bill_date' => date('Y-m-d'),
-            'source_city' => 'دمشق',
+            'source_city' => $request['source_city'],
             'has_done' => "غير مقفلة",
             'destination_city' => $request['destination_city'],
             'driver_id' => $request['driver_id'],
@@ -83,7 +83,6 @@ class BillsController extends Controller
             'receiver'=>$request['receiver'],
             'source_city'=>$bill->source_city,
             'destination_city'=>$bill->destination_city,
-            'receipts_date'=>date('Y-m-d'),
             'number_of_packages'=>$request['number_of_packages'],
             'package_type'=>$request['package_type'],
             'contents'=>$request['contents'],
@@ -98,6 +97,7 @@ class BillsController extends Controller
             'remittances'=>$request['remittances'],
             'remittances_paid'=>"غير مدفوع",
             'discount'=>$request['discount'],
+            'receipts_date'=>$request['receipts_date'],
             'bill_id'=>$request['bill_id'],
             'user_create' => Auth::user()->name,
             'user_last_update' => Auth::user()->name
@@ -140,13 +140,13 @@ class BillsController extends Controller
     {
         $bills = bills::findOrFail($id);
         $constraints = [
-            //'source_city' => 'required',
+            'source_city' => 'required',
             'destination_city' => 'required',
             'driver_id' => 'required',
             'v_number' => 'required',
         ];
         $input = [
-            //'source_city' => $request['source_city'],
+            'source_city' => $request['source_city'],
             'destination_city' => $request['destination_city'],
             'driver_id' => $request['driver_id'],
             'v_number' => $request['v_number'],
@@ -222,7 +222,7 @@ class BillsController extends Controller
 
     private function validateInput($request) {
         $this->validate($request, [
-            //'source_city' => 'required',
+            'source_city' => 'required',
             'destination_city' => 'required',
             'driver_id' => 'required',
             'v_number' => 'required',

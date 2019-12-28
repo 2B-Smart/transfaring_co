@@ -107,6 +107,10 @@
           autoclose: true,
           format: 'yyyy-mm-dd'
         });
+        $('.from').datepicker({
+          autoclose: true,
+          format: 'yyyy-mm-dd'
+        });
         $('#to').datepicker({
           autoclose: true,
           format: 'yyyy-mm-dd'

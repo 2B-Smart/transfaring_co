@@ -9,6 +9,26 @@
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('bills.store') }}">
                         {{ csrf_field() }}
+                        <div class="form-group{{ $errors->has('source_city') ? ' has-error' : '' }}">
+
+                            <div class="col-md-2"></div>
+                            <div class="col-md-6">
+
+                                <select id="source_city" class="form-control" name="source_city" required>
+                                    <option value="" selected></option>
+                                    @foreach($cities_list as $city)
+                                            <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('source_city'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('source_city') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <label for="source_city" class="col-md-2 control-label">المصدر</label>
+                        </div>
 
                         <div class="form-group{{ $errors->has('destination_city') ? ' has-error' : '' }}">
 

@@ -118,6 +118,12 @@
                                     <div class="col-md-12">
                                         <table id="example2" class="table table-bordered table-hover">
                                             <tr>
+                                               <td colspan="2">
+                                                   <input type="text" name="receipts_date" class="form-control from" id="receipts_date" required placeholder="تاريخ الايصال" value="<?=date('Y-m-d')?>">
+                                               </td>
+                                                <th colspan="2">تاريخ الايصال</th>
+                                            </tr>
+                                            <tr>
                                                 <td>
                                                     <select id="receiver" class="form-control" name="receiver" required>
                                                         <option value="" selected></option>
@@ -430,6 +436,7 @@
                 var size = $("#size").val();
                 var notes = $("#notes").val();
                 var discount = $("#discount").val();
+                var receipts_date=$("#receipts_date").val();
 
                 var Bid = <?php echo $bills->id; ?>;
 //                $.ajax({url:'bills/addrec&id='+ID+'&name='+coursName+'&center='+centerName,type : 'POST'}).done(function(result){ location.reload();});
@@ -439,7 +446,7 @@
 
                     url:"{{ route('bills.addrec') }}",
 
-                    data:{"_token": "{{ csrf_token() }}",sender:sender, receiver:receiver, number_of_packages:number_of_packages, package_type:package_type, contents:contents, marks:marks, weight:weight, size:size, notes:notes, remittances:remittances, prepaid_miscellaneous:prepaid_miscellaneous, trans_miscellaneous:trans_miscellaneous, collect_from_receiver:collect_from_receiver, prepaid:prepaid,discount:discount ,bill_id:Bid}
+                    data:{"_token": "{{ csrf_token() }}",sender:sender, receiver:receiver, number_of_packages:number_of_packages, package_type:package_type, contents:contents, marks:marks, weight:weight, size:size, notes:notes, remittances:remittances, prepaid_miscellaneous:prepaid_miscellaneous, trans_miscellaneous:trans_miscellaneous, collect_from_receiver:collect_from_receiver, prepaid:prepaid,discount:discount,receipts_date:receipts_date ,bill_id:Bid}
 
                 }).done(function(result){ location.reload();});
             });
