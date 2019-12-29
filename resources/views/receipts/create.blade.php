@@ -123,7 +123,7 @@
                                                     <th>ملاحظات</th>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2"><input class="form-control" name="discount" type="text" step="any" id="remittances" placeholder="خصم"></td>
+                                                    <td colspan="2"><input class="form-control" name="discount" type="text" step="any" id="discount" placeholder="خصم"></td>
                                                     <th colspan="2">خصم</th>
                                                 </tr>
                                                 <tr>

@@ -136,7 +136,7 @@
                                                         <th>ملاحظات</th>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="2"><input class="form-control" name="discount" type="text" step="any" id="remittances" value="{{ $receipts->discount }}" placeholder="خصم"></td>
+                                                        <td colspan="2"><input class="form-control" name="discount" type="text" step="any" id="discount" value="{{ $receipts->discount }}" placeholder="خصم"></td>
                                                         <th colspan="2">خصم</th>
                                                     </tr>
                                                     <tr>
