@@ -138,10 +138,20 @@ class ReportsController extends Controller
     {
         $bills = bills::where('v_number', '=', $request['v_number'])->whereBetween('bill_date', [$request['start_date'], $request['end_date']])->get();
         $car=cars::where('vehicle_number',$request['v_number'])->first();
-        //print_r($bills);
         return view('reports.carRp', [
             'bills' => $bills,
             'car'=>$car->vehicle_type.' - '.$car->vehicle_number,
+        ]);
+    }
+    public function receipt_paid()
+    {
+        return view('reports.receipt_paid');
+    }
+    public function receipt_paidRp(Request $request)
+    {
+        $receipts = receipts::whereBetween('receipts_date', [$request['start_date'], $request['end_date']])->where('remittances','<>',null)->where('remittances','>',0)->orderBy('id')->orderByDesc('receipts_date')->orderByDesc('paid_date')->get();
+        return view('reports.receipt_paidRp', [
+            'receipts' => $receipts,
         ]);
     }
 }

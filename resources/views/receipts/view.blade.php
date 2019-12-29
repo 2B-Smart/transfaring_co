@@ -89,7 +89,7 @@
                                         </tr>
                                         <tr>
                                             <td>{{ $receipts->remittances }}</td>
-                                            <td>{{ $receipts->remittances_paid }}</td>
+                                            <td>( {{ $receipts->paid_date }} ) {{ $receipts->remittances_paid }}</td>
                                             <th colspan="2">ضد الشحن</th>
                                         </tr>
                                         <tr>

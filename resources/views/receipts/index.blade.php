@@ -79,15 +79,16 @@
                   <td>{{ $receipt->updated_at }}</td>
 
                   <td>
-                      <?php if($receipt->bill->has_done=="غير مقفلة"|| \Illuminate\Support\Facades\Auth::user()->role=="admin") { ?>
+
                     <form class="row" method="POST" action="{{ route('receipts.destroy',  $receipt->id) }}" onsubmit = "return confirm('Are you sure?')">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <a href="{{ route('receipts.edit', $receipt->id) }}" class="btn btn-warning col-sm-6 col-xs-5 btn-margin">
-                        تعديل
-                        </a>
                         <a href="{{ route('receipts.view', $receipt->id) }}" class="btn btn-success col-sm-6 col-xs-5 btn-margin">
                         المحتويات
+                        </a>
+                        <?php if($receipt->bill->has_done=="غير مقفلة"|| \Illuminate\Support\Facades\Auth::user()->role=="admin") { ?>
+                        <a href="{{ route('receipts.edit', $receipt->id) }}" class="btn btn-warning col-sm-6 col-xs-5 btn-margin">
+                            تعديل
                         </a>
                          <button type="submit" class="btn btn-danger col-sm-6 col-xs-5 btn-margin">
                           حذف

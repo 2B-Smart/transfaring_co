@@ -237,6 +237,7 @@ class ReceiptsController extends Controller
         $receipts = receipts::findOrFail($id);
         $input = [
             'remittances_paid'=>"مدفوع",
+            'paid_date'=> date('Y-m-d'),
             'user_last_update' => Auth::user()->name
         ];
         receipts::where('id', $id)

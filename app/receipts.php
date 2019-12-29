@@ -26,6 +26,7 @@ class receipts extends Model
         'trans_miscellaneous',
         'remittances',
         'remittances_paid',
+        'paid_date',
         'discount',
         'bill_id',
         'user_create',

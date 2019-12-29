@@ -45,6 +45,7 @@
             <li><a href="{{ url('reports/sender') }}">المرسل</a></li>
             <li><a href="{{ url('reports/receiver') }}">المرسل اليه</a></li>
             <li><a href="{{ url('reports/car') }}">رقم لوحة المركبة</a></li>
+            <li><a href="{{ url('reports/receipt_paid') }}">ضد الدفع</a></li>
           </ul>
         </li>
 

@@ -73,6 +73,9 @@ Route::post('reports/receiverRp', 'ReportsController@receiverRp')->name('reports
 Route::get('reports/car', 'ReportsController@car')->name('reports.car');
 Route::post('reports/carRp', 'ReportsController@carRp')->name('reports.carRp');
 
+Route::get('reports/receipt_paid', 'ReportsController@receipt_paid')->name('reports.receipt_paid');
+Route::post('reports/receipt_paidRp', 'ReportsController@receipt_paidRp')->name('reports.receipt_paidRp');
+
 
 //Route::resource('employee-management', 'EmployeeManagementController');
 //Route::post('employee-management/search', 'EmployeeManagementController@search')->name('employee-management.search');
