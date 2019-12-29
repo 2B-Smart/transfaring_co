@@ -118,10 +118,14 @@
                                     <div class="col-md-12">
                                         <table id="example2" class="table table-bordered table-hover">
                                             <tr>
-                                               <td colspan="2">
+                                               <td>
                                                    <input type="text" name="receipts_date" class="form-control from" id="receipts_date" required placeholder="تاريخ الايصال" value="<?=date('Y-m-d')?>">
                                                </td>
-                                                <th colspan="2">تاريخ الايصال</th>
+                                                <th>تاريخ الايصال</th>
+                                                <td>
+                                                    <input type="number" name="receiptNo" id="receiptNo" class="form-control" required>
+                                                </td>
+                                                <th>رقم الايصال</th>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -336,7 +340,7 @@
                                                 <tr>
                                                     <td>{{ $receipt->receipts_date }}</td>
                                                     <th>تاريخ الايصال</th>
-                                                    <td>{{ $receipt->id }}</td>
+                                                    <td>{{ $receipt->receiptNo }}</td>
                                                     <th>رقم الايصال</th>
                                                 </tr>
                                                 <tr>
@@ -437,6 +441,7 @@
                 var notes = $("#notes").val();
                 var discount = $("#discount").val();
                 var receipts_date=$("#receipts_date").val();
+                var receiptNo=$("#receiptNo").val();
 
                 var Bid = <?php echo $bills->id; ?>;
 //                $.ajax({url:'bills/addrec&id='+ID+'&name='+coursName+'&center='+centerName,type : 'POST'}).done(function(result){ location.reload();});
@@ -446,7 +451,7 @@
 
                     url:"{{ route('bills.addrec') }}",
 
-                    data:{"_token": "{{ csrf_token() }}",sender:sender, receiver:receiver, number_of_packages:number_of_packages, package_type:package_type, contents:contents, marks:marks, weight:weight, size:size, notes:notes, remittances:remittances, prepaid_miscellaneous:prepaid_miscellaneous, trans_miscellaneous:trans_miscellaneous, collect_from_receiver:collect_from_receiver, prepaid:prepaid,discount:discount,receipts_date:receipts_date ,bill_id:Bid}
+                    data:{"_token": "{{ csrf_token() }}",receiptNo:receiptNo,sender:sender, receiver:receiver, number_of_packages:number_of_packages, package_type:package_type, contents:contents, marks:marks, weight:weight, size:size, notes:notes, remittances:remittances, prepaid_miscellaneous:prepaid_miscellaneous, trans_miscellaneous:trans_miscellaneous, collect_from_receiver:collect_from_receiver, prepaid:prepaid,discount:discount,receipts_date:receipts_date ,bill_id:Bid}
 
                 }).done(function(result){ location.reload();});
             });

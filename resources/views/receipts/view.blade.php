@@ -16,7 +16,7 @@
         <section class="content">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h3 class="box-title">معلومات الايصال رقم: {{ $receipts->id }}</h3>
+                    <h3 class="box-title">معلومات الايصال رقم: {{ $receipts->receiptNo }}</h3>
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -35,7 +35,7 @@
                                         <tr>
                                             <td>{{ $receipts->receipts_date }}</td>
                                             <th>تاريخ الايصال</th>
-                                            <td>{{ $receipts->id }}</td>
+                                            <td>{{ $receipts->receiptNo }}</td>
                                             <th>رقم الايصال</th>
                                         </tr>
                                         <tr>

@@ -33,7 +33,7 @@ class ReceiptsController extends Controller
 
         $constraints = [
             'receipts_date' => $request['تاريخالايصال'],
-            'id' => $request['رقمالايصال'],
+            'receiptNo' => $request['رقمالايصال'],
             'bill_id' => $request['رقمالمانيفست'],
             'source_city' => $request['المصدر'],
             'destination_city' => $request['الوجهة'],
@@ -114,6 +114,7 @@ class ReceiptsController extends Controller
         $this->validateInput($request);
         $bill = bills::find($request['bill_id']);
         receipts::create([
+            'receiptNo'=>$request['receiptNo'],
             'sender'=>$request['sender'],
             'receiver'=>$request['receiver'],
             'source_city'=>$bill->source_city,
@@ -195,15 +196,17 @@ class ReceiptsController extends Controller
         $receipts = receipts::findOrFail($id);
         $bill = bills::find($request['bill_id']);
         $constraints = [
+            'receiptNo'=>'required|max:20',
             'sender'=>'required',
             'receiver'=>'required',
             'receipts_date'=>'required',
-            'number_of_packages'=>'required',
+            'number_of_packages'=>'required|max:20',
             'package_type'=>'required',
             'contents'=>'required',
             'bill_id'=>'required',
         ];
         $input = [
+            'receiptNo'=>$request['receiptNo'],
             'sender'=>$request['sender'],
             'receiver'=>$request['receiver'],
             'source_city'=>$bill->source_city,
@@ -261,7 +264,7 @@ class ReceiptsController extends Controller
 
         $constraints = [
             'receipts_date' => $request['تاريخالايصال'],
-            'id' => $request['رقمالايصال'],
+            'receiptNo' => $request['رقمالايصال'],
             'bill_id' => $request['رقمالمانيفست'],
             'source_city' => $request['المصدر'],
             'destination_city' => $request['الوجهة'],
@@ -317,10 +320,11 @@ class ReceiptsController extends Controller
 
     private function validateInput($request) {
         $this->validate($request, [
+            'receiptNo'=>'required|max:20',
             'sender'=>'required',
             'receiver'=>'required',
             'receipts_date'=>'required',
-            'number_of_packages'=>'required',
+            'number_of_packages'=>'required|max:20',
             'package_type'=>'required',
             'contents'=>'required',
             'bill_id'=>'required',

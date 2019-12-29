@@ -28,7 +28,7 @@
           @endcomponent
           </br>
           @component('layouts.two-cols-search-row', ['items' => ['رقم الايصال','رقم المانيفست'],
-          'oldVals' => [isset($searchingVals) ? $searchingVals['id'] : '', isset($searchingVals) ? $searchingVals['bill_id'] : '']])
+          'oldVals' => [isset($searchingVals) ? $searchingVals['receiptNo'] : '', isset($searchingVals) ? $searchingVals['bill_id'] : '']])
           @endcomponent
           </br>
           @component('layouts.two-cols-search-row', ['items' => ['المصدر', 'الوجهة'],
@@ -66,7 +66,7 @@
             @foreach ($receipts as $receipt)
                 <tr role="row" class="odd">
                   <td>{{ $receipt->bill_id }}</td>
-                  <td>{{ $receipt->id }}</td>
+                  <td>{{ $receipt->receiptNo }}</td>
                   <td>{{ $receipt->customer_sender->customer_name }}</td>
                   <td>{{ $receipt->customer_receiver->customer_name }}</td>
                   <td>{{ $receipt->source_city }}</td>

@@ -40,6 +40,21 @@
                                             <div class="col-md-12">
                                                 <table id="example2" class="table table-bordered table-hover">
                                                     <tr>
+                                                        <td colspan="2">
+                                                            <select id="bill_id" class="form-control selecter" name="bill_id" required>
+                                                                <option value="" selected></option>
+                                                                @foreach($bills_list as $bill)
+                                                                    @if($bill->id == $receipts->bill_id)
+                                                                        <option value="{{ $bill->id }}" selected="selected">{{ 'الرحلة رقم '.$bill->id.' من '.$bill->source_city.' الى ' .$bill->destination_city}}</option>
+                                                                    @else
+                                                                        <option value="{{ $bill->id }}">{{ 'الرحلة رقم '.$bill->id.' من '.$bill->source_city.' الى ' .$bill->destination_city}}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <th colspan="2">رقم المانيفست</th>
+                                                    </tr>
+                                                    <tr>
                                                         <td>
                                                             <div class="input-group date">
                                                                 <input type="text" name="receipts_date" class="form-control" id="from" required placeholder="تاريخ الايصال" value="{{ $receipts->receipts_date }}">
@@ -47,18 +62,9 @@
                                                         </td>
                                                         <th>تاريخ الايصال</th>
                                                         <td>
-                                                            <select id="bill_id" class="form-control selecter" name="bill_id" required>
-                                                                <option value="" selected></option>
-                                                                @foreach($bills_list as $bill)
-                                                                    @if($bill->id == $receipts->bill_id)
-                                                                        <option value="{{ $bill->id }}" selected="selected">{{ 'الرحلة رقم '.$bill->id.' من '.$bill->source_city.' الى ' .$bill->destination_city}}</option>
-                                                                    @else
-                                                                    <option value="{{ $bill->id }}">{{ 'الرحلة رقم '.$bill->id.' من '.$bill->source_city.' الى ' .$bill->destination_city}}</option>
-                                                                    @endif
-                                                                @endforeach
-                                                            </select>
+                                                            <input name="receiptNo" class="form-control" id="receiptNo" value="{{ $receipts->receiptNo }}" required>
                                                         </td>
-                                                        <th>رقم المانيفست</th>
+                                                        <th>رقم الايصال</th>
                                                     </tr>
                                                     <tr>
                                                         <td>

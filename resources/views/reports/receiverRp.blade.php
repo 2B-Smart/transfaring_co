@@ -119,7 +119,7 @@
                         <td>{{ $receipt->number_of_packages }}</td>
                         <td>{{ $receipt->customer_sender->customer_name }}</td>
                         <td>{{ $receipt->source_city }}</td>
-                        <td>{{ $receipt->id }}</td>
+                        <td>{{ $receipt->receiptNo }}</td>
                         <td>{{ $receipt->bill->id }}</td>
                         <td>{{ $x }}</td>
                     </tr>
