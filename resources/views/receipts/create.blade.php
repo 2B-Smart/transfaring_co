@@ -39,13 +39,7 @@
                                         <div class="col-md-12">
                                             <table id="example2" class="table table-bordered table-hover">
                                                 <tr>
-                                                    <td>
-                                                        <div class="input-group date">
-                                                            <input type="text" name="receipts_date" class="form-control" id="from" required placeholder="تاريخ الايصال" value="<?=date('Y-m-d')?>">
-                                                        </div>
-                                                    </td>
-                                                    <th>تاريخ الايصال</th>
-                                                    <td>
+                                                    <td colspan="2">
                                                         <select id="bill_id" class="form-control selecter" name="bill_id" required>
                                                             <option value="" selected></option>
                                                             @foreach($bills_list as $bill)
@@ -53,7 +47,19 @@
                                                             @endforeach
                                                         </select>
                                                     </td>
-                                                    <th>رقم المانيفست</th>
+                                                    <th colspan="2">رقم المانيفست</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="input-group date">
+                                                            <input type="text" name="receipts_date" class="form-control" id="from" required placeholder="تاريخ الايصال" value="<?=date('Y-m-d')?>">
+                                                        </div>
+                                                    </td>
+                                                    <th>تاريخ الايصال</th>
+                                                    <td>
+                                                        <input type="number" name="receiptNo" id="receiptNo" class="form-control" required>
+                                                    </td>
+                                                    <th>رقم الايصال</th>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -117,7 +123,7 @@
                                                     <th>ملاحظات</th>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2"><input class="form-control" name="discount" type="text" step="any" id="remittances" placeholder="خصم"></td>
+                                                    <td colspan="2"><input class="form-control" name="discount" type="text" step="any" id="discount" placeholder="خصم"></td>
                                                     <th colspan="2">خصم</th>
                                                 </tr>
                                                 <tr>

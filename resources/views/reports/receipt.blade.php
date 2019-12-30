@@ -75,7 +75,7 @@
                     </td>
                     <td>
                         <span id="billnumber">
-                            {{ $receipts->id }}
+                            {{ $receipts->receiptNo }}
                         </span>
                     </td>
                     <td>
@@ -87,7 +87,7 @@
     </div>
     <div class="row">
             <div class="col col-sm-12">
-                <h3 class="box-title">معلومات الايصال رقم: {{ $receipts->id }}</h3>
+                <h3 class="box-title">معلومات الايصال رقم: {{ $receipts->receiptNo }}</h3>
             </div>
     </div>
     <div class="row">
@@ -96,7 +96,7 @@
                 <tr>
                     <td>{{ $receipts->receipts_date }}</td>
                     <th>تاريخ الايصال</th>
-                    <td>{{ $receipts->id }}</td>
+                    <td>{{ $receipts->receiptNo }}</td>
                     <th>رقم الايصال</th>
                 </tr>
                 <tr>

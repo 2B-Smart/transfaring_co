@@ -146,7 +146,7 @@
                         <td>{{ $receipt->number_of_packages }}</td>
                         <td>{{ $receipt->package_type }}</td>
                         <td>{{ $receipt->source_city }}</td>
-                        <td>{{ $receipt->id }}</td>
+                        <td>{{ $receipt->receiptNo }}</td>
                         <td>{{ $x }}</td>
                     </tr>
                     <?php

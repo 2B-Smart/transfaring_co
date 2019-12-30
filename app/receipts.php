@@ -8,6 +8,7 @@ class receipts extends Model
 {
     //
     protected $fillable = [
+        'receiptNo',
         'sender',
         'receiver',
         'source_city',

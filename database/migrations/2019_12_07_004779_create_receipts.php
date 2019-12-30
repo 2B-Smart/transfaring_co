@@ -15,6 +15,7 @@ class CreateReceipts extends Migration
     {
         Schema::create('receipts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('receiptNo')->nullable();
             $table->bigInteger('sender')->unsigned();
             $table->foreign('sender')->references('id')->on('customers');
             $table->bigInteger('receiver')->unsigned();

@@ -79,6 +79,7 @@ class BillsController extends Controller
 
         $bill = bills::find($request['bill_id']);
         $receipts=receipts::create([
+            'receiptNo'=>$request['receiptNo'],
             'sender'=>$request['sender'],
             'receiver'=>$request['receiver'],
             'source_city'=>$bill->source_city,

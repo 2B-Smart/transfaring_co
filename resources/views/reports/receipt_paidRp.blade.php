@@ -117,7 +117,7 @@
                         <td>{{ $receipt->remittances_paid }}</td>
                         <td>{{ $receipt->remittances }}</td>
                         <td>{{ $receipt->destination_city }}</td>
-                        <td>{{ $receipt->id }}</td>
+                        <td>{{ $receipt->receiptNo }}</td>
                         <td>{{ $receipt->bill->id }}</td>
                         <td>{{ $x }}</td>
                     </tr>
