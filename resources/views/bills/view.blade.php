@@ -118,6 +118,17 @@
                                     <div class="col-md-12">
                                         <table id="example2" class="table table-bordered table-hover">
                                             <tr>
+                                                <td colspan="2">
+                                                    <select id="source_city" class="form-control" name="source_city" required autofocus>
+                                                        <option value="" selected></option>
+                                                        @foreach($cities_list as $city)
+                                                            <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <th colspan="2">المصدر</th>
+                                            </tr>
+                                            <tr>
                                                <td>
                                                    <input type="text" name="receipts_date" class="form-control from" id="receipts_date" required placeholder="تاريخ الايصال" value="<?=date('Y-m-d')?>">
                                                </td>
@@ -338,6 +349,10 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                    <td colspan="2">{{ $receipt->source_city }}</td>
+                                                    <th colspan="2">المصدر</th>
+                                                </tr>
+                                                <tr>
                                                     <td>{{ $receipt->receipts_date }}</td>
                                                     <th>تاريخ الايصال</th>
                                                     <td>{{ $receipt->receiptNo }}</td>
@@ -442,6 +457,7 @@
                 var discount = $("#discount").val();
                 var receipts_date=$("#receipts_date").val();
                 var receiptNo=$("#receiptNo").val();
+                var source_city=$("#source_city").val();
 
                 var Bid = <?php echo $bills->id; ?>;
 //                $.ajax({url:'bills/addrec&id='+ID+'&name='+coursName+'&center='+centerName,type : 'POST'}).done(function(result){ location.reload();});
@@ -451,7 +467,7 @@
 
                     url:"{{ route('bills.addrec') }}",
 
-                    data:{"_token": "{{ csrf_token() }}",receiptNo:receiptNo,sender:sender, receiver:receiver, number_of_packages:number_of_packages, package_type:package_type, contents:contents, marks:marks, weight:weight, size:size, notes:notes, remittances:remittances, prepaid_miscellaneous:prepaid_miscellaneous, trans_miscellaneous:trans_miscellaneous, collect_from_receiver:collect_from_receiver, prepaid:prepaid,discount:discount,receipts_date:receipts_date ,bill_id:Bid}
+                    data:{"_token": "{{ csrf_token() }}",receiptNo:receiptNo,source_city:source_city,sender:sender, receiver:receiver, number_of_packages:number_of_packages, package_type:package_type, contents:contents, marks:marks, weight:weight, size:size, notes:notes, remittances:remittances, prepaid_miscellaneous:prepaid_miscellaneous, trans_miscellaneous:trans_miscellaneous, collect_from_receiver:collect_from_receiver, prepaid:prepaid,discount:discount,receipts_date:receipts_date ,bill_id:Bid}
 
                 }).done(function(result){ location.reload();});
             });

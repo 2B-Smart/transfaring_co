@@ -50,6 +50,29 @@
                                                     <th colspan="2">رقم المانيفست</th>
                                                 </tr>
                                                 <tr>
+                                                    <td colspan="2">
+                                                        <div class="form-group{{ $errors->has('source_city') ? ' has-error' : '' }}">
+
+                                                            <div class="col-md-12">
+
+                                                                <select id="source_city" class="form-control" name="source_city" required autofocus>
+                                                                    <option value="" selected></option>
+                                                                    @foreach($cities_list as $city)
+                                                                        <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
+                                                                    @endforeach
+                                                                </select>
+
+                                                                @if ($errors->has('source_city'))
+                                                                    <span class="help-block">
+                                        <strong>{{ $errors->first('source_city') }}</strong>
+                                    </span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <th colspan="2">المصدر</th>
+                                                </tr>
+                                                <tr>
                                                     <td>
                                                         <div class="input-group date">
                                                             <input type="text" name="receipts_date" class="form-control" id="from" required placeholder="تاريخ الايصال" value="<?=date('Y-m-d')?>">
