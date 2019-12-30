@@ -17,7 +17,7 @@
                             <div class="col-md-2"></div>
                             <div class="col-md-6">
 
-                                <select id="source_city" class="form-control" name="source_city" required autofocus disabled = "disabled">
+                                <select id="source_city" class="form-control" name="source_city" required autofocus>
                                     <option value="" selected></option>
                                     @foreach($cities_list as $city)
                                         @if($bills->source_city == $city->city_name)
