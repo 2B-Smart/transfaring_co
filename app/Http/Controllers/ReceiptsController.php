@@ -96,10 +96,12 @@ class ReceiptsController extends Controller
     {
         $bills_list = DB::table('bills')->get();
         $customers_list = DB::table('customers')->orderBy('customer_name')->get();
+        $cities_list = DB::table('cities')->get();
 
         return view('receipts.create', [
             'bills_list' => $bills_list,
             'customers_list' => $customers_list,
+            'cities_list'=>$cities_list
         ]);
     }
 
@@ -117,7 +119,7 @@ class ReceiptsController extends Controller
             'receiptNo'=>$request['receiptNo'],
             'sender'=>$request['sender'],
             'receiver'=>$request['receiver'],
-            'source_city'=>$bill->source_city,
+            'source_city'=>$request['source_city'],
             'destination_city'=>$bill->destination_city,
             'receipts_date'=>$request['receipts_date'],
             'number_of_packages'=>$request['number_of_packages'],
@@ -176,11 +178,13 @@ class ReceiptsController extends Controller
 
         $bills_list = DB::table('bills')->get();
         $customers_list = DB::table('customers')->orderBy('customer_name')->get();
+        $cities_list = DB::table('cities')->get();
 
         return view('receipts.edit', [
             'receipts' => $receipts,
             'bills_list' => $bills_list,
-            'customers_list' => $customers_list
+            'customers_list' => $customers_list,
+            'cities_list'=>$cities_list
         ]);
     }
 
@@ -197,6 +201,7 @@ class ReceiptsController extends Controller
         $bill = bills::find($request['bill_id']);
         $constraints = [
             'receiptNo'=>'required|max:20',
+            'source_city'=>'required',
             'sender'=>'required',
             'receiver'=>'required',
             'receipts_date'=>'required',
@@ -209,7 +214,7 @@ class ReceiptsController extends Controller
             'receiptNo'=>$request['receiptNo'],
             'sender'=>$request['sender'],
             'receiver'=>$request['receiver'],
-            'source_city'=>$bill->source_city,
+            'source_city'=>$request['source_city'],
             'destination_city'=>$bill->destination_city,
             'receipts_date'=>$request['receipts_date'],
             'number_of_packages'=>$request['number_of_packages'],
@@ -321,6 +326,7 @@ class ReceiptsController extends Controller
     private function validateInput($request) {
         $this->validate($request, [
             'receiptNo'=>'required|max:20',
+            'source_city'=>'required',
             'sender'=>'required',
             'receiver'=>'required',
             'receipts_date'=>'required',

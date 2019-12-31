@@ -64,7 +64,7 @@ class BillsController extends Controller
         }
 
         $customers_list = DB::table('customers')->orderBy('customer_name')->get();
-//        $cities_list = DB::table('cities')->get();
+        $cities_list = DB::table('cities')->get();
 //        $cars_list = DB::table('cars')->get();
 
 //        print_r($bills->receipts);
@@ -73,6 +73,7 @@ class BillsController extends Controller
         return view('bills.view', [
             'bills' => $bills,
             'customers_list' => $customers_list,
+            'cities_list'=>$cities_list,
         ]);
     }
     public function addrec(Request $request){
@@ -82,7 +83,7 @@ class BillsController extends Controller
             'receiptNo'=>$request['receiptNo'],
             'sender'=>$request['sender'],
             'receiver'=>$request['receiver'],
-            'source_city'=>$bill->source_city,
+            'source_city'=>$request['source_city'],
             'destination_city'=>$bill->destination_city,
             'number_of_packages'=>$request['number_of_packages'],
             'package_type'=>$request['package_type'],
