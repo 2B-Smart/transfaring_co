@@ -17,16 +17,7 @@
                             <div class="col-md-2"></div>
                             <div class="col-md-6">
 
-                                <select id="source_city" class="form-control" name="source_city" required autofocus>
-                                    <option value="" selected></option>
-                                    @foreach($cities_list as $city)
-                                        @if($bills->source_city == $city->city_name)
-                                            <option value="{{ $city->city_name }}" selected="selected">{{ $city->city_name }}</option>
-                                        @else
-                                            <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
+                                <input type="text" value="دمشق" id="source_city" class="form-control" name="source_city" required readonly="readonly">
 
                                 @if ($errors->has('source_city'))
                                     <span class="help-block">

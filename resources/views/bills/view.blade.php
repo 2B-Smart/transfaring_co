@@ -122,7 +122,11 @@
                                                     <select id="source_city" class="form-control" name="source_city" required autofocus>
                                                         <option value="" selected></option>
                                                         @foreach($cities_list as $city)
-                                                            <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
+                                                            @if($city->city_name == "دمشق")
+                                                                <option value="{{ $city->city_name }}" selected="selected">{{ $city->city_name }}</option>
+                                                            @else
+                                                                <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
+                                                            @endif
                                                         @endforeach
                                                     </select>
                                                 </td>
