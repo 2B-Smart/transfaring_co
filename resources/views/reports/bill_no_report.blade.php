@@ -131,6 +131,7 @@
                     $prepaid=0;
                     $prepaid_miscellaneous=0;
                     $remittances=0;
+                    $discount=0;
                 ?>
                 @foreach($bills->receipts as $receipt)
                     <tr>
@@ -155,6 +156,7 @@
                         $prepaid+= $receipt->prepaid;
                         $prepaid_miscellaneous+= $receipt->prepaid_miscellaneous;
                         $remittances+= $receipt->remittances;
+                        $discount+=$receipt->discount;
                     ?>
                     <?php $x++; ?>
                 @endforeach
@@ -186,6 +188,24 @@
                     <th>نوع السيارة</th>
                     <td>{{ $bills->v_number }}</td>
                     <th>رقم السيارة</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>{{$discount}}</td>
+                    <th>مجموع الخصم</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>{{($prepaid+$collect_from_receiver)-$discount}}</td>
+                    <th>المجموع العام بعد ازالة الخصم</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td></td>
