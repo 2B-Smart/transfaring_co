@@ -56,6 +56,7 @@
                 <th width="10%" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">تاريخ الانشاء</th>
                 <th width="10%" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">اخر تعديل من قبل</th>
                 <th width="10%" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">تاريخ اخر تعديل</th>
+                <th width="3%" tabindex="0" aria-controls="example2" rowspan="1" colspan="1">مقفلة؟</th>
 
                 <th tabindex="0" aria-controls="example2" rowspan="1" colspan="2">Action</th>
               </tr>
@@ -73,6 +74,7 @@
                   <td>{{ $bill->created_at }}</td>
                   <td>{{ $bill->user_last_update }}</td>
                   <td>{{ $bill->updated_at }}</td>
+                  <td>{{ $bill->has_done }}</td>
 
                   <td>
                       <a href="{{ route('reports.bill_no_report', $bill->id) }}" class="btn btn-success col-sm-6btn-margin">
@@ -119,7 +121,7 @@
                 <th width="10%" rowspan="1" colspan="1">تاريخ الانشاء</th>
                 <th width="10%" rowspan="1" colspan="1">اخر تعديل من قبل</th>
                 <th width="10%" rowspan="1" colspan="1">تاريخ اخر تعديل</th>
-
+                <th width="3%" rowspan="1" colspan="1">مقفلة؟</th>
                 <th rowspan="1" colspan="2">Action</th>
               </tr>
             </tfoot>

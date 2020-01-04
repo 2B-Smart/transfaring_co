@@ -13,13 +13,7 @@
 
                             <div class="col-md-2"></div>
                             <div class="col-md-6">
-
-                                <select id="source_city" class="form-control" name="source_city" required>
-                                    <option value="" selected></option>
-                                    @foreach($cities_list as $city)
-                                            <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="text" value="دمشق" id="source_city" class="form-control" name="source_city" required readonly="readonly">
 
                                 @if ($errors->has('source_city'))
                                     <span class="help-block">
