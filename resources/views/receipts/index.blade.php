@@ -1,3 +1,7 @@
+@php
+    use App\bills;
+    use App\customers;
+@endphp
 @extends('receipts.base')
 @section('action-content')
 <div>
@@ -64,11 +68,16 @@
             </thead>
             <tbody>
             @foreach ($receipts as $receipt)
+                @php
+                 $sender = customers::where('id', '=', $receipt->sender)->first();
+                 $receiver = customers::where('id', '=', $receipt->receiver)->first();
+                 $bill = bills::where('id', '=', $receipt->bill_id)->first();
+                @endphp
                 <tr role="row" class="odd">
                   <td>{{ $receipt->bill_id }}</td>
                   <td>{{ $receipt->receiptNo }}</td>
-                  <td>{{ $receipt->customer_sender->customer_name }}</td>
-                  <td>{{ $receipt->customer_receiver->customer_name }}</td>
+                  <td>{{ $sender->customer_name }}</td>
+                  <td>{{ $receiver->customer_name }}</td>
                   <td>{{ $receipt->source_city }}</td>
                   <td>{{ $receipt->destination_city }}</td>
                   <td>{{ $receipt->receipts_date }}</td>
@@ -86,7 +95,7 @@
                         <a href="{{ route('receipts.view', $receipt->id) }}" class="btn btn-success col-sm-6 col-xs-5 btn-margin">
                         المحتويات
                         </a>
-                        <?php if($receipt->bill->has_done=="غير مقفلة"|| \Illuminate\Support\Facades\Auth::user()->role=="admin") { ?>
+                        <?php if($bill->has_done=="غير مقفلة"|| \Illuminate\Support\Facades\Auth::user()->role=="admin") { ?>
                         <a href="{{ route('receipts.edit', $receipt->id) }}" class="btn btn-warning col-sm-6 col-xs-5 btn-margin">
                             تعديل
                         </a>
@@ -121,16 +130,6 @@
               </tr>
             </tfoot>
           </table>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-5">
-          <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">إظهار 1 to {{count($receipts)}} of {{count($receipts)}} سجلات</div>
-        </div>
-        <div class="col-sm-7">
-          <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-            {{ $receipts->links() }}
-          </div>
         </div>
       </div>
     </div>

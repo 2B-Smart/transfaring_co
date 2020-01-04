@@ -18,7 +18,7 @@ class ReceiptsController extends Controller
      */
     public function index()
     {
-        $receipts = receipts::orderBy('id')->orderByDesc('bill_id')->paginate(10);
+        $receipts = receipts::orderBy('id')->orderByDesc('bill_id')->get();
 
         return view('receipts/index', ['receipts' => $receipts]);
     }
@@ -281,12 +281,16 @@ class ReceiptsController extends Controller
     }
 
     private function doSearchingQuery($constraints) {
-        $query = receipts::query();
+        $sqlStatment = "select * from receipts";
         $fields = array_keys($constraints);
         $index = 0;
+        $where='';
+        $cond=[];
         foreach ($constraints as $constraint) {
             if ($constraint != null) {
+                //echo $fields[$index] ."<br>";
                 if($fields[$index]=='sender'){
+                    $where=' where ';
                     $customers=customers::where('customer_name', 'like', '%' . $constraint . '%')->get();
                     $customersIds=[];
                     foreach($customers as $c){
@@ -297,10 +301,12 @@ class ReceiptsController extends Controller
 //                    echo $dIDs;
 //                    die();
                     //$query = $query->where('driver_id', 'in', $driverIds);
-                    $query = $query->whereIn('sender', [$ScIDs]);
-
+                    //echo $ScIDs;
+                    //$query = $query->whereIn('sender', [$ScIDs]);
+                    $cond[] =' `sender` in ('.$ScIDs.')';
                 }
                 elseif($fields[$index]=='receiver'){
+                    $where=' where ';
                     $customers=customers::where('customer_name', 'like', '%' . $constraint . '%')->get();
                     $customersIds=[];
                     foreach($customers as $c){
@@ -308,19 +314,26 @@ class ReceiptsController extends Controller
                     }
 //                    print_r($driverIds);
                     $ScIDs =implode(",",$customersIds);
-//                    echo $dIDs;
+                    //echo $ScIDs;
 //                    die();
                     //$query = $query->where('driver_id', 'in', $driverIds);
-                    $query = $query->whereIn('receiver', [$ScIDs]);
+                    //$query = $query->whereIn('receiver', [$ScIDs]);
+                    $cond[] =' `receiver` in ('.$ScIDs.')';
                 }
                 else {
-                    $query = $query->where($fields[$index], 'like', '%' . $constraint . '%');
+                    $where=' where ';
+                    $cond[] =' `'.$fields[$index].'` like %'.$constraint.'% ';
+                    //$query = $query->where($fields[$index], 'like', '%' . $constraint . '%');
                 }
             }
 
             $index++;
         }
-        return $query->orderBy('id')->orderByDesc('bill_id')->paginate(10);
+        $conds=implode("and",$cond);
+        $sqlStatment .= $where.' '.$conds;
+        $query = DB::select($sqlStatment);
+        return $query;
+        //dd($query);
     }
 
     private function validateInput($request) {
