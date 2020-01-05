@@ -326,7 +326,7 @@ class ReceiptsController extends Controller
                 }
                 else {
                     $where=' where ';
-                    $cond[] =' `'.$fields[$index].'` like %'.$constraint.'% ';
+                    $cond[] =' `'.$fields[$index].'` like "%'.$constraint.'%" ';
                     //$query = $query->where($fields[$index], 'like', '%' . $constraint . '%');
                 }
             }
