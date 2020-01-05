@@ -320,6 +320,10 @@ class ReceiptsController extends Controller
                     //$query = $query->whereIn('receiver', [$ScIDs]);
                     $cond[] =' `receiver` in ('.$ScIDs.')';
                 }
+                elseif($fields[$index]=='receiptNo'||$fields[$index]=='bill_id'){
+                    $where=' where ';
+                    $cond[] =' `'.$fields[$index].'` = '.$constraint.' ';
+                }
                 else {
                     $where=' where ';
                     $cond[] =' `'.$fields[$index].'` like %'.$constraint.'% ';
