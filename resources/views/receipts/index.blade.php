@@ -44,7 +44,7 @@
           @endcomponent
         @endcomponent
       </form>
-    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap pg-table">
       <div class="row">
         <div class="col-sm-12">
           <table id="example2" class="table table-bordered table-hover">
@@ -132,6 +132,10 @@
           </table>
         </div>
       </div>
+        <div>
+            <a href="#" class="paginate btn btn-default" id="previous">السابق</a> |
+            <a href="#" class="paginate btn btn-default" id="next">التالي</a>
+        </div>
     </div>
   </div>
   <!-- /.box-body -->
