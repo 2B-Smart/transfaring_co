@@ -18,7 +18,7 @@ class ReceiptsController extends Controller
      */
     public function index()
     {
-        $receipts = receipts::orderBy('id')->orderByDesc('bill_id')->get();
+        $receipts = receipts::where('id',null)->orderBy('id')->orderByDesc('bill_id')->get();
 
         return view('receipts/index', ['receipts' => $receipts]);
     }
@@ -286,6 +286,7 @@ class ReceiptsController extends Controller
         $index = 0;
         $where='';
         $cond=[];
+        $order='order by `bill_id` DESC , `id` ASC';
         foreach ($constraints as $constraint) {
             if ($constraint != null) {
                 //echo $fields[$index] ."<br>";
@@ -334,7 +335,7 @@ class ReceiptsController extends Controller
             $index++;
         }
         $conds=implode("and",$cond);
-        $sqlStatment .= $where.' '.$conds;
+        $sqlStatment .= $where.' '.$conds.' '.$order;
         $query = DB::select($sqlStatment);
         return $query;
         //dd($query);
