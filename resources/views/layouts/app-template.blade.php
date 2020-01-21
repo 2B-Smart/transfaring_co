@@ -115,8 +115,35 @@
           autoclose: true,
           format: 'yyyy-mm-dd'
         });
-        $("#sender").select2();
-        $("#receiver").select2();
+        $("#sender").select2({
+            ajax: {
+              url: function (params) {
+                return "/customers/getCustomers?search="+params.term;
+              },
+              processResults: function (response) {
+                return {
+                    results: response
+                };
+              },
+              cache: true
+            }
+            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+        });
+
+        $("#receiver").select2({
+            ajax: {
+              url: function (params) {
+                return "/customers/getCustomers?search="+params.term;
+              },
+              processResults: function (response) {
+                return {
+                    results: response
+                };
+              },
+              cache: true
+            }
+            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+        });
         $(".selecter").select2();
         $(function () {
           // Selectors for future use
