@@ -62,7 +62,7 @@ class CustomersController extends Controller
         $customers=customers::where('customer_name', 'like', '%'.$request['search'].'%')->get();
         $crs=[];
         foreach($customers as $customer){
-            $crs[]=["id"=>$customer->id, "text"=>$customer->customer_name.' , '.$customer->customer_address];
+            $crs[]=["id"=>$customer->id, "text"=>$customer->customer_name.' , '.$customer->customer_mobile.' , '.$customer->customer_address];
         }
         return response($crs);
     }
