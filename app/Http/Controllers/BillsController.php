@@ -44,7 +44,7 @@ class BillsController extends Controller
     {
         $this->validateInput($request);
         bills::create([
-            'bill_date' => date('Y-m-d'),
+            'bill_date' => $request['bill_date'],
             'source_city' => $request['source_city'],
             'has_done' => "غير مقفلة",
             'destination_city' => $request['destination_city'],
@@ -142,12 +142,14 @@ class BillsController extends Controller
     {
         $bills = bills::findOrFail($id);
         $constraints = [
+            'bill_date' => 'required',
             'source_city' => 'required',
             'destination_city' => 'required',
             'driver_id' => 'required',
             'v_number' => 'required',
         ];
         $input = [
+            'bill_date' => $request['bill_date'],
             'source_city' => $request['source_city'],
             'destination_city' => $request['destination_city'],
             'driver_id' => $request['driver_id'],
@@ -178,6 +180,12 @@ class BillsController extends Controller
         return redirect()->intended('/bills');
     }
 
+    public function billunlock($id)
+    {
+        bills::where('id', $id)
+            ->update(['has_done' => "غير مقفلة",'user_last_update' => Auth::user()->name]);
+        return redirect()->intended('/bills');
+    }
     public function search(Request $request) {
 
         $constraints = [
@@ -224,6 +232,7 @@ class BillsController extends Controller
 
     private function validateInput($request) {
         $this->validate($request, [
+            'bill_date' => 'required',
             'source_city' => 'required',
             'destination_city' => 'required',
             'driver_id' => 'required',

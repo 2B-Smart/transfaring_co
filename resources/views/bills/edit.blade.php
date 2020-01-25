@@ -12,6 +12,21 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 
+                        <div class="form-group{{ $errors->has('bill_date') ? ' has-error' : '' }}">
+
+                            <div class="col-md-2"></div>
+                            <div class="col-md-6">
+                                <input type="text" value="{{ $bills->bill_date }}" id="bill_date" class="form-control from" name="bill_date" required>
+
+                                @if ($errors->has('bill_date'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('bill_date') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <label for="source_city" class="col-md-2 control-label">تاريخ الرحلة</label>
+                        </div>
+
                         <div class="form-group{{ $errors->has('source_city') ? ' has-error' : '' }}">
 
                             <div class="col-md-2"></div>
