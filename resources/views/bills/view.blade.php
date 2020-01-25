@@ -145,10 +145,6 @@
                                             <tr>
                                                 <td>
                                                     <select id="receiver" class="form-control" name="receiver" required>
-                                                        <option value="" selected></option>
-                                                        @foreach($customers_list as $customer)
-                                                            <option value="{{ $customer->id }}">{{ $customer->customer_name.' , '.$customer->customer_address.' , '.$customer->customer_mobile }}</option>
-                                                        @endforeach
                                                     </select>
                                                 </td>
                                                 <th>
@@ -157,10 +153,6 @@
                                                 </th>
                                                 <td>
                                                     <select id="sender" class="form-control" name="sender" required autofocus>
-                                                        <option value="" selected></option>
-                                                        @foreach($customers_list as $customer)
-                                                            <option value="{{ $customer->id }}">{{ $customer->customer_name.' , '.$customer->customer_address.' , '.$customer->customer_mobile }}</option>
-                                                        @endforeach
                                                     </select>
                                                 </td>
                                                 <th>
@@ -509,9 +501,6 @@
                     $('#receiver').append(
                     `<option value="${data}" selected="selected">${customer_name} , ${customer_address} , ${customer_mobile}</option>`
                     );
-                    $('#sender').append(
-                    `<option value="${data}">${customer_name} , ${customer_address} , ${customer_mobile}</option>`
-                    );
                     $('#Bcourses2').modal('hide');
                     $("#mobileNo2").val("");
                     $("#address2").val("");
@@ -534,9 +523,6 @@
                     data:{"_token": "{{ csrf_token() }}",customer_name:customer_name, customer_address:customer_address, customer_mobile:customer_mobile}
 
                 }).done(function(data){
-                    $('#receiver').append(
-                             `<option value="${data}">${customer_name} , ${customer_address} , ${customer_mobile}</option>`
-                    );
                     $('#sender').append(
                                 `<option value="${data}" selected="selected">${customer_name} , ${customer_address} , ${customer_mobile} </option>`
                     );

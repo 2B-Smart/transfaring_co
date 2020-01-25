@@ -18,7 +18,7 @@ class ReceiptsController extends Controller
      */
     public function index()
     {
-        $receipts = receipts::orderBy('id')->orderByDesc('bill_id')->get();
+        $receipts = receipts::where('id',null)->orderBy('id')->orderByDesc('bill_id')->get();
 
         return view('receipts/index', ['receipts' => $receipts]);
     }
@@ -286,39 +286,37 @@ class ReceiptsController extends Controller
         $index = 0;
         $where='';
         $cond=[];
+        $order='order by `bill_id` DESC , `id` ASC';
         foreach ($constraints as $constraint) {
             if ($constraint != null) {
                 //echo $fields[$index] ."<br>";
                 if($fields[$index]=='sender'){
                     $where=' where ';
                     $customers=customers::where('customer_name', 'like', '%' . $constraint . '%')->get();
-                    $customersIds=[];
-                    foreach($customers as $c){
-                        $customersIds[] = $c->id;
+                    if($customers->count()>0){
+                        $customersIds=[];
+                        foreach($customers as $c){
+                            $customersIds[] = $c->id;
+                        }
+                        $ScIDs =implode(",",$customersIds);
+                        $cond[] =' `sender` in ('.$ScIDs.')';
+                    }else{
+                        $cond[] =' `sender` is null ';
                     }
-//                    print_r($driverIds);
-                    $ScIDs =implode(",",$customersIds);
-//                    echo $dIDs;
-//                    die();
-                    //$query = $query->where('driver_id', 'in', $driverIds);
-                    //echo $ScIDs;
-                    //$query = $query->whereIn('sender', [$ScIDs]);
-                    $cond[] =' `sender` in ('.$ScIDs.')';
                 }
                 elseif($fields[$index]=='receiver'){
                     $where=' where ';
                     $customers=customers::where('customer_name', 'like', '%' . $constraint . '%')->get();
-                    $customersIds=[];
-                    foreach($customers as $c){
-                        $customersIds[] = $c->id;
+                    if($customers->count()>0){
+                        $customersIds=[];
+                        foreach($customers as $c){
+                            $customersIds[] = $c->id;
+                        }
+                        $ScIDs =implode(",",$customersIds);
+                        $cond[] =' `receiver` in ('.$ScIDs.')';
+                    }else{
+                        $cond[] =' `receiver` is null ';
                     }
-//                    print_r($driverIds);
-                    $ScIDs =implode(",",$customersIds);
-                    //echo $ScIDs;
-//                    die();
-                    //$query = $query->where('driver_id', 'in', $driverIds);
-                    //$query = $query->whereIn('receiver', [$ScIDs]);
-                    $cond[] =' `receiver` in ('.$ScIDs.')';
                 }
                 elseif($fields[$index]=='receiptNo'||$fields[$index]=='bill_id'){
                     $where=' where ';
@@ -334,7 +332,7 @@ class ReceiptsController extends Controller
             $index++;
         }
         $conds=implode("and",$cond);
-        $sqlStatment .= $where.' '.$conds;
+        $sqlStatment .= $where.' '.$conds.' '.$order;
         $query = DB::select($sqlStatment);
         return $query;
         //dd($query);
