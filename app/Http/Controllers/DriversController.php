@@ -14,7 +14,7 @@ class DriversController extends Controller
 
     public function index()
     {
-        $drivers = drivers::paginate(10);
+        $drivers = drivers::take(100)->get();
 
         return view('drivers/index', ['drivers' => $drivers]);
     }
@@ -126,7 +126,7 @@ class DriversController extends Controller
 
             $index++;
         }
-        return $query->paginate(10);
+        return $query->get();
     }
     private function validateInput($request) {
         $this->validate($request, [

@@ -32,7 +32,7 @@ class UserManagementController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::take(100)->get();
 
         return view('users-mgmt/index', ['users' => $users]);
     }
@@ -172,7 +172,7 @@ class UserManagementController extends Controller
 
             $index++;
         }
-        return $query->paginate(10);
+        return $query->get();
     }
     private function validateInput($request) {
         $this->validate($request, [

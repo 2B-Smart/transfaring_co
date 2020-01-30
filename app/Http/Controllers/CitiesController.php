@@ -19,7 +19,7 @@ class CitiesController extends Controller
     protected $redirectTo = '/cities';
     public function index()
     {
-        $cities = cities::paginate(10);
+        $cities = cities::take(100)->get();
 
         return view('cities/index', ['cities' => $cities]);
     }
@@ -156,7 +156,7 @@ class CitiesController extends Controller
 
             $index++;
         }
-        return $query->paginate(10);
+        return $query->get();
     }
     private function validateInput($request) {
         $this->validate($request, [

@@ -15,7 +15,7 @@ class CarsController extends Controller
 
     public function index()
     {
-        $cars = cars::paginate(10);
+        $cars = cars::take(100)->get();
 
         return view('cars/index', ['cars' => $cars]);
     }
@@ -157,7 +157,7 @@ class CarsController extends Controller
 
             $index++;
         }
-        return $query->paginate(10);
+        return $query->get();
     }
     private function validateInput($request) {
         $this->validate($request, [

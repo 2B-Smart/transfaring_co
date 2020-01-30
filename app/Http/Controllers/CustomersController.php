@@ -16,7 +16,7 @@ class CustomersController extends Controller
 
     public function index()
     {
-        $customers = customers::paginate(10);
+        $customers = customers::take(100)->get();
 
         return view('customers/index', ['customers' => $customers]);
     }
@@ -140,7 +140,7 @@ class CustomersController extends Controller
 
             $index++;
         }
-        return $query->paginate(10);
+        return $query->get();
     }
     private function validateInput($request) {
         $this->validate($request, [

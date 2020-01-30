@@ -16,7 +16,7 @@ class BillsController extends Controller
 
     public function index()
     {
-        $bills = bills::orderBy('has_done')->orderByDesc('id')->paginate(10);
+        $bills = bills::orderBy('has_done')->orderByDesc('id')->take(100)->get();
 
         return view('bills/index', ['bills' => $bills]);
     }
@@ -227,7 +227,7 @@ class BillsController extends Controller
 
             $index++;
         }
-        return $query->orderBy('has_done')->orderByDesc('id')->paginate(10);
+        return $query->orderBy('has_done')->orderByDesc('id')->get();
     }
 
     private function validateInput($request) {
