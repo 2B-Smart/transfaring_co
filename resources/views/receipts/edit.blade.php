@@ -101,14 +101,7 @@
                                                                 </div>
                                                                 <div class="col-sm-10">
                                                                     <select id="receiver" class="form-control" name="receiver" required>
-                                                                        <option value="" selected></option>
-                                                                        @foreach($customers_list as $customer)
-                                                                            @if($customer->id == $receipts->receiver)
-                                                                                <option value="{{ $customer->id }}" selected="selected">{{ $customer->customer_name.' , '.$customer->customer_address.' , '.$customer->customer_mobile }}</option>
-                                                                            @else
-                                                                            <option value="{{ $customer->id }}">{{ $customer->customer_name.' , '.$customer->customer_address.' , '.$customer->customer_mobile }}</option>
-                                                                            @endif
-                                                                        @endforeach
+                                                                        <option value="{{ $receiver->id }}" selected="selected">{{ $receiver->customer_name.' , '.$receiver->customer_address.' , '.$receiver->customer_mobile }}</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -123,14 +116,7 @@
                                                                 </div>
                                                                 <div class="col-sm-10">
                                                                     <select id="sender" class="form-control" name="sender" required>
-                                                                        <option value="" selected></option>
-                                                                        @foreach($customers_list as $customer)
-                                                                            @if($customer->id == $receipts->sender)
-                                                                                <option value="{{ $customer->id }}" selected="selected">{{ $customer->customer_name.' , '.$customer->customer_address.' , '.$customer->customer_mobile }}</option>
-                                                                            @else
-                                                                            <option value="{{ $customer->id }}">{{ $customer->customer_name.' , '.$customer->customer_address.' , '.$customer->customer_mobile }}</option>
-                                                                            @endif
-                                                                        @endforeach
+                                                                        <option value="{{ $sender->id }}" selected="selected">{{ $sender->customer_name.' , '.$sender->customer_address.' , '.$sender->customer_mobile }}</option>
                                                                     </select>
                                                                 </div>
                                                             </div>

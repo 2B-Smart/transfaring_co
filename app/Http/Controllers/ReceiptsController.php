@@ -95,12 +95,10 @@ class ReceiptsController extends Controller
     public function create()
     {
         $bills_list = DB::table('bills')->get();
-        $customers_list = DB::table('customers')->orderBy('customer_name')->get();
         $cities_list = DB::table('cities')->get();
 
         return view('receipts.create', [
             'bills_list' => $bills_list,
-            'customers_list' => $customers_list,
             'cities_list'=>$cities_list
         ]);
     }
@@ -177,13 +175,15 @@ class ReceiptsController extends Controller
         }
 
         $bills_list = DB::table('bills')->get();
-        $customers_list = DB::table('customers')->orderBy('customer_name')->get();
+        $sender = DB::table('customers')->where('id',$receipts->sender)->first();
+        $receiver = DB::table('customers')->where('id',$receipts->receiver)->first();
         $cities_list = DB::table('cities')->get();
 
         return view('receipts.edit', [
             'receipts' => $receipts,
             'bills_list' => $bills_list,
-            'customers_list' => $customers_list,
+            'sender' => $sender,
+            'receiver' => $receiver,
             'cities_list'=>$cities_list
         ]);
     }

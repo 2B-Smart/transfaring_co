@@ -92,10 +92,6 @@
                                                             </div>
                                                             <div class="col-sm-10">
                                                                 <select id="receiver" class="form-control" name="receiver" required>
-                                                                    <option value="" selected></option>
-                                                                    @foreach($customers_list as $customer)
-                                                                        <option value="{{ $customer->id }}">{{ $customer->customer_name.' , '.$customer->customer_address.' , '.$customer->customer_mobile }}</option>
-                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -110,10 +106,6 @@
                                                             </div>
                                                             <div class="col-sm-10">
                                                                 <select id="sender" class="form-control" name="sender" required>
-                                                                    <option value="" selected></option>
-                                                                    @foreach($customers_list as $customer)
-                                                                        <option value="{{ $customer->id }}">{{ $customer->customer_name.' , '.$customer->customer_address.' , '.$customer->customer_mobile }}</option>
-                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
