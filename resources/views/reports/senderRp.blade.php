@@ -62,12 +62,23 @@
 </button>
 <div class="wrapper" id="printJS-div">
     <!-- Main Header -->
+    {{--<div class="row">--}}
+    {{--<div class="col cl-sm-12">--}}
+    {{--<table class="table">--}}
+
+    {{--</table>--}}
+    {{--</div>--}}
+    {{--</div>--}}
     <div class="row">
         <div class="col cl-sm-12">
-            <table class="table">
-                <tr><td colspan="6"></td></tr>
+            <table align="center" id="example2" class="table table-bordered table-hover">
+                <thead>
                 <tr>
-                    <td></td>
+                    <td colspan="4">
+
+                    </td>
+                </tr>
+                <tr>
                     <td>
                         <img src="{{ asset("/logo.png") }}" width="50" height="50">
                     </td>
@@ -76,55 +87,109 @@
                         <span>للنقل</span>
                     </th>
                     <th>
-                        {{$receipts->count()}}
+                            <span id="billnumber">
+                                {{$receipts->count()}} :عدد المرات التي استفاد المرسل  {{ $sender }} من خدماتنا
+                            </span>
                     </th>
                     <th>
-                        <span id="billnumber">
-                            :عدد المرات التي استفاد المرسل {{ $sender }} من خدماتنا
-                        </span>
-                    </th>
-                    <th>
-                        <span id="headernotes">
-                            كل شطب او تعديل<br>
-                            بدون توقيع غير معترف به
-                        </span>
+                            <span id="headernotes">
+                                كل شطب او تعديل<br>
+                                بدون توقيع غير معترف به
+                            </span>
                     </th>
                 </tr>
-
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col cl-sm-12">
-            <table class="table table-border table-hover">
                 <tr>
-                    <td></td>
-                    <th>تاريخ الايصال</th>
-                    <th>المحتويات</th>
-                    <th>عدد الطرود</th>
-                    <th>المرسل اليه</th>
-                    <th>الوجهة</th>
-                    <th>رقم الايصال</th>
-                    <th>رقم الرحلة</th>
-                    <th> {{ "#" }} </th>
+                    <td colspan="4">
+
+                    </td>
                 </tr>
+                </thead>
+                <tbody>
                 <?php
                 $x=1;
                 ?>
                 @foreach($receipts as $receipt)
+
                     <tr>
-                        <td></td>
                         <td>{{ $receipt->receipts_date }}</td>
-                        <td>{{ $receipt->contents }}</td>
-                        <td>{{ $receipt->number_of_packages }}</td>
-                        <td>{{ $receipt->customer_receiver->customer_name }}</td>
-                        <td>{{ $receipt->destination_city }}</td>
+                        <th>تاريخ الايصال</th>
                         <td>{{ $receipt->receiptNo }}</td>
-                        <td>{{ $receipt->bill->id }}</td>
-                        <td>{{ $x }}</td>
+                        <th>رقم الايصال</th>
                     </tr>
-                    <?php $x++; ?>
+                    <tr>
+                        <td>{{ $receipt->customer_receiver->customer_name }}</td>
+                        <th>المستقبل</th>
+                        <td>{{ $receipt->customer_sender->customer_name }}</td>
+                        <th>المرسل</th>
+                    </tr>
+                    <tr>
+                        <th>عدد الطرود</th>
+                        <th>نوع الطرد</th>
+                        <th>المحتويات</th>
+                        <th>العلامات</th>
+                    </tr>
+                    <tr>
+                        <td>{{ $receipt->number_of_packages }}</td>
+                        <td>{{ $receipt->package_type }}</td>
+                        <td>{{ $receipt->contents }}</td>
+                        <td>{{ $receipt->marks }}</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">الوزن</th>
+                        <th colspan="2">الحجم</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{ $receipt->weight }}</td>
+                        <td colspan="2">{{ $receipt->size }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">{{ $receipt->notes }}</td>
+                        <th>ملاحظات</th>
+                    </tr>
+                    <tr>
+                        <th>للتحصيل من المرسل اليه</th>
+                        <th>المدفوع مسبقاً</th>
+                        <th colspan="2">الاجور</th>
+                    </tr>
+                    <tr>
+                        <td>{{ $receipt->collect_from_receiver }}</td>
+                        <td>{{ $receipt->prepaid }}</td>
+                        <th colspan="2">اجور الشحن</th>
+                    </tr>
+                    <tr>
+                        <td>{{ $receipt->trans_miscellaneous }}</td>
+                        <td>{{ $receipt->prepaid_miscellaneous }}</td>
+                        <th colspan="2">متفرقات</th>
+                    </tr>
+                    <tr>
+                        <td>{{ $receipt->remittances }}</td>
+                        <td>( {{ $receipt->paid_date }} ) {{ $receipt->remittances_paid }}</td>
+                        <th colspan="2">ضد الشحن</th>
+                    </tr>
+                    <tr>
+                        <td>{{ $receipt->discount }}</td>
+                        <td>-</td>
+                        <th colspan="2">خصم</th>
+                    </tr>
+                    <tr>
+                        <td>{{ $receipt->collect_from_receiver+$receipt->trans_miscellaneous+$receipt->remittances-$receipt->discount }}</td>
+                        <td>{{ $receipt->prepaid+$receipt->prepaid_miscellaneous }}</td>
+                        <th colspan="2">المجموع</th>
+                    </tr>
+                    @if($x==2)
+                        <tr><td colspan="4"><hr/></td></tr>
+                        <?php
+                        $x=1;
+                        ?>
+                    @elseif($x==1)
+                        <tr><td colspan="4"></td></tr>
+                        <?php
+                        $x++;
+                        ?>
+                    @endif
+
                 @endforeach
+                </tbody>
             </table>
         </div>
     </div>

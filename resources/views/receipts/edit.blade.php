@@ -149,10 +149,6 @@
                                                         <th>ملاحظات</th>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="2"><input class="form-control" name="discount" type="text" step="any" id="discount" value="{{ $receipts->discount }}" placeholder="خصم"></td>
-                                                        <th colspan="2">خصم</th>
-                                                    </tr>
-                                                    <tr>
                                                         <th>للتحصيل من المرسل اليه</th>
                                                         <th>المدفوع مسبقاً</th>
                                                         <th colspan="2">الاجور</th>
@@ -169,8 +165,13 @@
                                                     </tr>
                                                     <tr>
                                                         <td><input class="form-control" name="remittances" type="number" step="any" id="remittances" value="{{ $receipts->remittances }}" placeholder="ضد الشحن"></td>
-                                                        <td></td>
+                                                        <td>-</td>
                                                         <th colspan="2">ضد الشحن</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input class="form-control" name="discount" type="text" step="any" id="discount" value="{{ $receipts->discount }}" placeholder="خصم"></td>
+                                                        <td>-</td>
+                                                        <th colspan="2">خصم</th>
                                                     </tr>
 
                                                     <tr>

@@ -97,28 +97,67 @@
     <div class="row">
         <div class="col cl-sm-12">
             <table class="table table-border table-hover">
+                <thead>
                 <tr>
                     <td></td>
+                    <th>ضد الشحن</th>
+                    <th>متفرقات مدفوعة</th>
+                    <th>المجموع العام بعد ازالة الخصم</th>
+                    <th>مجموع الخصم</th>
+                    <th>المحول</th>
+                    <th>المسبق</th>
+                    <th>المجموع العام</th>
                     <th>تاريخ الرحلة</th>
                     <th>اسم السائق</th>
                     <th>رقم المركبة</th>
                     <th>رقم الرحلة</th>
                     <th> {{ "#" }} </th>
                 </tr>
+                </thead>
+                <tbody>
                 <?php
                 $x=1;
                 ?>
                 @foreach($bills as $bill)
+                    <?php
+                    $x=1;
+                    $trans_miscellaneous=0;
+                    $collect_from_receiver=0;
+                    $prepaid=0;
+                    $prepaid_miscellaneous=0;
+                    $remittances=0;
+                    $discount=0;
+                    ?>
+                    @foreach($bill->receipts as $receipt)
+                        <?php
+                        $trans_miscellaneous+= $receipt->trans_miscellaneous;
+                        $collect_from_receiver+= $receipt->collect_from_receiver;
+                        $prepaid+= $receipt->prepaid;
+                        $prepaid_miscellaneous+= $receipt->prepaid_miscellaneous;
+                        $remittances+= $receipt->remittances;
+                        $discount+=$receipt->discount;
+                        ?>
+                        <?php $x++; ?>
+                    @endforeach
                     <tr>
                         <td></td>
+                        <td>{{$remittances}}</td>
+                        <td>{{$prepaid_miscellaneous}}</td>
+                        <td>{{($prepaid+$collect_from_receiver)-$discount}}</td>
+                        <td>{{$discount}}</td>
+                        <td>{{$trans_miscellaneous}}</td>
+                        <td>{{$prepaid}}</td>
+                        <td>{{$prepaid+$collect_from_receiver}}</td>
                         <td>{{ $bill->bill_date }}</td>
                         <td>{{ $bill->driver->full_name }}</td>
                         <td>{{ $bill->v_number }}</td>
                         <td>{{ $bill->id }}</td>
                         <td>{{ $x }}</td>
                     </tr>
+
                     <?php $x++; ?>
                 @endforeach
+                </tbody>
             </table>
         </div>
     </div>

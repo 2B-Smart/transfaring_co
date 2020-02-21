@@ -145,13 +145,24 @@ class ReportsController extends Controller
     }
     public function receipt_paid()
     {
-        return view('reports.receipt_paid');
+        $cities_list = DB::table('cities')->get();
+        return view('reports.receipt_paid',[
+            'cities_list'=>$cities_list,
+        ]);
     }
     public function receipt_paidRp(Request $request)
     {
-        $receipts = receipts::whereBetween('receipts_date', [$request['start_date'], $request['end_date']])->where('remittances','<>',null)->where('remittances','>',0)->orderBy('id')->orderByDesc('receipts_date')->orderByDesc('paid_date')->get();
-        return view('reports.receipt_paidRp', [
-            'receipts' => $receipts,
-        ]);
+        if($request['city']=="all"){
+            $receipts = receipts::whereBetween('receipts_date', [$request['start_date'], $request['end_date']])->where('remittances','<>',null)->where('remittances','>',0)->orderBy('id')->orderByDesc('receipts_date')->orderByDesc('paid_date')->get();
+            return view('reports.receipt_paidRp', [
+                'receipts' => $receipts,
+            ]);
+        }else{
+            $receipts = receipts::whereBetween('receipts_date', [$request['start_date'], $request['end_date']])->where('remittances','<>',null)->where('remittances','>',0)->where('destination_city','=',$request['city'])->orderBy('id')->orderByDesc('receipts_date')->orderByDesc('paid_date')->get();
+            return view('reports.receipt_paidRp', [
+                'receipts' => $receipts,
+            ]);
+        }
+
     }
 }

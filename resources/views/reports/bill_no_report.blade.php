@@ -81,7 +81,7 @@
                     </th>
                     <td>
                         <span id="billnumber">
-                            {{ $bills->id }}
+رقم                            {{ $bills->id }}
                         </span>
                     </td>
                     <th>
@@ -108,6 +108,7 @@
     <div class="row">
         <div class="col cl-sm-12">
             <table class="table table-border table-hover">
+                <thead>
                 <tr>
                     <td></td>
                     <th>المحول</th>
@@ -124,6 +125,7 @@
                     <th>رقم الايصال</th>
                     <th> {{ "#" }} </th>
                 </tr>
+                </thead>
                 <?php
                     $x=1;
                     $trans_miscellaneous=0;
@@ -133,6 +135,7 @@
                     $remittances=0;
                     $discount=0;
                 ?>
+                <tbody>
                 @foreach($bills->receipts as $receipt)
                     <tr>
                         <td></td>
@@ -160,6 +163,7 @@
                     ?>
                     <?php $x++; ?>
                 @endforeach
+                </tbody>
             </table>
             <table class="table">
                 <tr>

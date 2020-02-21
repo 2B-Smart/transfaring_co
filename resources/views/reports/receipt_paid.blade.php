@@ -14,6 +14,21 @@
 
                                 <div class="col-md-2"></div>
                                 <div class="col-md-6">
+                                    <select id="city" class="form-control" name="city" required autofocus>
+                                        <option value="" selected></option>
+                                        <option value="all">الكل</option>
+                                        @foreach($cities_list as $city)
+                                            <option value="{{ $city->city_name }}">{{ $city->city_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <label for="city_name" class="col-md-2 control-label">المدينة الوجهة</label>
+
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-md-2"></div>
+                                <div class="col-md-6">
                                     <input class="form-control" name="start_date" id="from" required>
                                 </div>
                                 <label for="city_name" class="col-md-2 control-label">تاريخ البداية</label>

@@ -97,6 +97,7 @@
     <div class="row">
         <div class="col cl-sm-12">
             <table class="table table-border table-hover">
+                <thead>
                 <tr>
                     <td></td>
                     <th>تاريخ الدفع</th>
@@ -107,6 +108,8 @@
                     <th>رقم الرحلة</th>
                     <th> {{ "#" }} </th>
                 </tr>
+                </thead>
+                <tbody>
                 <?php
                 $x=1;
                 ?>
@@ -123,6 +126,7 @@
                     </tr>
                     <?php $x++; ?>
                 @endforeach
+                </tbody>
             </table>
         </div>
     </div>
