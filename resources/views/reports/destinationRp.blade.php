@@ -117,6 +117,12 @@
                 <tbody>
                 <?php
                 $x=1;
+                $A_trans_miscellaneous=0;
+                $A_collect_from_receiver=0;
+                $A_prepaid=0;
+                $A_prepaid_miscellaneous=0;
+                $A_remittances=0;
+                $A_discount=0;
                 ?>
                 @foreach($bills as $bill)
                     <?php
@@ -136,6 +142,13 @@
                         $prepaid_miscellaneous+= $receipt->prepaid_miscellaneous;
                         $remittances+= $receipt->remittances;
                         $discount+=$receipt->discount;
+                        ///////////////////////////
+                        $A_trans_miscellaneous+= $receipt->trans_miscellaneous;
+                        $A_collect_from_receiver+= $receipt->collect_from_receiver;
+                        $A_prepaid+= $receipt->prepaid;
+                        $A_prepaid_miscellaneous+= $receipt->prepaid_miscellaneous;
+                        $A_remittances+= $receipt->remittances;
+                        $A_discount+=$receipt->discount;
                         ?>
                         <?php $x++; ?>
                     @endforeach
@@ -158,6 +171,38 @@
                     <?php $x++; ?>
                 @endforeach
                 </tbody>
+                <tr><td colspan="13"><hr/></td></tr>
+                <tr>
+                    <td></td>
+                    <td>{{($A_prepaid+$A_collect_from_receiver)-$A_discount}}</td>
+                    <th>المجموع العام بعد ازالة الخصم</th>
+                    <td>{{$A_prepaid+$A_collect_from_receiver}}</td>
+                    <th>المجموع العام</th>
+                    <td colspan="8"></td>
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>{{$A_prepaid_miscellaneous}}</td>
+                    <th>متفرقات مدفوعة</th>
+                    <td>{{$A_prepaid}}</td>
+                    <th>المسبق</th>
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>{{$A_remittances}}</td>
+                    <th>ضد الشحن</th>
+                    <td>{{$A_trans_miscellaneous}}</td>
+                    <th>المحول</th>
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td colspan="3"></td>
+                    <td>{{$A_discount}}</td>
+                    <th>مجموع الخصم</th>
+                    <td colspan="8"></td>
+                </tr>
             </table>
         </div>
     </div>
