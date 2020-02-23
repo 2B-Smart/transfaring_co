@@ -21,6 +21,15 @@ class BillsController extends Controller
         return view('bills/index', ['bills' => $bills]);
     }
 
+    public function getBills(Request $request){
+        $bills=bills::where('id', '=',$request['search'])->orWhere('source_city', 'like', '%'.$request['search'].'%')->orWhere('destination_city', 'like', '%'.$request['search'].'%')->get();
+        $crs=[];
+        foreach($bills as $bill){
+            $crs[]=["id"=>$bill->id, "text"=> 'الرحلة رقم '.$bill->id.' من '.$bill->source_city.' الى ' .$bill->destination_city];
+        }
+        return response($crs);
+    }
+
     public function create()
     {
         $drivers_list = DB::table('drivers')->orderBy('full_name')->get();

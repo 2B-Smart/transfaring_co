@@ -144,6 +144,20 @@
             }
             // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
         });
+        $(".billNumber").select2({
+            ajax: {
+              url: function (params) {
+                return "/bills/getBills?search="+params.term;
+              },
+              processResults: function (response) {
+                return {
+                    results: response
+                };
+              },
+              cache: true
+            }
+            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+        });
         $(".selecter").select2();
         $(function () {
           // Selectors for future use

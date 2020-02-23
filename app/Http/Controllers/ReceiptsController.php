@@ -87,6 +87,74 @@ class ReceiptsController extends Controller
             ->where('remittances','>',0)->orderBy('id')->orderByDesc('bill_id')->paginate(10);
     }
 
+    public function correction(){
+        return view('receipts.correction');
+    }
+    public function getR(Request $request){
+
+        $receipts = receipts::where('bill_id',$request['bill_id'])->orderBy('id')->get();
+        $res="<table class='table'>";
+        $res.="<tr><td colspan='12'></td><td><button type='button' class='btn btn-success pull-right mvAR'>نقل الكل</button></td></tr>";
+        $res.="<tr>
+                <th width='3%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>رقم المانيفست</th>
+                <th width='3%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>رقم الايصال</th>
+                <th width='3%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>المرسل</th>
+                <th width='3%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>المرسل اليه</th>
+                <th width='3%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>المصدر</th>
+                <th width='3%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>الوجهة</th>
+                <th width='10%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>تاريخ الايصال</th>
+                <th width='10%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>المحتويات</th>
+                <th width='10%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>أنشئ من قبل</th>
+                <th width='10%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>تاريخ الانشاء</th>
+                <th width='10%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>اخر تعديل من قبل</th>
+                <th width='10%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>تاريخ اخر تعديل</th>
+                <th tabindex='0' aria-controls='example2' rowspan='1' colspan='2'>Action</th>
+            </tr>";
+        foreach($receipts as $receipt){
+            $res.="<tr id='". $receipt->id ."' >
+                    <td>". $receipt->bill_id ."</td>
+                  <td>". $receipt->receiptNo ."</td>
+                  <td>". $receipt->customer_sender->customer_name ."</td>
+                  <td>". $receipt->customer_receiver->customer_name ."</td>
+                  <td>". $receipt->source_city ."</td>
+                  <td>". $receipt->destination_city ."</td>
+                  <td>". $receipt->receipts_date ."</td>
+                  <td>". $receipt->contents ."</td>
+                  <td>". $receipt->user_create ."</td>
+                  <td>". $receipt->created_at ."</td>
+                  <td>". $receipt->user_last_update ."</td>
+                  <td>". $receipt->updated_at ."</td>
+                  <td><button type='button' id='". $receipt->id ."' class='btn btn-success pull-right mvR'>نقل</button></td>
+                </tr>";
+        }
+        $res.="</table>";
+        return response($res);
+    }
+    public function mvR(Request $request){
+        $bill = bills::find($request['bill_id']);
+        $input = [
+            'destination_city'=>$bill->destination_city,
+            'bill_id'=>$request['bill_id'],
+            'user_last_update' => Auth::user()->name
+        ];
+        receipts::where('id', $request['ID'])
+            ->update($input);
+    }
+
+    public function mvAR(Request $request){
+        $bill = bills::find($request['bill_id']);
+        $bill2 = bills::find($request['bill_id2']);
+        foreach($bill->receipts as $receipt){
+            $input = [
+                'destination_city'=>$bill2->destination_city,
+                'bill_id'=>$request['bill_id2'],
+                'user_last_update' => Auth::user()->name
+            ];
+            receipts::where('id', $receipt->id)
+                ->update($input);
+        }
+
+    }
     /**
      * Show the form for creating a new resource.
      *

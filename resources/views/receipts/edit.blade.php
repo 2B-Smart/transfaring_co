@@ -41,15 +41,8 @@
                                                 <table id="example2" class="table table-bordered table-hover">
                                                     <tr>
                                                         <td colspan="2">
-                                                            <select id="bill_id" class="form-control selecter" name="bill_id" required>
-                                                                <option value="" selected></option>
-                                                                @foreach($bills_list as $bill)
-                                                                    @if($bill->id == $receipts->bill_id)
-                                                                        <option value="{{ $bill->id }}" selected="selected">{{ 'الرحلة رقم '.$bill->id.' من '.$bill->source_city.' الى ' .$bill->destination_city}}</option>
-                                                                    @else
-                                                                        <option value="{{ $bill->id }}">{{ 'الرحلة رقم '.$bill->id.' من '.$bill->source_city.' الى ' .$bill->destination_city}}</option>
-                                                                    @endif
-                                                                @endforeach
+                                                            <select id="bill_id" class="form-control billNumber" name="bill_id" required>
+                                                                <option selected="selected" value="{{ $receipts->bill->id }}">الرحلة رقم {{ $receipts->bill->id }} من {{ $receipts->bill->source_city }} الى {{ $receipts->bill->destination_city }}</option>
                                                             </select>
                                                         </td>
                                                         <th colspan="2">رقم المانيفست</th>

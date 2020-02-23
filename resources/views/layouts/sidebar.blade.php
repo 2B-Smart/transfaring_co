@@ -33,6 +33,7 @@
         <li><a href="{{ route('bills.index') }}"><i class="fa fa-truck"></i> <span>الرحلات</span></a></li>
         <li><a href="{{ route('receipts.index') }}"><i class="fa fa-book"></i> <span>الايصالات</span></a></li>
         <li><a href="{{ route('receipts.unpaid') }}"><i class="fa fa-book"></i> <span>الايصالات ضد الدفع لم يتم دفعها</span></a></li>
+        <li><a href="{{ route('receipts.correction') }}"><i class="fa fa-book"></i> <span>ترحيل الايصالات الخطأ</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-files-o"></i> <span>التقارير</span>
             <span class="pull-right-container">

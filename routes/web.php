@@ -45,6 +45,10 @@ Route::get('receipts/view/{id}', 'ReceiptsController@view')->name('receipts.view
 Route::post('haspaid/{id}', 'ReceiptsController@haspaid')->name('receipts.haspaid');
 Route::get('receipts/unpaid', 'ReceiptsController@unpaid')->name('receipts.unpaid');
 Route::post('receipts/searchunpaid', 'ReceiptsController@searchunpaid')->name('receipts.searchunpaid');
+Route::get('receipts/correction', 'ReceiptsController@correction')->name('receipts.correction');
+Route::post('receipts/getR', 'ReceiptsController@getR')->name('receipts.getR');
+Route::post('receipts/mvR', 'ReceiptsController@mvR')->name('receipts.mvR');
+Route::post('receipts/mvAR', 'ReceiptsController@mvAR')->name('receipts.mvAR');
 Route::resource('receipts', 'ReceiptsController');
 
 Route::post('bills/search', 'BillsController@search')->name('bills.search');
@@ -53,6 +57,7 @@ Route::post('billunlock/{id}', 'BillsController@billunlock')->name('bills.billun
 Route::get('bills/view/{id}', 'BillsController@view')->name('bills.view');
 Route::Post('bills/addrec', 'BillsController@addrec')->name('bills.addrec');
 Route::Post('bills/delrec/{id}', 'BillsController@delrec')->name('bills.delrec');
+Route::get('bills/getBills', 'BillsController@getBills')->name('bills.getBills');
 Route::resource('bills', 'BillsController');
 
 Route::get('errorshandler/connot_do_this', 'ReportsController@connot_do_this')->name('errorshandler.connot_do_this');

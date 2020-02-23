@@ -40,11 +40,7 @@
                                             <table id="example2" class="table table-bordered table-hover">
                                                 <tr>
                                                     <td colspan="2">
-                                                        <select id="bill_id" class="form-control selecter" name="bill_id" required>
-                                                            <option value="" selected></option>
-                                                            @foreach($bills_list as $bill)
-                                                                <option value="{{ $bill->id }}">{{ 'الرحلة رقم '.$bill->id.' من '.$bill->source_city.' الى ' .$bill->destination_city}}</option>
-                                                            @endforeach
+                                                        <select id="bill_id" class="form-control billNumber" name="bill_id" required>
                                                         </select>
                                                     </td>
                                                     <th colspan="2">رقم المانيفست</th>
