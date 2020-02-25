@@ -71,6 +71,12 @@
             });
         });
 
+        $(function(){
+            $('#bill_id').on('change',function(){
+                $('#resaultData').empty();
+            });
+        });
+
         $(function () {
             $(document).on('click','.mvR',function() {
                 if(confirm("هل تريد النقل!!")){
