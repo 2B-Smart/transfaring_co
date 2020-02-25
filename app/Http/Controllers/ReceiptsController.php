@@ -96,8 +96,9 @@ class ReceiptsController extends Controller
         $res="<table class='table'>";
         $res.="<tr><td colspan='12'></td><td><button type='button' class='btn btn-success pull-right mvAR'>نقل الكل</button></td></tr>";
         $res.="<tr>
-                <th width='3%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>رقم المانيفست</th>
-                <th width='3%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>رقم الايصال</th>
+                <th width='3%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>أمر النقل</th>
+                <th width='7%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>رقم الرحلة</th>
+                <th width='8%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>رقم الايصال</th>
                 <th width='3%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>المرسل</th>
                 <th width='3%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>المرسل اليه</th>
                 <th width='3%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>المصدر</th>
@@ -108,11 +109,11 @@ class ReceiptsController extends Controller
                 <th width='10%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>تاريخ الانشاء</th>
                 <th width='10%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>اخر تعديل من قبل</th>
                 <th width='10%' tabindex='0' aria-controls='example2' rowspan='1' colspan='1'>تاريخ اخر تعديل</th>
-                <th tabindex='0' aria-controls='example2' rowspan='1' colspan='2'>Action</th>
             </tr>";
         foreach($receipts as $receipt){
             $res.="<tr id='". $receipt->id ."' >
-                    <td>". $receipt->bill_id ."</td>
+                  <td><button type='button' id='". $receipt->id ."' class='btn btn-success pull-right mvR'>نقل</button></td>
+                  <td>". $receipt->bill_id ."</td>
                   <td>". $receipt->receiptNo ."</td>
                   <td>". $receipt->customer_sender->customer_name ."</td>
                   <td>". $receipt->customer_receiver->customer_name ."</td>
@@ -124,7 +125,6 @@ class ReceiptsController extends Controller
                   <td>". $receipt->created_at ."</td>
                   <td>". $receipt->user_last_update ."</td>
                   <td>". $receipt->updated_at ."</td>
-                  <td><button type='button' id='". $receipt->id ."' class='btn btn-success pull-right mvR'>نقل</button></td>
                 </tr>";
         }
         $res.="</table>";
