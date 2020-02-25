@@ -6,12 +6,12 @@
             <div class="col col-sm-6">
                 <table class="table">
                     <tr>
-
+                        <th></th>
                         <th>نقل الى مانيفست</th>
-
                         <th>المنافيست التي تحوي الخطأ</th>
                     </tr>
                     <tr>
+                        <td><button type="button" class="btn btn-success pull-right s">بحث</button></td> 
                         <td>
                             <div class="form-group">
                                 <select id="bill_id2" class="form-control billNumber">
@@ -24,13 +24,13 @@
                                 </select>
                             </div>
                         </td>
+                        
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <div class="form-group">
-                                <button type="button" class="btn btn-success pull-right s">بحث</button>
-                            </div>
+                           <!-- <div class="form-group">-->
+                           <!-- </div> -->
                         </td>
                     </tr>
                 </table>
