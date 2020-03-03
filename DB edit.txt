@@ -1,0 +1,6 @@
+ALTER TABLE `receipts`
+ADD COLUMN voucher_no varchar(255) AFTER `paid_date`,
+ADD COLUMN received_name varchar(255) AFTER `voucher_no`,
+ADD COLUMN received_address varchar(255) AFTER `received_name`,
+ADD COLUMN received_mobile varchar(255) AFTER `received_address`,
+ADD COLUMN received_date date AFTER `received_mobile`;

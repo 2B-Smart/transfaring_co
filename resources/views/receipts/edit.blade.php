@@ -166,7 +166,28 @@
                                                         <td>-</td>
                                                         <th colspan="2">خصم</th>
                                                     </tr>
-
+                                                    @if($receipts->voucher_no != null)
+                                                    <tr>
+                                                        <td><input class="form-control from" name="paid_date" type="text" id="paid_date" value="{{ $receipts->paid_date }}" placeholder="تاريخ التسليم"></td></td>
+                                                        <th>تاريخ الاستلام</th>
+                                                        <td><input class="form-control" name="voucher_no" type="text" id="voucher_no" value="{{ $receipts->voucher_no }}" placeholder="رقم الحوالة"></td></td>
+                                                        <th>رقم الحوالة</th>
+                                                    </tr>
+                                                    @endif
+                                                    @if($receipts->received_name)
+                                                    <tr>
+                                                        <td><input class="form-control" name="received_name" type="text" id="received_name" value="{{ $receipts->received_name }}" placeholder="اسم المستلم"></td></td>
+                                                        <th>اسم المستلم</th>
+                                                        <td><input class="form-control from" name="received_date" type="text" id="received_date" value="{{ $receipts->received_date }}" placeholder="تاريخ التسليم"></td></td>
+                                                        <th>تاريخ التسليم</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input class="form-control" name="received_address" type="text" id="received_address" value="{{ $receipts->received_address }}" placeholder="عنوان المستلم"></td></td>
+                                                        <th>عنوان المستلم</th>
+                                                        <td><input class="form-control" name="received_mobile" type="text" id="received_mobile" value="{{ $receipts->received_mobile }}" placeholder="رقم جوال المستلم"></td></td>
+                                                        <th>رقم جوال المستلم</th>
+                                                    </tr>
+                                                    @endif
                                                     <tr>
                                                         <td colspan="3"></td>
                                                         <td>

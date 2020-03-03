@@ -42,7 +42,8 @@ Route::resource('customers', 'CustomersController');
 Route::post('receipts/search', 'ReceiptsController@search')->name('receipts.search');
 Route::get('receipts/view/{id}', 'ReceiptsController@view')->name('receipts.view');
 Route::get('receipts/view/{id}', 'ReceiptsController@view')->name('receipts.view');
-Route::post('haspaid/{id}', 'ReceiptsController@haspaid')->name('receipts.haspaid');
+Route::post('receipts.haspaid', 'ReceiptsController@haspaid')->name('receipts.haspaid');
+Route::post('receipts.hasreceivedbycrs', 'ReceiptsController@hasreceivedbycrs')->name('receipts.hasreceivedbycrs');
 Route::get('receipts/unpaid', 'ReceiptsController@unpaid')->name('receipts.unpaid');
 Route::post('receipts/searchunpaid', 'ReceiptsController@searchunpaid')->name('receipts.searchunpaid');
 Route::get('receipts/correction', 'ReceiptsController@correction')->name('receipts.correction');
@@ -82,6 +83,9 @@ Route::post('reports/carRp', 'ReportsController@carRp')->name('reports.carRp');
 
 Route::get('reports/receipt_paid', 'ReportsController@receipt_paid')->name('reports.receipt_paid');
 Route::post('reports/receipt_paidRp', 'ReportsController@receipt_paidRp')->name('reports.receipt_paidRp');
+
+Route::get('reports/receipt_paidF', 'ReportsController@receipt_paidF')->name('reports.receipt_paidF');
+Route::post('reports/receipt_paidFRp', 'ReportsController@receipt_paidFRp')->name('reports.receipt_paidFRp');
 
 
 //Route::resource('employee-management', 'EmployeeManagementController');

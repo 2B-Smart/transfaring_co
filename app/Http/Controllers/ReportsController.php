@@ -163,6 +163,15 @@ class ReportsController extends Controller
                 'receipts' => $receipts,
             ]);
         }
+    }
+    public function receipt_paidF(){
+        return view('reports.receipt_paidF');
+    }
+    public function receipt_paidFRp(Request $request){
+        $receipt= receipts::where('receiptNo',$request['receiptNo'])->first();
 
+        return view('reports.receipt_paidFRp', [
+            'receipt' => $receipt,
+        ]);
     }
 }

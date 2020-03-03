@@ -7,7 +7,7 @@
   <div class="box-header">
     <div class="row">
         <div class="col-sm-8">
-          <h3 class="box-title"></h3>
+          <h3 class="box-title">إيصالات ضد الدفع</h3>
         </div>
     </div>
   </div>
@@ -37,7 +37,7 @@
           @endcomponent
         @endcomponent
       </form>
-    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap pg-table">
       <div class="row">
         <div class="col-sm-12">
           <table id="example2" class="table table-bordered table-hover">
@@ -70,14 +70,11 @@
                   <td>{{ $receipt->remittances }}</td>
 
                   <td>
-                    <form class="row" method="POST" action="{{ route('receipts.haspaid',  $receipt->id) }}" onsubmit = "return confirm('Are you sure?')">
-                        <input type="hidden" name="_method" value="POST">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                         <button type="submit" class="btn btn-danger col-sm-6 col-xs-5 btn-margin">
-                          تم الدفع
-                        </button>
-                    </form>
-
+                      @if($receipt->remittances_paid=='غير مدفوع')
+                          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#Bcourses_{{ $receipt->id }}">تم الاستلام</button>
+                      @else
+                          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#Bcourses2_{{ $receipt->id }}">تم التسليم</button>
+                      @endif
                   </td>
               </tr>
             @endforeach
@@ -100,21 +97,159 @@
           </table>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-5">
-          <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">إظهار 1 to {{count($receipts)}} of {{count($receipts)}} سجلات</div>
+
+        <div>
+            <a href="#" class="paginate btn btn-default" id="previous">السابق</a> |
+            <a href="#" class="paginate btn btn-default" id="next">التالي</a>
         </div>
-        <div class="col-sm-7">
-          <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-            {{ $receipts->links() }}
-          </div>
-        </div>
-      </div>
+
     </div>
+      <div class="row">
+          <div class="col-sm-12">
+              @foreach($receipts as $receipt)
+                  @if($receipt->remittances_paid=='غير مدفوع')
+                      <div class="modal fade" id="Bcourses_{{ $receipt->id }}" role="dialog">
+                          <div class="modal-dialog">
+
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">معلومات الحوالة</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                      <form class="form-horizontal">
+                                          <div class="form-group">
+                                              <label for="name" class="col-sm-2 control-label">رقم الحوالة</label>
+                                              <div class="col-sm-10">
+                                                  <input id="voucher_no_{{ $receipt->id }}" type="text">
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="name" class="col-sm-2 control-label">تاريخ الحوالة</label>
+                                              <div class="col-sm-10">
+                                                  <input id="paid_date_{{ $receipt->id }}"class="from" type="text" value="<?=date('Y-m-d')?>">
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <div class="col-sm-12">
+                                                  <button type="button" class="btn btn-success addcrs" id="1_{{ $receipt->id }}">تم الاستلام</button>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  </div>
+                              </div>
+
+                          </div>
+                      </div>
+                  @else
+                      <div class="modal fade" id="Bcourses2_{{ $receipt->id }}" role="dialog">
+                          <div class="modal-dialog">
+
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">معلومات المستلم</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                      <form class="form-horizontal">
+                                          <div class="form-group">
+                                              <label for="name" class="col-sm-2 control-label">الاسم</label>
+                                              <div class="col-sm-10">
+                                                  <input id="full_name_{{ $receipt->id }}" type="text" value="{{ $receipt->customer_receiver->customer_name }}">
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="شadd" class="col-sm-2 control-label">العنوان</label>
+                                              <div class="col-sm-10">
+                                                  <input id="address_{{ $receipt->id }}" type="text" value="{{ $receipt->customer_receiver->customer_address }}">
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="moNo" class="col-sm-2 control-label">رقم الجوال</label>
+                                              <div class="col-sm-10">
+                                                  <input id="mobileNo_{{ $receipt->id }}" type="number" value="{{ $receipt->customer_receiver->customer_mobile }}">
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="name" class="col-sm-2 control-label">تاريخ الحوالة</label>
+                                              <div class="col-sm-10">
+                                                  <input id="received_date_{{ $receipt->id }}"class="from" type="text" value="<?=date('Y-m-d')?>">
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <div class="col-sm-12">
+                                                  <button type="button" class="btn btn-success addcrs2" id="2_{{ $receipt->id }}">تم التسليم</button>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  </div>
+                              </div>
+
+                          </div>
+                      </div>
+                  @endif
+              @endforeach
+          </div>
+      </div>
   </div>
   <!-- /.box-body -->
 </div>
     </section>
     <!-- /.content -->
   </div>
+
+<script src="{{ asset ("/bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js") }}"></script>
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(function () {
+        $(document).on('click','.addcrs',function() {
+            var ID = $(this).attr("id");
+            var shortText = jQuery.trim(ID).substring(2);
+            var voucher_no=$("#voucher_no_"+shortText).val();
+            var paid_date=$("#paid_date_"+shortText).val();
+            $.ajax({
+
+                type:'POST',
+
+                url:"{{ route('receipts.haspaid') }}",
+
+                data:{"_token": "{{ csrf_token() }}",ID:shortText,voucher_no:voucher_no,paid_date:paid_date}
+
+            }).done(function(result){ location.reload();});
+        });
+    });
+    $(function () {
+        $(document).on('click','.addcrs2',function() {
+            var ID = $(this).attr("id");
+            var shortText = jQuery.trim(ID).substring(2);
+            var full_name=$("#full_name_"+shortText).val();
+            var address=$("#address_"+shortText).val();
+            var mobileNo=$("#mobileNo_"+shortText).val();
+            var received_date=$("#received_date_"+shortText).val();
+            $.ajax({
+
+                type:'POST',
+
+                url:"{{ route('receipts.hasreceivedbycrs') }}",
+
+                data:{"_token": "{{ csrf_token() }}",ID:shortText,full_name:full_name,address:mobileNo,mobileNo:address,received_date:received_date}
+
+            }).done(function(result){ location.reload();});
+        });
+    });
+
+</script>
 @endsection

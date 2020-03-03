@@ -100,8 +100,12 @@
                 <thead>
                 <tr>
                     <td></td>
-                    <th>تاريخ الدفع</th>
-                    <th>تم الدفع؟</th>
+                    <th>رقم جوال المستلم</th>
+                    <th>عنوان المستلم</th>
+                    <th>اسم المستلم</th>
+                    <th>تاريخ التسليم للزبون</th>
+                    <th>تاريخ استلام الحوالة</th>
+                    <th>الحالة</th>
                     <th>ضد الشحن</th>
                     <th>الوجهة</th>
                     <th>رقم الايصال</th>
@@ -112,10 +116,15 @@
                 <tbody>
                 <?php
                 $x=1;
+                $sumRem=0;
                 ?>
                 @foreach($receipts as $receipt)
                     <tr>
                         <td></td>
+                        <td>{{ $receipt->received_mobile }}</td>
+                        <td>{{ $receipt->received_address }}</td>
+                        <td>{{ $receipt->received_name }}</td>
+                        <td>{{ $receipt->received_date }}</td>
                         <td>{{ $receipt->paid_date }}</td>
                         <td>{{ $receipt->remittances_paid }}</td>
                         <td>{{ $receipt->remittances }}</td>
@@ -124,9 +133,13 @@
                         <td>{{ $receipt->bill->id }}</td>
                         <td>{{ $x }}</td>
                     </tr>
-                    <?php $x++; ?>
+                    <?php $x++; $sumRem+=$receipt->remittances;?>
                 @endforeach
                 </tbody>
+            </table>
+            <table class="table">
+                <td></td>
+                <th class="pull-left">مجموع الحوالات ضد الدفع: {{$sumRem}}</th>
             </table>
         </div>
     </div>

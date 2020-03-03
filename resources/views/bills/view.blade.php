@@ -186,10 +186,7 @@
                                                     <td colspan="3"><input class="form-control" type="text" id="notes" placeholder="ملاحظات"></td>
                                                     <th>ملاحظات</th>
                                                 </tr>
-                                                <tr>
-                                                    <td colspan="2"><input class="form-control" name="discount" type="text" step="any" id="discount" placeholder="خصم"></td>
-                                                    <th colspan="2">خصم</th>
-                                                </tr>
+
                                                 <tr>
                                                     <th>للتحصيل من المرسل اليه</th>
                                                     <th>المدفوع مسبقاً</th>
@@ -209,6 +206,11 @@
                                                     <td><input class="form-control" type="number" step="any" id="remittances" placeholder="ضد الشحن"></td>
                                                     <td></td>
                                                     <th colspan="2">ضد الشحن</th>
+                                                </tr>
+                                                <tr>
+                                                    <td><input class="form-control" name="discount" type="text" step="any" id="discount" placeholder="خصم"></td>
+                                                    <td>-</td>
+                                                    <th colspan="2">خصم</th>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="3"></td>
@@ -385,10 +387,6 @@
                                                     <th>ملاحظات</th>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2">{{ $receipt->discount }}</td>
-                                                    <th colspan="2">خصم</th>
-                                                </tr>
-                                                <tr>
                                                     <th>للتحصيل من المرسل اليه</th>
                                                     <th>المدفوع مسبقاً</th>
                                                     <th colspan="2">الاجور</th>
@@ -409,7 +407,12 @@
                                                     <th colspan="2">ضد الشحن</th>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ $receipt->collect_from_receiver+$receipt->trans_miscellaneous+$receipt->remittances }}</td>
+                                                    <td>{{ $receipt->discount }}</td>
+                                                    <td>-</td>
+                                                    <th colspan="2">خصم</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{ $receipt->collect_from_receiver+$receipt->trans_miscellaneous+$receipt->remittances-$receipt->discount }}</td>
                                                     <td>{{ $receipt->prepaid+$receipt->prepaid_miscellaneous }}</td>
                                                     <th colspan="2">المجموع</th>
                                                 </tr>

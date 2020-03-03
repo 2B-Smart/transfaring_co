@@ -37,9 +37,11 @@
             background-color: grey;
         }
         .wrapper{
+            /*margin: 10px;*/
+            /*width: 14.8cm;*/
+            /*height: 21.0cm;*/
             margin: 10px;
-            width: 14.8cm;
-            height: 21.0cm;
+            width: 21.0cm;
             background-color: white;
         }
         .row {
@@ -75,7 +77,7 @@
                     </td>
                     <td>
                         <span id="billnumber">
-                            {{ $receipts->receiptNo }}
+                            {{--{{ $receipt->receiptNo }}--}}
                         </span>
                     </td>
                     <td>
@@ -87,78 +89,128 @@
     </div>
     <div class="row">
             <div class="col col-sm-12">
-                <h3 class="box-title">معلومات الايصال رقم: {{ $receipts->receiptNo }}</h3>
+                <h3 class="box-title">معلومات الايصال رقم: {{ $receipt->receiptNo }}</h3>
             </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <table id="example2" class="table table-bordered table-hover">
+            {{--<table id="example2" class="table table-bordered table-hover">--}}
+                {{--<tr>--}}
+                    {{--<td>{{ $receipt->receipts_date }}</td>--}}
+                    {{--<th>تاريخ الايصال</th>--}}
+                    {{--<td>{{ $receipt->receiptNo }}</td>--}}
+                    {{--<th>رقم الايصال</th>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td>{{ $receipt->customer_receiver->customer_name }}</td>--}}
+                    {{--<th>المستقبل</th>--}}
+                    {{--<td>{{ $receipt->customer_sender->customer_name }}</td>--}}
+                    {{--<th>المرسل</th>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<th>عدد الطرود</th>--}}
+                    {{--<th>نوع الطرد</th>--}}
+                    {{--<th>المحتويات</th>--}}
+                    {{--<th>العلامات</th>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td>{{ $receipt->number_of_packages }}</td>--}}
+                    {{--<td>{{ $receipt->package_type }}</td>--}}
+                    {{--<td>{{ $receipt->contents }}</td>--}}
+                    {{--<td>{{ $receipt->marks }}</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<th colspan="2">الوزن</th>--}}
+                    {{--<th colspan="2">الحجم</th>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td colspan="2">{{ $receipt->weight }}</td>--}}
+                    {{--<td colspan="2">{{ $receipt->size }}</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td colspan="3">{{ $receipt->notes }}</td>--}}
+                    {{--<th>ملاحظات</th>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<th>للتحصيل من المرسل اليه</th>--}}
+                    {{--<th>المدفوع مسبقاً</th>--}}
+                    {{--<th colspan="2">الاجور</th>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td>{{ $receipt->collect_from_receiver }}</td>--}}
+                    {{--<td>{{ $receipt->prepaid }}</td>--}}
+                    {{--<th colspan="2">اجور الشحن</th>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td>{{ $receipt->trans_miscellaneous }}</td>--}}
+                    {{--<td>{{ $receipt->prepaid_miscellaneous }}</td>--}}
+                    {{--<th colspan="2">متفرقات</th>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td>{{ $receipt->remittances }}</td>--}}
+                    {{--<td>{{ $receipt->remittances_paid }}</td>--}}
+                    {{--<th colspan="2">ضد الشحن</th>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td>{{ $receipt->discount }}</td>--}}
+                    {{--<td>-</td>--}}
+                    {{--<th colspan="2">خصم</th>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td>{{ $receipt->collect_from_receiver+$receipt->trans_miscellaneous+$receipt->remittances-$receipt->discount }}</td>--}}
+                    {{--<td>{{ $receipt->prepaid+$receipt->prepaid_miscellaneous }}</td>--}}
+                    {{--<th colspan="2">المجموع</th>--}}
+                {{--</tr>--}}
+                {{--<tr><td colspan="4"><hr/></td></tr>--}}
+            {{--</table>--}}
+            <table class="table table-bordered table-hover">
                 <tr>
-                    <td>{{ $receipts->receipts_date }}</td>
-                    <th>تاريخ الايصال</th>
-                    <td>{{ $receipts->receiptNo }}</td>
-                    <th>رقم الايصال</th>
-                </tr>
-                <tr>
-                    <td>{{ $receipts->customer_receiver->customer_name }}</td>
-                    <th>المستقبل</th>
-                    <td>{{ $receipts->customer_sender->customer_name }}</td>
-                    <th>المرسل</th>
-                </tr>
-                <tr>
-                    <th>عدد الطرود</th>
-                    <th>نوع الطرد</th>
-                    <th>المحتويات</th>
-                    <th>العلامات</th>
-                </tr>
-                <tr>
-                    <td>{{ $receipts->number_of_packages }}</td>
-                    <td>{{ $receipts->package_type }}</td>
-                    <td>{{ $receipts->contents }}</td>
-                    <td>{{ $receipts->marks }}</td>
-                </tr>
-                <tr>
-                    <th colspan="2">الوزن</th>
-                    <th colspan="2">الحجم</th>
-                </tr>
-                <tr>
-                    <td colspan="2">{{ $receipts->weight }}</td>
-                    <td colspan="2">{{ $receipts->size }}</td>
-                </tr>
-                <tr>
-                    <td colspan="3">{{ $receipts->notes }}</td>
-                    <th>ملاحظات</th>
-                </tr>
 
-                <tr>
-                    <th>للتحصيل من المرسل اليه</th>
-                    <th>المدفوع مسبقاً</th>
-                    <th colspan="2">الاجور</th>
+                    <td>{{$receipt->remittances}}</td>
+                    <th>قيمة ضد الدفع</th>
+
                 </tr>
                 <tr>
-                    <td>{{ $receipts->collect_from_receiver }}</td>
-                    <td>{{ $receipts->prepaid }}</td>
-                    <th colspan="2">اجور الشحن</th>
+
+                    <td>{{$receipt->remittances_paid}}</td>
+                    <th>حالة الايصال</th>
+
                 </tr>
                 <tr>
-                    <td>{{ $receipts->trans_miscellaneous }}</td>
-                    <td>{{ $receipts->prepaid_miscellaneous }}</td>
-                    <th colspan="2">متفرقات</th>
+
+                    <td>{{$receipt->voucher_no}}</td>
+                    <th>رقم الحوالة</th>
+
                 </tr>
                 <tr>
-                    <td>{{ $receipts->remittances }}</td>
-                    <td>{{ $receipts->remittances_paid }}</td>
-                    <th colspan="2">ضد الشحن</th>
+
+                    <td>{{$receipt->paid_date}}</td>
+                    <th>تاريخ الاستلام</th>
+
                 </tr>
                 <tr>
-                    <td>{{ $receipts->discount }}</td>
-                    <td>-</td>
-                    <th colspan="2">خصم</th>
+
+                    <td>{{$receipt->received_date}}</td>
+                    <th>تاريخ التسليم</th>
+
                 </tr>
                 <tr>
-                    <td>{{ $receipts->collect_from_receiver+$receipts->trans_miscellaneous+$receipts->remittances-$receipts->discount }}</td>
-                    <td>{{ $receipts->prepaid+$receipts->prepaid_miscellaneous }}</td>
-                    <th colspan="2">المجموع</th>
+
+                    <td>{{$receipt->received_name}}</td>
+                    <th>اسم المستلم</th>
+
+                </tr>
+                <tr>
+
+                    <td>{{$receipt->received_address}}</td>
+                    <th>عنوان المستلم</th>
+
+                </tr>
+                <tr>
+
+                    <td>{{$receipt->received_mobile}}</td>
+                    <th>رقم جوال المستلم</th>
+
                 </tr>
             </table>
         </div>

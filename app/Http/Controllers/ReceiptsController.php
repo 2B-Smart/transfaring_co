@@ -24,7 +24,7 @@ class ReceiptsController extends Controller
     }
     public function unpaid()
     {
-        $receipts = receipts::where('remittances_paid','غير مدفوع')->where('remittances','<>',null)
+        $receipts = receipts::where('remittances_paid','<>','تم التسليم')->where('remittances','<>',null)
             ->where('remittances','>',0)->orderBy('id')->orderByDesc('receipts_date')->paginate(10);
 
         return view('receipts/unpaid', ['receipts' => $receipts]);
@@ -87,6 +87,33 @@ class ReceiptsController extends Controller
             ->where('remittances','>',0)->orderBy('id')->orderByDesc('bill_id')->paginate(10);
     }
 
+    public function haspaid(Request $request)
+    {
+        $receipts = receipts::findOrFail($request['ID']);
+        $input = [
+            'remittances_paid'=>"تم الاستلام",
+            'paid_date'=> $request['paid_date'],
+            'voucher_no'=> $request['voucher_no'],
+            'user_last_update' => Auth::user()->name
+        ];
+        receipts::where('id', $request['ID'])
+            ->update($input);
+    }
+    public function hasreceivedbycrs(Request $request)
+    {
+        $receipts = receipts::findOrFail($request['ID']);
+        $input = [
+            'remittances_paid'=>"تم التسليم",
+            'received_name'=> $request['full_name'],
+            'received_address'=> $request['address'],
+            'received_mobile'=> $request['mobileNo'],
+            'received_date'=> $request['received_date'],
+            'user_last_update' => Auth::user()->name
+        ];
+        receipts::where('id', $request['ID'])
+            ->update($input);
+    }
+
     public function correction(){
         return view('receipts.correction');
     }
@@ -140,7 +167,6 @@ class ReceiptsController extends Controller
         receipts::where('id', $request['ID'])
             ->update($input);
     }
-
     public function mvAR(Request $request){
         $bill = bills::find($request['bill_id']);
         $bill2 = bills::find($request['bill_id2']);
@@ -297,6 +323,12 @@ class ReceiptsController extends Controller
             'prepaid_miscellaneous'=>$request['prepaid_miscellaneous'],
             'trans_miscellaneous'=>$request['trans_miscellaneous'],
             'remittances'=>$request['remittances'],
+            'paid_date'=>$request['paid_date'],
+            'voucher_no'=>$request['voucher_no'],
+            'received_name'=>$request['received_name'],
+            'received_address'=>$request['received_address'],
+            'received_mobile'=>$request['received_mobile'],
+            'received_date'=>$request['received_date'],
             'discount'=>$request['discount'],
             'bill_id'=>$request['bill_id'],
             'user_last_update' => Auth::user()->name
@@ -306,19 +338,6 @@ class ReceiptsController extends Controller
             ->update($input);
 
         return redirect()->intended('/receipts');
-    }
-
-    public function haspaid($id)
-    {
-        $receipts = receipts::findOrFail($id);
-        $input = [
-            'remittances_paid'=>"مدفوع",
-            'paid_date'=> date('Y-m-d'),
-            'user_last_update' => Auth::user()->name
-        ];
-        receipts::where('id', $id)
-            ->update($input);
-        return redirect()->intended('/receipts/unpaid');
     }
 
     /**
