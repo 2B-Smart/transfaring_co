@@ -71,7 +71,7 @@
 
                   <td>
                       @if($receipt->remittances_paid=='غير مدفوع')
-                          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#Bcourses_{{ $receipt->id }}">تم الاستلام</button>
+                          <button type="button" class="btn btn-success addrec" data-toggle="modal" data-target="#Bcourses_{{ $receipt->id }}">تم الاستلام</button>
                       @else
                           <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#Bcourses2_{{ $receipt->id }}">تم التسليم</button>
                       @endif
