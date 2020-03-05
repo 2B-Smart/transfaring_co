@@ -183,9 +183,9 @@
                                                     </tr>
                                                     <tr>
                                                         <td><input class="form-control" name="received_address" type="text" id="received_address" value="{{ $receipts->received_address }}" placeholder="عنوان المستلم"></td></td>
-                                                        <th>عنوان المستلم</th>
-                                                        <td><input class="form-control" name="received_mobile" type="text" id="received_mobile" value="{{ $receipts->received_mobile }}" placeholder="رقم جوال المستلم"></td></td>
                                                         <th>رقم جوال المستلم</th>
+                                                        <td><input class="form-control" name="received_mobile" type="text" id="received_mobile" value="{{ $receipts->received_mobile }}" placeholder="رقم جوال المستلم"></td></td>
+                                                        <th>عنوان المستلم</th>
                                                     </tr>
                                                     @endif
                                                     <tr>
