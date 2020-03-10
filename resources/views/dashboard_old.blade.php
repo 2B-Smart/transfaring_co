@@ -5,7 +5,7 @@
         <div class="overlay"></div>
     
         <!-- Sidebar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation" >
             <ul class="nav sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
