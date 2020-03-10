@@ -37,6 +37,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       margin-left: auto;
       margin-right: auto;
       width: 50%;
+      
     }
   </style>
 </head>
@@ -60,8 +61,8 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+<body   class="hold-transition skin-blue sidebar-mini">
+<div  class="wrapper">
 
   <!-- Main Header -->
   @include('layouts.header')
